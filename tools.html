@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Free Security Tools | Digital Security Workshop</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      @font-face {
+        font-family: "Graebenbach";
+        src: url("Graebenbach-Regular.otf") format("opentype");
+        font-weight: 400;
+        font-style: normal;
+      }
+
+      @font-face {
+        font-family: "Graebenbach";
+        src: url("Graebenbach-Medium.otf") format("opentype");
+        font-weight: 500;
+        font-style: normal;
+      }
+
+      body {
+        font-family: "Graebenbach", "Segoe UI", Tahoma, Geneva, Verdana,
+          sans-serif;
+      }
+
+      .tool-card {
+        transition: transform 0.2s, box-shadow 0.2s;
+      }
+
+      .tool-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      @media print {
+        body {
+          background: white !important;
+        }
+
+        /* Hide everything except the print-only sections */
+        .no-print,
+        header,
+        main,
+        footer {
+          display: none !important;
+        }
+
+        /* Show only the print-only content */
+        .print-only {
+          display: block !important;
+          background: white !important;
+          border: none !important;
+          margin: 0 !important;
+          padding: 20px !important;
+          font-family: Arial, sans-serif !important;
+        }
+
+        /* Style the print-only content nicely */
+        .print-only h2 {
+          font-size: 18px !important;
+          font-weight: bold !important;
+          margin-bottom: 15px !important;
+          border-bottom: 2px solid #000 !important;
+          padding-bottom: 5px !important;
+        }
+
+        .print-only h3 {
+          font-size: 14px !important;
+          font-weight: bold !important;
+          margin-top: 12px !important;
+          margin-bottom: 6px !important;
+        }
+
+        .print-only p {
+          font-size: 11px !important;
+          margin-bottom: 3px !important;
+          line-height: 1.3 !important;
+        }
+
+        .print-only .text-xs {
+          font-size: 10px !important;
+        }
+      }
+    </style>
+  </head>
+  <body class="bg-gradient-to-br from-rose-50 via-pink-50 to-teal-50">
+    <!-- Print Button -->
+    <div class="no-print fixed top-4 right-4 z-50">
+      <button
+        onclick="window.print()"
+        class="bg-pink-600 hover:bg-pink-700 text-white font-bold py-2 px-4 rounded-full shadow-lg transition-all hover:scale-105"
+      >
+        Print / Save PDF
+      </button>
+    </div>
+
+    <!-- Header -->
+    <header class="bg-white shadow-sm sticky top-0 z-40">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+        <div class="flex items-center justify-center">
+          <img src="logo.png" alt="Doria Feminist Fund" class="h-12 mr-4" />
+          <h1
+            class="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-600 to-teal-600"
+          >
+            Free Security Tools
+          </h1>
+        </div>
+      </div>
+    </header>
+
+    <!-- Back Button -->
+    <div class="no-print fixed top-4 left-4 z-50">
+      <a
+        href="index.html#appendix"
+        class="bg-white hover:bg-gray-100 text-stone-700 font-semibold py-2 px-4 rounded-full shadow-lg transition-all hover:scale-105 inline-block"
+      >
+        ← Back
+      </a>
+    </div>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <!-- PDF Notice -->
+      <div class="print-only" style="display: none">
+        <h2>📄 Digital Security Tools - Quick Reference</h2>
+        <p style="margin-bottom: 15px">
+          <strong>Doria Feminist Fund | Digital Security Workshop</strong><br />
+          This reference sheet contains essential security tools and their
+          official download/setup links. Type these URLs carefully in your
+          browser to download the tools safely.
+        </p>
+      </div>
+
+      <!-- Password Management -->
+      <section class="mb-8">
+        <h2
+          class="text-xl font-bold text-stone-900 mb-4 flex items-center border-b-2 border-pink-300 pb-2"
+        >
+          <span class="text-2xl mr-2">🔑</span>
+          Password Management
+        </h2>
+        <div class="grid md:grid-cols-3 gap-4">
+          <div
+            class="tool-card bg-white rounded-lg shadow p-4 border border-stone-200"
+          >
+            <h3 class="text-lg font-bold text-stone-800 mb-2">Bitwarden</h3>
+            <p class="text-sm text-stone-600 mb-3">
+              Securely manage all your passwords in one encrypted vault - you
+              only need to remember one master passphrase
+            </p>
+            <div class="flex flex-col space-y-2">
+              <a
+                href="https://bitwarden.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-sm text-pink-600 hover:text-pink-700 font-semibold"
+              >
+                bitwarden.com →
+              </a>
+              <a
+                href="https://bitwarden.com/help/getting-started-webvault/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-xs text-teal-600 hover:text-teal-700 border border-teal-200 rounded px-2 py-1 bg-teal-50"
+              >
+                📋 Setup Guide
+              </a>
+            </div>
+          </div>
+
+          <div
+            class="tool-card bg-white rounded-lg shadow p-4 border border-stone-200"
+          >
+            <h3 class="text-lg font-bold text-stone-800 mb-2">KeePassXC</h3>
+            <p class="text-sm text-stone-600 mb-3">
+              Open-source password manager that stores everything locally - no
+              cloud required
+            </p>
+            <div class="flex flex-col space-y-2">
+              <a
+                href="https://keepassxc.org/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-sm text-pink-600 hover:text-pink-700 font-semibold"
+              >
+                keepassxc.org →
+              </a>
+              <a
+                href="https://keepassxc.org/docs/KeePassXC_GettingStarted.html"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-xs text-teal-600 hover:text-teal-700 border border-teal-200 rounded px-2 py-1 bg-teal-50"
+              >
+                📋 Setup Guide
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Two-Factor Authentication -->
+      <section class="mb-8">
+        <h2
+          class="text-xl font-bold text-stone-900 mb-4 flex items-center border-b-2 border-pink-300 pb-2"
+        >
+          <span class="text-2xl mr-2">📱</span>
+          Two-Factor Authentication (2FA)
+        </h2>
+        <div class="grid md:grid-cols-3 gap-4">
+          <div
+            class="tool-card bg-white rounded-lg shadow p-4 border border-stone-200"
+          >
+            <h3 class="text-lg font-bold text-stone-800 mb-2">
+              Google Authenticator
+            </h3>
+            <p class="text-sm text-stone-600 mb-3">
+              Add a second layer of security to your accounts - even if someone
+              steals your password, they can't get in without the code from your
+              phone
+            </p>
+            <div class="flex flex-col space-y-2">
+              <a
+                href="https://support.google.com/accounts/answer/1066447"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-sm text-pink-600 hover:text-pink-700 font-semibold"
+              >
+                Download from App Store →
+              </a>
+              <a
+                href="https://support.google.com/accounts/answer/185839"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-xs text-teal-600 hover:text-teal-700 border border-teal-200 rounded px-2 py-1 bg-teal-50"
+              >
+                📋 Setup Guide
+              </a>
+            </div>
+          </div>
+
+          <div
+            class="tool-card bg-white rounded-lg shadow p-4 border border-stone-200"
+          >
+            <h3 class="text-lg font-bold text-stone-800 mb-2">Authy</h3>
+            <p class="text-sm text-stone-600 mb-3">
+              Like Google Authenticator, but includes encrypted cloud backup if
+              you lose your phone
+            </p>
+            <div class="flex flex-col space-y-2">
+              <a
+                href="https://authy.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-sm text-pink-600 hover:text-pink-700 font-semibold"
+              >
+                authy.com →
+              </a>
+              <a
+                href="https://authy.com/guides/twilio/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-xs text-teal-600 hover:text-teal-700 border border-teal-200 rounded px-2 py-1 bg-teal-50"
+              >
+                📋 Setup Guide
+              </a>
+            </div>
+          </div>
+
+          <div
+            class="tool-card bg-white rounded-lg shadow p-4 border border-stone-200"
+          >
+            <h3 class="text-lg font-bold text-stone-800 mb-2">
+              Microsoft Authenticator
+            </h3>
+            <p class="text-sm text-stone-600 mb-3">
+              Microsoft's 2FA app with password-less sign-in and account
+              recovery features
+            </p>
+            <div class="flex flex-col space-y-2">
+              <a
+                href="https://www.microsoft.com/en-us/security/mobile-authenticator-app"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-sm text-pink-600 hover:text-pink-700 font-semibold"
+              >
+                Download from Microsoft →
+              </a>
+              <a
+                href="https://support.microsoft.com/en-us/account-billing/set-up-the-microsoft-authenticator-app-as-your-verification-method-33452159-6af9-438f-8f82-63ce94cf3d29"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-xs text-teal-600 hover:text-teal-700 border border-teal-200 rounded px-2 py-1 bg-teal-50"
+              >
+                📋 Setup Guide
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Secure Messaging -->
+      <section class="mb-8">
+        <h2
+          class="text-xl font-bold text-stone-900 mb-4 flex items-center border-b-2 border-pink-300 pb-2"
+        >
+          <span class="text-2xl mr-2">💬</span>
+          Secure Messaging
+        </h2>
+        <div class="grid md:grid-cols-3 gap-4">
+          <div
+            class="tool-card bg-white rounded-lg shadow p-4 border border-stone-200"
+          >
+            <h3 class="text-lg font-bold text-stone-800 mb-2">Signal</h3>
+            <p class="text-sm text-stone-600 mb-3">
+              The most secure messaging app for sensitive conversations -
+              end-to-end encrypted with minimal metadata collection
+            </p>
+            <div class="flex flex-col space-y-2">
+              <a
+                href="https://signal.org/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-sm text-pink-600 hover:text-pink-700 font-semibold"
+              >
+                signal.org →
+              </a>
+              <a
+                href="https://support.signal.org/hc/en-us/articles/360007059731-Installing-Signal"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-xs text-teal-600 hover:text-teal-700 border border-teal-200 rounded px-2 py-1 bg-teal-50"
+              >
+                📋 Setup Guide
+              </a>
+            </div>
+          </div>
+
+          <div
+            class="tool-card bg-white rounded-lg shadow p-4 border border-stone-200"
+          >
+            <h3 class="text-lg font-bold text-stone-800 mb-2">
+              Element (Matrix)
+            </h3>
+            <p class="text-sm text-stone-600 mb-3">
+              Decentralized secure messaging - good alternative to Signal with
+              self-hosting options for organizations
+            </p>
+            <div class="flex flex-col space-y-2">
+              <a
+                href="https://element.io/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-sm text-pink-600 hover:text-pink-700 font-semibold"
+              >
+                element.io →
+              </a>
+              <a
+                href="https://element.io/help"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-xs text-teal-600 hover:text-teal-700 border border-teal-200 rounded px-2 py-1 bg-teal-50"
+              >
+                📋 Setup Guide
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- VPN Services -->
+      <section class="mb-8">
+        <h2
+          class="text-xl font-bold text-stone-900 mb-4 flex items-center border-b-2 border-pink-300 pb-2"
+        >
+          <span class="text-2xl mr-2">🔒</span>
+          VPN Services
+        </h2>
+        <div class="grid md:grid-cols-3 gap-4">
+          <div
+            class="tool-card bg-white rounded-lg shadow p-4 border border-stone-200"
+          >
+            <h3 class="text-lg font-bold text-stone-800 mb-2">RiseupVPN</h3>
+            <p class="text-sm text-stone-600 mb-3">
+              Hide your browsing activity from your internet provider and
+              government - free VPN run by and for activists
+            </p>
+            <div class="flex flex-col space-y-2">
+              <a
+                href="https://riseup.net/vpn"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-sm text-pink-600 hover:text-pink-700 font-semibold"
+              >
+                riseup.net/vpn →
+              </a>
+              <a
+                href="https://riseup.net/en/vpn/how-to"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-xs text-teal-600 hover:text-teal-700 border border-teal-200 rounded px-2 py-1 bg-teal-50"
+              >
+                📋 Setup Guide
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Encryption Tools -->
+      <section class="mb-8">
+        <h2
+          class="text-xl font-bold text-stone-900 mb-4 flex items-center border-b-2 border-pink-300 pb-2"
+        >
+          <span class="text-2xl mr-2">🔐</span>
+          Encryption Tools
+        </h2>
+        <div class="grid md:grid-cols-3 gap-4">
+          <div
+            class="tool-card bg-white rounded-lg shadow p-4 border border-stone-200"
+          >
+            <h3 class="text-lg font-bold text-stone-800 mb-2">Cryptomator</h3>
+            <p class="text-sm text-stone-600 mb-3">
+              Encrypt your files before uploading to Google Drive or Dropbox -
+              so the cloud provider can't see them
+            </p>
+            <div class="flex flex-col space-y-2">
+              <a
+                href="https://cryptomator.org/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-sm text-pink-600 hover:text-pink-700 font-semibold"
+              >
+                cryptomator.org →
+              </a>
+              <a
+                href="https://docs.cryptomator.org/en/1.6/desktop/getting-started/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-xs text-teal-600 hover:text-teal-700 border border-teal-200 rounded px-2 py-1 bg-teal-50"
+              >
+                📋 Setup Guide
+              </a>
+            </div>
+          </div>
+
+          <div
+            class="tool-card bg-white rounded-lg shadow p-4 border border-stone-200"
+          >
+            <h3 class="text-lg font-bold text-stone-800 mb-2">VeraCrypt</h3>
+            <p class="text-sm text-stone-600 mb-3">
+              Encrypt your entire hard drive so your data stays safe if your
+              device is lost or stolen
+            </p>
+            <div class="flex flex-col space-y-2">
+              <a
+                href="https://www.veracrypt.fr/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-sm text-pink-600 hover:text-pink-700 font-semibold"
+              >
+                veracrypt.fr →
+              </a>
+              <a
+                href="https://www.veracrypt.fr/en/Beginner%27s%20Tutorial.html"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-xs text-teal-600 hover:text-teal-700 border border-teal-200 rounded px-2 py-1 bg-teal-50"
+              >
+                📋 Setup Guide
+              </a>
+            </div>
+          </div>
+
+          <div
+            class="tool-card bg-white rounded-lg shadow p-4 border border-stone-200"
+          >
+            <h3 class="text-lg font-bold text-stone-800 mb-2">7-Zip</h3>
+            <p class="text-sm text-stone-600 mb-3">
+              Create password-protected encrypted archives to securely share
+              files
+            </p>
+            <div class="flex flex-col space-y-2">
+              <a
+                href="https://www.7-zip.org/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-sm text-pink-600 hover:text-pink-700 font-semibold"
+              >
+                7-zip.org →
+              </a>
+              <a
+                href="https://www.7-zip.org/faq.html"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-xs text-teal-600 hover:text-teal-700 border border-teal-200 rounded px-2 py-1 bg-teal-50"
+              >
+                📋 Setup Guide
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- File Deletion -->
+      <section class="mb-8">
+        <h2
+          class="text-xl font-bold text-stone-900 mb-4 flex items-center border-b-2 border-pink-300 pb-2"
+        >
+          <span class="text-2xl mr-2">🗑️</span>
+          Secure File Deletion
+        </h2>
+        <div class="grid md:grid-cols-3 gap-4">
+          <div
+            class="tool-card bg-white rounded-lg shadow p-4 border border-stone-200"
+          >
+            <h3 class="text-lg font-bold text-stone-800 mb-2">BleachBit</h3>
+            <p class="text-sm text-stone-600 mb-3">
+              Permanently delete sensitive files so they can't be recovered,
+              even with forensic tools (Windows/Linux)
+            </p>
+            <div class="flex flex-col space-y-2">
+              <a
+                href="https://www.bleachbit.org/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-sm text-pink-600 hover:text-pink-700 font-semibold"
+              >
+                bleachbit.org →
+              </a>
+              <a
+                href="https://docs.bleachbit.org/doc/installation.html"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-xs text-teal-600 hover:text-teal-700 border border-teal-200 rounded px-2 py-1 bg-teal-50"
+              >
+                📋 Setup Guide
+              </a>
+            </div>
+          </div>
+
+          <div
+            class="tool-card bg-white rounded-lg shadow p-4 border border-stone-200"
+          >
+            <h3 class="text-lg font-bold text-stone-800 mb-2">Eraser</h3>
+            <p class="text-sm text-stone-600 mb-3">
+              Permanently delete sensitive files so they can't be recovered,
+              even with forensic tools (Windows only)
+            </p>
+            <div class="flex flex-col space-y-2">
+              <a
+                href="https://eraser.heidi.ie/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-sm text-pink-600 hover:text-pink-700 font-semibold"
+              >
+                eraser.heidi.ie →
+              </a>
+              <a
+                href="https://eraser.heidi.ie/documentation/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-xs text-teal-600 hover:text-teal-700 border border-teal-200 rounded px-2 py-1 bg-teal-50"
+              >
+                📋 Setup Guide
+              </a>
+            </div>
+          </div>
+
+          <div
+            class="tool-card bg-white rounded-lg shadow p-4 border border-stone-200"
+          >
+            <h3 class="text-lg font-bold text-stone-800 mb-2">
+              Permanent Eraser
+            </h3>
+            <p class="text-sm text-stone-600 mb-3">
+              Permanently delete sensitive files so they can't be recovered,
+              even with forensic tools (Mac only)
+            </p>
+            <div class="flex flex-col space-y-2">
+              <a
+                href="https://www.edenwaith.com/products/permanent%20eraser/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-sm text-pink-600 hover:text-pink-700 font-semibold"
+              >
+                edenwaith.com →
+              </a>
+              <a
+                href="https://www.edenwaith.com/products/permanent%20eraser/documentation.php"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-xs text-teal-600 hover:text-teal-700 border border-teal-200 rounded px-2 py-1 bg-teal-50"
+              >
+                📋 Setup Guide
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Backup Tools -->
+      <section class="mb-8">
+        <h2
+          class="text-xl font-bold text-stone-900 mb-4 flex items-center border-b-2 border-pink-300 pb-2"
+        >
+          <span class="text-2xl mr-2">💾</span>
+          Backup Tools
+        </h2>
+        <div class="grid md:grid-cols-3 gap-4">
+          <div
+            class="tool-card bg-white rounded-lg shadow p-4 border border-stone-200"
+          >
+            <h3 class="text-lg font-bold text-stone-800 mb-2">Duplicati</h3>
+            <p class="text-sm text-stone-600 mb-3">
+              Automatically back up your files with encryption - so you don't
+              lose everything if disaster strikes
+            </p>
+            <div class="flex flex-col space-y-2">
+              <a
+                href="https://www.duplicati.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-sm text-pink-600 hover:text-pink-700 font-semibold"
+              >
+                duplicati.com →
+              </a>
+              <a
+                href="https://duplicati.readthedocs.io/en/latest/01-introduction/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-xs text-teal-600 hover:text-teal-700 border border-teal-200 rounded px-2 py-1 bg-teal-50"
+              >
+                📋 Setup Guide
+              </a>
+            </div>
+          </div>
+
+          <div
+            class="tool-card bg-white rounded-lg shadow p-4 border border-stone-200"
+          >
+            <h3 class="text-lg font-bold text-stone-800 mb-2">
+              Built-in OS Backup
+            </h3>
+            <p class="text-sm text-stone-600 mb-3">
+              Free backup already on your computer (Time Machine for Mac, File
+              History for Windows) - just turn it on
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Antivirus -->
+      <section class="mb-8">
+        <h2
+          class="text-xl font-bold text-stone-900 mb-4 flex items-center border-b-2 border-pink-300 pb-2"
+        >
+          <span class="text-2xl mr-2">🛡️</span>
+          Antivirus & Malware Protection
+        </h2>
+        <div class="grid md:grid-cols-3 gap-4">
+          <div
+            class="tool-card bg-white rounded-lg shadow p-4 border border-stone-200"
+          >
+            <h3 class="text-lg font-bold text-stone-800 mb-2">
+              Windows Defender
+            </h3>
+            <p class="text-sm text-stone-600 mb-3">
+              Catch viruses and malware before they steal your data - already
+              installed on Windows 10/11
+            </p>
+          </div>
+
+          <div
+            class="tool-card bg-white rounded-lg shadow p-4 border border-stone-200"
+          >
+            <h3 class="text-lg font-bold text-stone-800 mb-2">Malwarebytes</h3>
+            <p class="text-sm text-stone-600 mb-3">
+              Scan and remove malware that your regular antivirus might miss -
+              free version available
+            </p>
+            <div class="flex flex-col space-y-2">
+              <a
+                href="https://www.malwarebytes.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-sm text-pink-600 hover:text-pink-700 font-semibold"
+              >
+                malwarebytes.com →
+              </a>
+              <a
+                href="https://support.malwarebytes.com/hc/en-us/articles/360038479538-Download-and-install-Malwarebytes"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-xs text-teal-600 hover:text-teal-700 border border-teal-200 rounded px-2 py-1 bg-teal-50"
+              >
+                📋 Setup Guide
+              </a>
+            </div>
+          </div>
+
+          <div
+            class="tool-card bg-white rounded-lg shadow p-4 border border-stone-200"
+          >
+            <h3 class="text-lg font-bold text-stone-800 mb-2">ClamAV</h3>
+            <p class="text-sm text-stone-600 mb-3">
+              Open-source antivirus trusted by security professionals - good for
+              Linux users or those wanting transparency
+            </p>
+            <div class="flex flex-col space-y-2">
+              <a
+                href="https://www.clamav.net/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-sm text-pink-600 hover:text-pink-700 font-semibold"
+              >
+                clamav.net →
+              </a>
+              <a
+                href="https://docs.clamav.net/manual/Installing.html"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-xs text-teal-600 hover:text-teal-700 border border-teal-200 rounded px-2 py-1 bg-teal-50"
+              >
+                📋 Setup Guide
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Learning Resources -->
+      <section class="mb-8">
+        <h2
+          class="text-xl font-bold text-stone-900 mb-4 flex items-center border-b-2 border-pink-300 pb-2"
+        >
+          <span class="text-2xl mr-2">📚</span>
+          Learning Resources & Support
+        </h2>
+        <div class="grid md:grid-cols-2 gap-4">
+          <div
+            class="tool-card bg-white rounded-lg shadow p-4 border border-stone-200"
+          >
+            <h3 class="text-lg font-bold text-stone-800 mb-2">
+              Security in a Box
+            </h3>
+            <p class="text-sm text-stone-600 mb-3">
+              Comprehensive digital security guides in multiple languages
+            </p>
+            <a
+              href="https://securityinabox.org/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-sm text-teal-600 hover:text-teal-700 font-semibold"
+            >
+              securityinabox.org →
+            </a>
+          </div>
+
+          <div
+            class="tool-card bg-white rounded-lg shadow p-4 border border-stone-200"
+          >
+            <h3 class="text-lg font-bold text-stone-800 mb-2">
+              EFF Surveillance Self-Defense
+            </h3>
+            <p class="text-sm text-stone-600 mb-3">
+              Practical security guides from the Electronic Frontier Foundation
+            </p>
+            <a
+              href="https://ssd.eff.org/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-sm text-teal-600 hover:text-teal-700 font-semibold"
+            >
+              ssd.eff.org →
+            </a>
+          </div>
+
+          <div
+            class="tool-card bg-white rounded-lg shadow p-4 border border-stone-200"
+          >
+            <h3 class="text-lg font-bold text-stone-800 mb-2">
+              Digital First Aid Kit
+            </h3>
+            <p class="text-sm text-stone-600 mb-3">
+              Emergency help for common security incidents
+            </p>
+            <a
+              href="https://digitalfirstaid.org/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-sm text-teal-600 hover:text-teal-700 font-semibold"
+            >
+              digitalfirstaid.org →
+            </a>
+          </div>
+
+          <div
+            class="tool-card bg-white rounded-lg shadow p-4 border border-stone-200"
+          >
+            <h3 class="text-lg font-bold text-stone-800 mb-2">
+              Access Now Helpline
+            </h3>
+            <p class="text-sm text-stone-600 mb-3">
+              24/7 emergency digital security support in multiple languages
+            </p>
+            <a
+              href="https://www.accessnow.org/help/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-sm text-teal-600 hover:text-teal-700 font-semibold"
+            >
+              accessnow.org/help →
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Installation Warning -->
+      <section class="mb-8 bg-red-50 border-l-4 border-red-500 rounded-lg p-4">
+        <h3 class="text-lg font-bold text-red-900 mb-2">
+          ⚠️ Installation Guidelines
+        </h3>
+        <ul class="text-sm text-red-800 space-y-1">
+          <li>
+            • <strong>Only download from official websites</strong> or verified
+            app stores
+          </li>
+          <li>
+            • <strong>Never click "download" links</strong> in emails or SMS
+          </li>
+          <li>
+            • <strong>When in doubt, ask for help</strong> before installing
+          </li>
+        </ul>
+      </section>
+    </main>
+
+    <!-- Print-only URL Reference -->
+    <section
+      class="print-only max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8"
+      style="display: none"
+    >
+      <h2 class="text-xl font-bold mb-6 border-b-2 border-gray-400 pb-2">
+        📎 Link Reference for PDF Users
+      </h2>
+      <div class="text-xs space-y-4">
+        <div>
+          <h3 class="font-bold text-sm mb-2">Password Managers:</h3>
+          <p>
+            • Bitwarden: https://bitwarden.com (Setup:
+            https://bitwarden.com/help/getting-started-webvault/)
+          </p>
+          <p>
+            • KeePassXC: https://keepassxc.org (Setup:
+            https://keepassxc.org/docs/KeePassXC_GettingStarted.html)
+          </p>
+        </div>
+
+        <div>
+          <h3 class="font-bold text-sm mb-2">Two-Factor Authentication:</h3>
+          <p>
+            • Google Authenticator:
+            https://support.google.com/accounts/answer/1066447 (Setup:
+            https://support.google.com/accounts/answer/185839)
+          </p>
+          <p>• Authy: https://authy.com (Setup: https://authy.com/guides/)</p>
+          <p>
+            • Microsoft Authenticator:
+            https://www.microsoft.com/en-us/security/mobile-authenticator-app
+            (Setup:
+            https://support.microsoft.com/en-us/account-billing/how-to-use-the-microsoft-authenticator-app-9783c865-0308-42fb-a519-8cf666fe0acc)
+          </p>
+        </div>
+
+        <div>
+          <h3 class="font-bold text-sm mb-2">Secure Messaging:</h3>
+          <p>
+            • Signal: https://signal.org (Setup:
+            https://support.signal.org/hc/en-us/articles/360007059731-Installing-Signal)
+          </p>
+          <p>
+            • Element: https://element.io (Setup:
+            https://element.io/get-started)
+          </p>
+        </div>
+
+        <div>
+          <h3 class="font-bold text-sm mb-2">VPN Services:</h3>
+          <p>
+            • RiseupVPN: https://riseup.net/en/vpn (Setup:
+            https://riseup.net/en/vpn/how-to)
+          </p>
+        </div>
+
+        <div>
+          <h3 class="font-bold text-sm mb-2">File Encryption:</h3>
+          <p>
+            • Cryptomator: https://cryptomator.org (Setup:
+            https://docs.cryptomator.org/en/1.6/desktop/getting-started/)
+          </p>
+          <p>
+            • VeraCrypt: https://www.veracrypt.fr (Setup:
+            https://www.veracrypt.fr/en/Beginner%27s%20Tutorial.html)
+          </p>
+          <p>
+            • 7-Zip: https://www.7-zip.org (Setup:
+            https://www.7-zip.org/faq.html)
+          </p>
+        </div>
+
+        <div>
+          <h3 class="font-bold text-sm mb-2">Other Essential Tools:</h3>
+          <p>• Tor Browser: https://www.torproject.org</p>
+          <p>• Firefox: https://www.mozilla.org/firefox/</p>
+          <p>• DuckDuckGo: https://duckduckgo.com</p>
+          <p>
+            • Duplicati (Backup): https://www.duplicati.com (Setup:
+            https://duplicati.readthedocs.io/en/latest/01-introduction/)
+          </p>
+          <p>
+            • Malwarebytes: https://www.malwarebytes.com (Setup:
+            https://support.malwarebytes.com/hc/en-us/articles/360038479538)
+          </p>
+        </div>
+
+        <p class="mt-4 text-xs text-gray-600 font-bold">
+          💡 Tip: Type these URLs carefully in your browser, or search for the
+          tool name + "official website"
+        </p>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-stone-800 text-stone-200 py-6">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <p class="text-sm">
+          © <span id="footer-year"></span> Doria Feminist Fund | Digital
+          Security Workshop
+        </p>
+      </div>
+    </footer>
+
+    <script>
+      document.getElementById("footer-year").textContent =
+        new Date().getFullYear();
+    </script>
+  </body>
+</html>
