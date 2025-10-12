@@ -312,38 +312,38 @@
       <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex items-center justify-between h-16">
           <div class="flex items-center">
-            <img src="logo.png" alt="Doria Feminist Fund" class="h-10 mr-3" />
+            <img src="logo.png" alt="Doria Feminist Fund" class="h-14 mr-3" />
           </div>
           <div class="hidden md:block">
             <div id="nav-links" class="ml-10 flex items-baseline space-x-4">
               <a
                 href="#part1"
-                class="nav-link text-stone-600 hover:text-pink-500 px-3 py-2 rounded-md text-sm font-medium"
+                class="nav-link text-stone-600 hover:text-pink-500 px-3 py-2 text-sm font-medium"
                 >Threat Landscape</a
               >
               <a
                 href="#part2"
-                class="nav-link text-stone-600 hover:text-pink-500 px-3 py-2 rounded-md text-sm font-medium"
+                class="nav-link text-stone-600 hover:text-pink-500 px-3 py-2 text-sm font-medium"
                 >Personal Security</a
               >
               <a
                 href="#part3"
-                class="nav-link text-stone-600 hover:text-pink-500 px-3 py-2 rounded-md text-sm font-medium"
+                class="nav-link text-stone-600 hover:text-pink-500 px-3 py-2 text-sm font-medium"
                 >Organizational Protocols</a
               >
               <a
                 href="#part4"
-                class="nav-link text-stone-600 hover:text-pink-500 px-3 py-2 rounded-md text-sm font-medium"
+                class="nav-link text-stone-600 hover:text-pink-500 px-3 py-2 text-sm font-medium"
                 >External Threats</a
               >
               <a
                 href="#part5"
-                class="nav-link text-stone-600 hover:text-pink-500 px-3 py-2 rounded-md text-sm font-medium"
+                class="nav-link text-stone-600 hover:text-pink-500 px-3 py-2 text-sm font-medium"
                 >Action Plan</a
               >
               <a
                 href="#appendix"
-                class="nav-link text-stone-600 hover:text-pink-500 px-3 py-2 rounded-md text-sm font-medium"
+                class="nav-link text-stone-600 hover:text-pink-500 px-3 py-2 text-sm font-medium"
                 >Resource Guide</a
               >
             </div>
@@ -800,10 +800,37 @@
                 <div id="action-checklist" class="space-y-4"></div>
               </div>
               <div class="bg-white p-8 rounded-lg shadow-md">
-                <h3 class="text-2xl font-bold mb-4">
-                  Your Incident Response Plan
-                </h3>
-                <div id="incident-response-accordion"></div>
+                <div class="flex items-start space-x-4 mb-6">
+                  <div class="flex-shrink-0">
+                    <div
+                      class="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center"
+                    >
+                      <span class="text-3xl">🚨</span>
+                    </div>
+                  </div>
+                  <div class="flex-1">
+                    <h3 class="text-2xl font-bold mb-2 text-stone-900">
+                      Incident Response Plan
+                    </h3>
+                    <p class="text-stone-600 mb-4">
+                      When a security incident happens, every minute counts.
+                      Having a clear, documented response plan means you won't
+                      waste precious time figuring out what to do. This template
+                      guides you through immediate actions, damage control, and
+                      recovery steps—so when panic sets in, you have a trusted
+                      roadmap to follow.
+                    </p>
+                  </div>
+                </div>
+                <div class="text-center">
+                  <a
+                    href="incident-response.html"
+                    target="_blank"
+                    class="inline-block bg-pink-500 hover:bg-pink-600 text-white font-bold py-4 px-8 rounded-full text-lg transition-colors shadow-lg"
+                  >
+                    View Incident Response Template →
+                  </a>
+                </div>
               </div>
             </div>
           </div>
@@ -1503,19 +1530,25 @@
         createSplitView("part2-split-view", accordionData.part2);
         createTimeline("part3-timeline", accordionData.part3);
         createFlipCards("part4-flip-cards", accordionData.part4);
-        createAccordion("incident-response-accordion", incidentResponseData);
         // Cheat sheet cards removed - now showing CTA to dedicated cheat-sheet.html page
         // createCheatSheetCards("appendix-cards", accordionData.appendix);
 
         const actionContainer = document.getElementById("action-checklist");
-        actionChecklistData.forEach((item) => {
+        actionChecklistData.forEach((item, index) => {
           const div = document.createElement("div");
-          div.className = "flex items-start";
+          div.className = "flex items-start space-x-4 p-6 rounded-lg bg-gradient-to-r from-pink-50 to-teal-50 border-2 border-pink-100 hover:border-pink-300 transition-all";
           div.innerHTML = `
-            <input id="${item.id}" type="checkbox" class="h-5 w-5 rounded border-stone-300 text-pink-500 focus:ring-pink-500 mt-1">
-            <div class="ml-3 text-sm">
-                <label for="${item.id}" class="font-medium text-stone-700">${item.text}</label>
-                <p class="text-stone-500">${item.details}</p>
+            <div class="flex-shrink-0">
+              <div class="w-12 h-12 rounded-full bg-gradient-to-br from-pink-500 to-teal-500 flex items-center justify-center text-white font-bold text-xl shadow-lg">
+                ${index + 1}
+              </div>
+            </div>
+            <div class="flex-1">
+              <label for="${item.id}" class="text-lg font-bold text-stone-800 cursor-pointer block mb-2">${item.text}</label>
+              <p class="text-stone-600 mb-3">${item.details}</p>
+            </div>
+            <div class="flex-shrink-0 pt-1">
+              <input id="${item.id}" type="checkbox" class="h-7 w-7 rounded border-2 border-pink-400 text-pink-500 focus:ring-pink-500 focus:ring-offset-2 cursor-pointer accent-pink-500">
             </div>
         `;
           actionContainer.appendChild(div);

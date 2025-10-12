@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Incident Response Plan Template | Digital Security Workshop</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      @font-face {
+        font-family: "Graebenbach";
+        src: url("Graebenbach-Regular.otf") format("opentype");
+        font-weight: 400;
+        font-style: normal;
+      }
+
+      @font-face {
+        font-family: "Graebenbach";
+        src: url("Graebenbach-Medium.otf") format("opentype");
+        font-weight: 500;
+        font-style: normal;
+      }
+
+      body {
+        font-family: "Graebenbach", "Segoe UI", Tahoma, Geneva, Verdana,
+          sans-serif;
+      }
+
+      .severity-critical {
+        border-left: 4px solid #dc2626;
+      }
+      .severity-high {
+        border-left: 4px solid #ea580c;
+      }
+      .severity-medium {
+        border-left: 4px solid #ca8a04;
+      }
+
+      @media print {
+        body {
+          background: white !important;
+        }
+        .no-print {
+          display: none !important;
+        }
+      }
+    </style>
+  </head>
+  <body class="bg-gradient-to-br from-rose-50 to-pink-50 text-stone-800">
+    <!-- Back Button -->
+    <div class="no-print fixed top-4 left-4 z-50">
+      <a
+        href="index.html#part5"
+        class="bg-white hover:bg-gray-100 text-stone-700 font-semibold py-3 px-6 rounded-full shadow-lg transition-all hover:scale-105 inline-block"
+      >
+        ← Back to Workshop
+      </a>
+    </div>
+
+    <!-- Download Button -->
+    <div class="no-print fixed top-4 right-4 z-50">
+      <button
+        onclick="window.print()"
+        class="bg-pink-600 hover:bg-pink-700 text-white font-bold py-3 px-6 rounded-full shadow-lg transition-all hover:scale-105"
+      >
+        Download as PDF
+      </button>
+    </div>
+
+    <!-- Header -->
+    <header class="bg-white shadow-sm sticky top-0 z-40">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+        <div class="flex items-center justify-center">
+          <img src="logo.png" alt="Doria Feminist Fund" class="h-12 mr-4" />
+          <h1
+            class="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-600 to-teal-600"
+          >
+            Incident Response Plan
+          </h1>
+        </div>
+      </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <!-- Introduction Section -->
+      <section class="mb-12 bg-white rounded-xl shadow-lg p-8">
+        <h2 class="text-3xl font-bold text-stone-900 mb-4">
+          About This Template
+        </h2>
+        <p class="text-lg text-stone-600 mb-4">
+          This incident response plan is designed to help your organization
+          respond quickly and effectively to security incidents. Download this
+          template and fill in your organization-specific information to create
+          a customized emergency response guide.
+        </p>
+        <div class="bg-pink-50 border-l-4 border-pink-500 p-4 rounded">
+          <p class="font-semibold text-pink-900">
+            💡 How to Use This Template:
+          </p>
+          <ul class="list-disc list-inside text-pink-800 mt-2 space-y-1">
+            <li>Download as PDF using the button above</li>
+            <li>
+              Fill in the emergency contact information digitally or by hand
+            </li>
+            <li>Keep copies in accessible locations (physical and digital)</li>
+            <li>Review and update quarterly</li>
+            <li>Train all team members on these procedures</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Emergency Contacts Template -->
+      <section class="mb-12 bg-white rounded-xl shadow-lg p-8">
+        <h2 class="text-2xl font-bold text-stone-900 mb-6 flex items-center">
+          <span class="text-3xl mr-3">📞</span>
+          Emergency Contact Information
+        </h2>
+        <div class="grid md:grid-cols-2 gap-6">
+          <div class="border-2 border-stone-200 rounded-lg p-4">
+            <h3 class="font-bold text-stone-700 mb-3">Internal Contacts</h3>
+            <div class="space-y-3">
+              <div>
+                <label class="text-sm font-semibold text-stone-600"
+                  >IT/Security Lead:</label
+                >
+                <div
+                  class="border-b-2 border-dotted border-stone-300 mt-1 h-6"
+                ></div>
+              </div>
+              <div>
+                <label class="text-sm font-semibold text-stone-600"
+                  >Executive Director:</label
+                >
+                <div
+                  class="border-b-2 border-dotted border-stone-300 mt-1 h-6"
+                ></div>
+              </div>
+              <div>
+                <label class="text-sm font-semibold text-stone-600"
+                  >Communications Lead:</label
+                >
+                <div
+                  class="border-b-2 border-dotted border-stone-300 mt-1 h-6"
+                ></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Incident 1: Device Lost/Stolen -->
+      <section
+        class="mb-12 bg-white rounded-xl shadow-lg p-8 incident-card severity-critical"
+      >
+        <div class="flex items-start justify-between mb-6">
+          <div>
+            <h2 class="text-2xl font-bold text-red-600 mb-2">
+              🚨 Incident Type 1: Device Lost or Stolen
+            </h2>
+            <span
+              class="inline-block bg-red-100 text-red-800 text-xs font-semibold px-3 py-1 rounded-full"
+            >
+              CRITICAL SEVERITY
+            </span>
+          </div>
+        </div>
+
+        <div class="space-y-6">
+          <!-- Immediate Actions -->
+          <div class="bg-red-50 rounded-lg p-6">
+            <h3 class="text-xl font-bold text-red-900 mb-4 flex items-center">
+              ⚡ Immediate Actions (First 15 Minutes)
+            </h3>
+            <div class="space-y-3">
+              <label class="flex items-start space-x-3">
+                <input
+                  type="checkbox"
+                  class="mt-1 h-5 w-5 text-red-600 rounded border-stone-300"
+                />
+                <span class="text-stone-700">
+                  <strong>Try to locate the device:</strong> Use Find My iPhone,
+                  Find My Device (Android), or similar tracking services
+                  immediately. Mark as "Lost" mode if available.
+                </span>
+              </label>
+              <label class="flex items-start space-x-3">
+                <input
+                  type="checkbox"
+                  class="mt-1 h-5 w-5 text-red-600 rounded border-stone-300"
+                />
+                <span class="text-stone-700">
+                  <strong>Do NOT attempt remote wipe yet:</strong> Premature
+                  wiping removes your ability to track. Only wipe if device
+                  contains extremely sensitive data and cannot be recovered.
+                </span>
+              </label>
+              <label class="flex items-start space-x-3">
+                <input
+                  type="checkbox"
+                  class="mt-1 h-5 w-5 text-red-600 rounded border-stone-300"
+                />
+                <span class="text-stone-700">
+                  <strong>Notify your IT/Security Lead immediately:</strong>
+                  Document when, where, and how the device was lost. Include
+                  device model, serial number if known.
+                </span>
+              </label>
+              <label class="flex items-start space-x-3">
+                <input
+                  type="checkbox"
+                  class="mt-1 h-5 w-5 text-red-600 rounded border-stone-300"
+                />
+                <span class="text-stone-700">
+                  <strong>Log the incident:</strong> Record date, time,
+                  location, circumstances, and what data was on the device. This
+                  is crucial for assessment.
+                </span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Data Protection -->
+          <div class="bg-orange-50 rounded-lg p-6">
+            <h3
+              class="text-xl font-bold text-orange-900 mb-4 flex items-center"
+            >
+              🔒 Data Protection Steps (First Hour)
+            </h3>
+            <div class="space-y-3">
+              <label class="flex items-start space-x-3">
+                <input
+                  type="checkbox"
+                  class="mt-1 h-5 w-5 text-orange-600 rounded border-stone-300"
+                />
+                <span class="text-stone-700">
+                  <strong>Change all passwords immediately:</strong> Start with
+                  email, then banking, cloud storage, work accounts, and social
+                  media. Use a different device for this.
+                </span>
+              </label>
+              <label class="flex items-start space-x-3">
+                <input
+                  type="checkbox"
+                  class="mt-1 h-5 w-5 text-orange-600 rounded border-stone-300"
+                />
+                <span class="text-stone-700">
+                  <strong>Revoke active sessions:</strong> Log out of all
+                  devices for email, social media, and cloud services through
+                  account security settings.
+                </span>
+              </label>
+              <label class="flex items-start space-x-3">
+                <input
+                  type="checkbox"
+                  class="mt-1 h-5 w-5 text-orange-600 rounded border-stone-300"
+                />
+                <span class="text-stone-700">
+                  <strong>Notify your bank/financial institutions:</strong> If
+                  banking apps or payment info were on the device, alert banks
+                  to monitor for suspicious activity.
+                </span>
+              </label>
+              <label class="flex items-start space-x-3">
+                <input
+                  type="checkbox"
+                  class="mt-1 h-5 w-5 text-orange-600 rounded border-stone-300"
+                />
+                <span class="text-stone-700">
+                  <strong>Disable SIM card:</strong> Contact mobile carrier to
+                  suspend service and prevent SIM-swapping attacks or
+                  unauthorized calls.
+                </span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Recovery -->
+          <div class="bg-yellow-50 rounded-lg p-6">
+            <h3
+              class="text-xl font-bold text-yellow-900 mb-4 flex items-center"
+            >
+              🔄 Recovery Procedures (First 24 Hours)
+            </h3>
+            <div class="space-y-3">
+              <label class="flex items-start space-x-3">
+                <input
+                  type="checkbox"
+                  class="mt-1 h-5 w-5 text-yellow-600 rounded border-stone-300"
+                />
+                <span class="text-stone-700">
+                  <strong>File a police report:</strong> Especially important if
+                  theft occurred or for insurance claims. Get report number for
+                  documentation.
+                </span>
+              </label>
+              <label class="flex items-start space-x-3">
+                <input
+                  type="checkbox"
+                  class="mt-1 h-5 w-5 text-yellow-600 rounded border-stone-300"
+                />
+                <span class="text-stone-700">
+                  <strong>Monitor accounts for suspicious activity:</strong>
+                  Check bank statements, email logs, and login history daily for
+                  the next week.
+                </span>
+              </label>
+              <label class="flex items-start space-x-3">
+                <input
+                  type="checkbox"
+                  class="mt-1 h-5 w-5 text-yellow-600 rounded border-stone-300"
+                />
+                <span class="text-stone-700">
+                  <strong>Remote wipe if not recovered within 48 hours:</strong>
+                  Use Find My Device or similar to factory reset the device if
+                  it contains sensitive organizational data.
+                </span>
+              </label>
+              <label class="flex items-start space-x-3">
+                <input
+                  type="checkbox"
+                  class="mt-1 h-5 w-5 text-yellow-600 rounded border-stone-300"
+                />
+                <span class="text-stone-700">
+                  <strong>Assess data exposure risk:</strong> Document what data
+                  was on the device and notify affected parties if beneficiary
+                  or donor information was compromised.
+                </span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Prevention -->
+          <div class="bg-green-50 rounded-lg p-6">
+            <h3 class="text-xl font-bold text-green-900 mb-4 flex items-center">
+              ✅ Prevention Checklist (Going Forward)
+            </h3>
+            <div class="space-y-3">
+              <label class="flex items-start space-x-3">
+                <input
+                  type="checkbox"
+                  class="mt-1 h-5 w-5 text-green-600 rounded border-stone-300"
+                />
+                <span class="text-stone-700">
+                  Enable full-disk encryption on all devices (FileVault for Mac,
+                  BitLocker for Windows)
+                </span>
+              </label>
+              <label class="flex items-start space-x-3">
+                <input
+                  type="checkbox"
+                  class="mt-1 h-5 w-5 text-green-600 rounded border-stone-300"
+                />
+                <span class="text-stone-700">
+                  Set up Find My Device/Find My iPhone and test it regularly
+                </span>
+              </label>
+              <label class="flex items-start space-x-3">
+                <input
+                  type="checkbox"
+                  class="mt-1 h-5 w-5 text-green-600 rounded border-stone-300"
+                />
+                <span class="text-stone-700">
+                  Use strong passwords/passphrases and enable biometric locks
+                </span>
+              </label>
+              <label class="flex items-start space-x-3">
+                <input
+                  type="checkbox"
+                  class="mt-1 h-5 w-5 text-green-600 rounded border-stone-300"
+                />
+                <span class="text-stone-700">
+                  Regular backups to secure cloud storage (not stored on device)
+                </span>
+              </label>
+              <label class="flex items-start space-x-3">
+                <input
+                  type="checkbox"
+                  class="mt-1 h-5 w-5 text-green-600 rounded border-stone-300"
+                />
+                <span class="text-stone-700">
+                  Keep device serial numbers and IMEI numbers documented in
+                  secure location
+                </span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Incident 2: Account Hacked -->
+      <section
+        class="mb-12 bg-white rounded-xl shadow-lg p-8 incident-card severity-high"
+      >
+        <div class="flex items-start justify-between mb-6">
+          <div>
+            <h2 class="text-2xl font-bold text-orange-600 mb-2">
+              🔓 Incident Type 2: Account Hacked or Compromised
+            </h2>
+            <span
+              class="inline-block bg-orange-100 text-orange-800 text-xs font-semibold px-3 py-1 rounded-full"
+            >
+              HIGH SEVERITY
+            </span>
+          </div>
+        </div>
+
+        <div class="space-y-6">
+          <!-- Detection -->
+          <div class="bg-orange-50 rounded-lg p-6">
+            <h3
+              class="text-xl font-bold text-orange-900 mb-4 flex items-center"
+            >
+              🔍 Detection Signs (How to Know You've Been Hacked)
+            </h3>
+            <div class="grid md:grid-cols-2 gap-3">
+              <div class="flex items-start space-x-2">
+                <span class="text-orange-600">⚠️</span>
+                <span class="text-stone-700 text-sm"
+                  >Login from unfamiliar location or device</span
+                >
+              </div>
+              <div class="flex items-start space-x-2">
+                <span class="text-orange-600">⚠️</span>
+                <span class="text-stone-700 text-sm"
+                  >Password no longer works</span
+                >
+              </div>
+              <div class="flex items-start space-x-2">
+                <span class="text-orange-600">⚠️</span>
+                <span class="text-stone-700 text-sm"
+                  >Friends/colleagues report strange messages from you</span
+                >
+              </div>
+              <div class="flex items-start space-x-2">
+                <span class="text-orange-600">⚠️</span>
+                <span class="text-stone-700 text-sm"
+                  >Account settings changed without your knowledge</span
+                >
+              </div>
+              <div class="flex items-start space-x-2">
+                <span class="text-orange-600">⚠️</span>
+                <span class="text-stone-700 text-sm"
+                  >Unauthorized purchases or transactions</span
+                >
+              </div>
+              <div class="flex items-start space-x-2">
+                <span class="text-orange-600">⚠️</span>
+                <span class="text-stone-700 text-sm"
+                  >Security alerts from the service provider</span
+                >
+              </div>
+            </div>
+          </div>
+
+          <!-- Containment -->
+          <div class="bg-red-50 rounded-lg p-6">
+            <h3 class="text-xl font-bold text-red-900 mb-4 flex items-center">
+              🛑 Containment Steps (Immediate)
+            </h3>
+            <div class="space-y-3">
+              <label class="flex items-start space-x-3">
+                <input
+                  type="checkbox"
+                  class="mt-1 h-5 w-5 text-red-600 rounded border-stone-300"
+                />
+                <span class="text-stone-700">
+                  <strong>Try "Forgot Password" immediately:</strong> Use
+                  account recovery to reset password before the hacker changes
+                  recovery email/phone.
+                </span>
+              </label>
+              <label class="flex items-start space-x-3">
+                <input
+                  type="checkbox"
+                  class="mt-1 h-5 w-5 text-red-600 rounded border-stone-300"
+                />
+                <span class="text-stone-700">
+                  <strong>Use a DIFFERENT secure device:</strong> Don't attempt
+                  recovery from a potentially compromised device. Use a trusted
+                  computer or phone.
+                </span>
+              </label>
+              <label class="flex items-start space-x-3">
+                <input
+                  type="checkbox"
+                  class="mt-1 h-5 w-5 text-red-600 rounded border-stone-300"
+                />
+                <span class="text-stone-700">
+                  <strong>Check recovery email/phone is still yours:</strong>
+                  Verify the hacker hasn't changed your backup email or phone
+                  number.
+                </span>
+              </label>
+              <label class="flex items-start space-x-3">
+                <input
+                  type="checkbox"
+                  class="mt-1 h-5 w-5 text-red-600 rounded border-stone-300"
+                />
+                <span class="text-stone-700">
+                  <strong>Contact the service provider directly:</strong> If
+                  locked out completely, use support channels (help center,
+                  social media) to report the compromise.
+                </span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Recovery -->
+          <div class="bg-yellow-50 rounded-lg p-6">
+            <h3
+              class="text-xl font-bold text-yellow-900 mb-4 flex items-center"
+            >
+              🔧 Recovery Process
+            </h3>
+            <div class="space-y-3">
+              <label class="flex items-start space-x-3">
+                <input
+                  type="checkbox"
+                  class="mt-1 h-5 w-5 text-yellow-600 rounded border-stone-300"
+                />
+                <span class="text-stone-700">
+                  <strong
+                    >Change password to a unique, strong passphrase:</strong
+                  >
+                  Use 15+ characters, never reused. Store in password manager.
+                </span>
+              </label>
+              <label class="flex items-start space-x-3">
+                <input
+                  type="checkbox"
+                  class="mt-1 h-5 w-5 text-yellow-600 rounded border-stone-300"
+                />
+                <span class="text-stone-700">
+                  <strong>Enable or reset 2FA immediately:</strong> Use
+                  authenticator app, not SMS. Save backup codes offline.
+                </span>
+              </label>
+              <label class="flex items-start space-x-3">
+                <input
+                  type="checkbox"
+                  class="mt-1 h-5 w-5 text-yellow-600 rounded border-stone-300"
+                />
+                <span class="text-stone-700">
+                  <strong>Review account activity and settings:</strong> Check
+                  sent messages, connected apps, forwarding rules, and
+                  authorized devices.
+                </span>
+              </label>
+              <label class="flex items-start space-x-3">
+                <input
+                  type="checkbox"
+                  class="mt-1 h-5 w-5 text-yellow-600 rounded border-stone-300"
+                />
+                <span class="text-stone-700">
+                  <strong>Revoke access to suspicious third-party apps:</strong>
+                  Remove any unfamiliar connected services or OAuth
+                  authorizations.
+                </span>
+              </label>
+              <label class="flex items-start space-x-3">
+                <input
+                  type="checkbox"
+                  class="mt-1 h-5 w-5 text-yellow-600 rounded border-stone-300"
+                />
+                <span class="text-stone-700">
+                  <strong
+                    >Change passwords on other accounts using the same
+                    password:</strong
+                  >
+                  Assume credential stuffing attacks if you reused passwords.
+                </span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Communication -->
+          <div class="bg-blue-50 rounded-lg p-6">
+            <h3 class="text-xl font-bold text-blue-900 mb-4 flex items-center">
+              📢 Communication Protocol
+            </h3>
+            <div class="space-y-3">
+              <label class="flex items-start space-x-3">
+                <input
+                  type="checkbox"
+                  class="mt-1 h-5 w-5 text-blue-600 rounded border-stone-300"
+                />
+                <span class="text-stone-700">
+                  <strong>Warn your contacts immediately:</strong> Send message
+                  from a different secure channel warning them NOT to click
+                  links from the compromised account.
+                </span>
+              </label>
+              <label class="flex items-start space-x-3">
+                <input
+                  type="checkbox"
+                  class="mt-1 h-5 w-5 text-blue-600 rounded border-stone-300"
+                />
+                <span class="text-stone-700">
+                  <strong
+                    >Post public warning if account has public reach:</strong
+                  >
+                  Use other platforms to alert followers about the compromise.
+                </span>
+              </label>
+              <label class="flex items-start space-x-3">
+                <input
+                  type="checkbox"
+                  class="mt-1 h-5 w-5 text-blue-600 rounded border-stone-300"
+                />
+                <span class="text-stone-700">
+                  <strong>Notify your organization's leadership:</strong> Inform
+                  stakeholders if organizational data was accessed.
+                </span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Incident 3: Phishing/Malware -->
+      <section
+        class="mb-12 bg-white rounded-xl shadow-lg p-8 incident-card severity-medium"
+      >
+        <div class="flex items-start justify-between mb-6">
+          <div>
+            <h2 class="text-2xl font-bold text-yellow-700 mb-2">
+              🎣 Incident Type 3: Clicked Phishing Link or Downloaded Malware
+            </h2>
+            <span
+              class="inline-block bg-yellow-100 text-yellow-800 text-xs font-semibold px-3 py-1 rounded-full"
+            >
+              MEDIUM-HIGH SEVERITY
+            </span>
+          </div>
+        </div>
+
+        <div class="space-y-6">
+          <!-- Immediate Containment -->
+          <div class="bg-red-50 rounded-lg p-6">
+            <h3 class="text-xl font-bold text-red-900 mb-4 flex items-center">
+              ⚡ Immediate Containment (First 5 Minutes)
+            </h3>
+            <div class="space-y-3">
+              <label class="flex items-start space-x-3">
+                <input
+                  type="checkbox"
+                  class="mt-1 h-5 w-5 text-red-600 rounded border-stone-300"
+                />
+                <span class="text-stone-700">
+                  <strong>Disconnect from internet IMMEDIATELY:</strong> Turn
+                  off WiFi and unplug ethernet to prevent malware from spreading
+                  or data from being exfiltrated.
+                </span>
+              </label>
+              <label class="flex items-start space-x-3">
+                <input
+                  type="checkbox"
+                  class="mt-1 h-5 w-5 text-red-600 rounded border-stone-300"
+                />
+                <span class="text-stone-700">
+                  <strong>DO NOT shut down the device yet:</strong> Running
+                  malware might execute on shutdown. Disconnect network first,
+                  then seek guidance.
+                </span>
+              </label>
+              <label class="flex items-start space-x-3">
+                <input
+                  type="checkbox"
+                  class="mt-1 h-5 w-5 text-red-600 rounded border-stone-300"
+                />
+                <span class="text-stone-700">
+                  <strong>Document what happened:</strong> Screenshot or
+                  photograph the suspicious email/link, note the time, and what
+                  you clicked.
+                </span>
+              </label>
+              <label class="flex items-start space-x-3">
+                <input
+                  type="checkbox"
+                  class="mt-1 h-5 w-5 text-red-600 rounded border-stone-300"
+                />
+                <span class="text-stone-700">
+                  <strong>Alert IT/Security Lead from different device:</strong>
+                  Don't use the compromised device to report the incident.
+                </span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Assessment -->
+          <div class="bg-orange-50 rounded-lg p-6">
+            <h3
+              class="text-xl font-bold text-orange-900 mb-4 flex items-center"
+            >
+              🔍 Damage Assessment
+            </h3>
+            <div class="space-y-3">
+              <label class="flex items-start space-x-3">
+                <input
+                  type="checkbox"
+                  class="mt-1 h-5 w-5 text-orange-600 rounded border-stone-300"
+                />
+                <span class="text-stone-700">
+                  <strong>Determine what credentials you entered:</strong> If
+                  you entered passwords, usernames, or financial info, note
+                  which accounts.
+                </span>
+              </label>
+              <label class="flex items-start space-x-3">
+                <input
+                  type="checkbox"
+                  class="mt-1 h-5 w-5 text-orange-600 rounded border-stone-300"
+                />
+                <span class="text-stone-700">
+                  <strong>Identify what data was accessible:</strong> What
+                  files, emails, or documents could the attacker access from
+                  this device?
+                </span>
+              </label>
+              <label class="flex items-start space-x-3">
+                <input
+                  type="checkbox"
+                  class="mt-1 h-5 w-5 text-orange-600 rounded border-stone-300"
+                />
+                <span class="text-stone-700">
+                  <strong>Check if malware executed:</strong> Did you download
+                  and OPEN a file, or just click a link? Opening is higher risk.
+                </span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Cleanup -->
+          <div class="bg-yellow-50 rounded-lg p-6">
+            <h3
+              class="text-xl font-bold text-yellow-900 mb-4 flex items-center"
+            >
+              🧹 System Cleanup (Use Different Device First)
+            </h3>
+            <div class="space-y-3">
+              <label class="flex items-start space-x-3">
+                <input
+                  type="checkbox"
+                  class="mt-1 h-5 w-5 text-yellow-600 rounded border-stone-300"
+                />
+                <span class="text-stone-700">
+                  <strong>Change passwords from a SAFE device:</strong> Log into
+                  accounts from a different, trusted device and change all
+                  passwords immediately.
+                </span>
+              </label>
+              <label class="flex items-start space-x-3">
+                <input
+                  type="checkbox"
+                  class="mt-1 h-5 w-5 text-yellow-600 rounded border-stone-300"
+                />
+                <span class="text-stone-700">
+                  <strong>Enable 2FA on all accounts:</strong> Add extra layer
+                  of protection while cleaning compromised device.
+                </span>
+              </label>
+              <label class="flex items-start space-x-3">
+                <input
+                  type="checkbox"
+                  class="mt-1 h-5 w-5 text-yellow-600 rounded border-stone-300"
+                />
+                <span class="text-stone-700">
+                  <strong>Run full antivirus/malware scan:</strong> Use
+                  reputable antivirus (Windows Defender, Malwarebytes) in safe
+                  mode if possible.
+                </span>
+              </label>
+              <label class="flex items-start space-x-3">
+                <input
+                  type="checkbox"
+                  class="mt-1 h-5 w-5 text-yellow-600 rounded border-stone-300"
+                />
+                <span class="text-stone-700">
+                  <strong>Consider professional help:</strong> If high-value
+                  data is at risk or malware persists, consult security
+                  professional.
+                </span>
+              </label>
+              <label class="flex items-start space-x-3">
+                <input
+                  type="checkbox"
+                  class="mt-1 h-5 w-5 text-yellow-600 rounded border-stone-300"
+                />
+                <span class="text-stone-700">
+                  <strong>Factory reset if necessary:</strong> For severe
+                  infections, backup important files (scan them first) and
+                  reinstall OS.
+                </span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Post-Incident -->
+          <div class="bg-green-50 rounded-lg p-6">
+            <h3 class="text-xl font-bold text-green-900 mb-4 flex items-center">
+              📝 Post-Incident Review
+            </h3>
+            <div class="space-y-3">
+              <label class="flex items-start space-x-3">
+                <input
+                  type="checkbox"
+                  class="mt-1 h-5 w-5 text-green-600 rounded border-stone-300"
+                />
+                <span class="text-stone-700">
+                  <strong>Monitor accounts for 30 days:</strong> Watch for
+                  unusual activity in email, banking, and social media accounts.
+                </span>
+              </label>
+              <label class="flex items-start space-x-3">
+                <input
+                  type="checkbox"
+                  class="mt-1 h-5 w-5 text-green-600 rounded border-stone-300"
+                />
+                <span class="text-stone-700">
+                  <strong>Report the phishing attempt:</strong> Forward phishing
+                  email to service provider (e.g., reportphishing@apple.com,
+                  phish@uber.com).
+                </span>
+              </label>
+              <label class="flex items-start space-x-3">
+                <input
+                  type="checkbox"
+                  class="mt-1 h-5 w-5 text-green-600 rounded border-stone-300"
+                />
+                <span class="text-stone-700">
+                  <strong>Share lessons learned with team:</strong> Use this as
+                  training opportunity - what red flags did you miss?
+                </span>
+              </label>
+              <label class="flex items-start space-x-3">
+                <input
+                  type="checkbox"
+                  class="mt-1 h-5 w-5 text-green-600 rounded border-stone-300"
+                />
+                <span class="text-stone-700">
+                  <strong>Update security training:</strong> If multiple people
+                  fell for similar attacks, schedule refresher training.
+                </span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Incident Log Template -->
+      <section class="mb-12 bg-white rounded-xl shadow-lg p-8">
+        <h2 class="text-2xl font-bold text-stone-900 mb-6 flex items-center">
+          <span class="text-3xl mr-3">📋</span>
+          Incident Log Template
+        </h2>
+        <p class="text-stone-600 mb-6">
+          Document each incident for tracking, legal purposes, and improving
+          your response procedures.
+        </p>
+        <div class="space-y-4 border-2 border-stone-200 rounded-lg p-6">
+          <div>
+            <label class="font-semibold text-stone-700"
+              >Incident Date & Time:</label
+            >
+            <div
+              class="border-b-2 border-dotted border-stone-300 mt-1 h-6"
+            ></div>
+          </div>
+          <div>
+            <label class="font-semibold text-stone-700">Incident Type:</label>
+            <div
+              class="border-b-2 border-dotted border-stone-300 mt-1 h-6"
+            ></div>
+          </div>
+          <div>
+            <label class="font-semibold text-stone-700"
+              >Affected Person/Team:</label
+            >
+            <div
+              class="border-b-2 border-dotted border-stone-300 mt-1 h-6"
+            ></div>
+          </div>
+          <div>
+            <label class="font-semibold text-stone-700"
+              >Description of Incident:</label
+            >
+            <div
+              class="border-b-2 border-dotted border-stone-300 mt-2 h-6"
+            ></div>
+            <div
+              class="border-b-2 border-dotted border-stone-300 mt-2 h-6"
+            ></div>
+            <div
+              class="border-b-2 border-dotted border-stone-300 mt-2 h-6"
+            ></div>
+          </div>
+          <div>
+            <label class="font-semibold text-stone-700">Actions Taken:</label>
+            <div
+              class="border-b-2 border-dotted border-stone-300 mt-2 h-6"
+            ></div>
+            <div
+              class="border-b-2 border-dotted border-stone-300 mt-2 h-6"
+            ></div>
+            <div
+              class="border-b-2 border-dotted border-stone-300 mt-2 h-6"
+            ></div>
+          </div>
+          <div>
+            <label class="font-semibold text-stone-700"
+              >Data/Accounts Compromised:</label
+            >
+            <div
+              class="border-b-2 border-dotted border-stone-300 mt-2 h-6"
+            ></div>
+            <div
+              class="border-b-2 border-dotted border-stone-300 mt-2 h-6"
+            ></div>
+          </div>
+          <div>
+            <label class="font-semibold text-stone-700">Resolution Date:</label>
+            <div
+              class="border-b-2 border-dotted border-stone-300 mt-1 h-6"
+            ></div>
+          </div>
+          <div>
+            <label class="font-semibold text-stone-700"
+              >Lessons Learned / Follow-up Actions:</label
+            >
+            <div
+              class="border-b-2 border-dotted border-stone-300 mt-2 h-6"
+            ></div>
+            <div
+              class="border-b-2 border-dotted border-stone-300 mt-2 h-6"
+            ></div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-stone-800 text-stone-200 py-6">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <p class="text-sm">
+          © <span id="footer-year"></span> Doria Feminist Fund | Digital
+          Security Workshop
+        </p>
+      </div>
+    </footer>
+
+    <script>
+      document.getElementById("footer-year").textContent =
+        new Date().getFullYear();
+    </script>
+  </body>
+</html>
