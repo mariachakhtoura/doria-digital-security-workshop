@@ -6,6 +6,20 @@
     <title>Digital Security Cheat Sheet - Doria Feminist Fund</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
+      @font-face {
+        font-family: 'Graebenbach';
+        src: url('Graebenbach-Regular.otf') format('opentype');
+        font-weight: 400;
+        font-style: normal;
+      }
+
+      @font-face {
+        font-family: 'Graebenbach';
+        src: url('Graebenbach-Medium.otf') format('opentype');
+        font-weight: 500;
+        font-style: normal;
+      }
+
       @page {
         size: A4;
         margin: 1.5cm;
@@ -15,6 +29,7 @@
         body {
           print-color-adjust: exact;
           -webkit-print-color-adjust: exact;
+          background: white !important;
         }
         .no-print {
           display: none !important;
@@ -22,9 +37,109 @@
         .page-break {
           page-break-after: always;
         }
-        .avoid-break {
+
+        /* Convert to compact multi-column layout for print */
+        .space-y-6 {
+          column-count: 2;
+          column-gap: 1.5rem;
+          column-rule: 1px solid #e5e7eb;
+        }
+
+        /* Remove card styling for print */
+        .card {
+          background: none !important;
+          border: none !important;
+          box-shadow: none !important;
+          border-radius: 0 !important;
+          padding: 0 !important;
+          margin-bottom: 1rem !important;
+          break-inside: avoid;
           page-break-inside: avoid;
         }
+
+        /* Hide badges */
+        .badge {
+          display: none !important;
+        }
+
+        /* Compact section headers */
+        .card .flex.items-center.mb-4 h3 {
+          font-size: 1rem !important;
+          margin-bottom: 0.25rem !important;
+          padding-bottom: 0.25rem !important;
+          border-bottom: 2px solid #ec4899 !important;
+          display: block !important;
+        }
+
+        .card .flex.items-center.mb-4 {
+          display: block !important;
+          margin-bottom: 0.5rem !important;
+        }
+
+        .card .flex.items-center.mb-4 span.text-4xl {
+          font-size: 1.25rem !important;
+          margin-right: 0.5rem !important;
+        }
+
+        .card .flex.items-center.mb-4 p {
+          font-size: 0.7rem !important;
+          margin: 0 !important;
+          font-style: italic;
+        }
+
+        /* Convert side-by-side to stacked */
+        .grid.md\\:grid-cols-2 {
+          display: block !important;
+          grid-template-columns: none !important;
+          gap: 0 !important;
+        }
+
+        /* Remove colored boxes */
+        .bg-red-50, .bg-green-50, .bg-teal-50 {
+          background: none !important;
+          border: none !important;
+          padding: 0 !important;
+          border-radius: 0 !important;
+          margin-bottom: 0.5rem !important;
+        }
+
+        /* Compact headings */
+        .bg-red-50 h4, .bg-green-50 h4 {
+          font-size: 0.7rem !important;
+          margin-bottom: 0.25rem !important;
+          font-weight: 700 !important;
+          color: inherit !important;
+        }
+
+        .font-bold.text-red-800 {
+          color: #b91c1c !important;
+        }
+
+        .font-bold.text-green-800 {
+          color: #166534 !important;
+        }
+
+        /* Compact lists */
+        .bg-red-50 ul, .bg-green-50 ul {
+          font-size: 0.65rem !important;
+          margin-left: 1rem !important;
+          margin-bottom: 0.5rem !important;
+          line-height: 1.3 !important;
+        }
+
+        .bg-red-50 ul li, .bg-green-50 ul li {
+          margin-bottom: 0.125rem !important;
+        }
+
+        /* Compact "Why it matters" */
+        .bg-teal-50 p {
+          font-size: 0.65rem !important;
+          padding: 0.25rem 0.5rem !important;
+          background: #f0fdfa !important;
+          border-left: 2px solid #14b8a6 !important;
+          margin-top: 0.5rem !important;
+        }
+
         a {
           text-decoration: none;
           color: inherit;
@@ -32,7 +147,7 @@
       }
 
       body {
-        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        font-family: 'Graebenbach', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       }
 
       .badge {
@@ -75,7 +190,14 @@
         🖨️ Print / Save as PDF
       </button>
     </div>
-
+    <div class="flex items-center justify-center mb-8 mt-4">
+      <img src="logo.png" alt="Doria Feminist Fund" class="h-16 mr-4" />
+      <h1
+        class="text-4xl font-extrabold bg-gradient-to-r from-pink-600 to-teal-600 bg-clip-text text-transparent leading-normal"
+      >
+        Reference Guide
+      </h1>
+    </div>
     <!-- Back Button -->
     <div class="no-print fixed top-4 left-4 z-50">
       <a
@@ -87,99 +209,6 @@
     </div>
 
     <div class="max-w-5xl mx-auto p-8">
-      <!-- Cover Page -->
-      <div
-        class="page-break avoid-break bg-white rounded-2xl shadow-xl p-12 mb-8 text-center relative overflow-hidden"
-      >
-        <div
-          class="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-pink-200 to-teal-200 rounded-full opacity-20 -mr-32 -mt-32"
-        ></div>
-        <div
-          class="absolute bottom-0 left-0 w-48 h-48 bg-gradient-to-tr from-teal-200 to-rose-200 rounded-full opacity-20 -ml-24 -mb-24"
-        ></div>
-
-        <div class="relative z-10">
-          <img
-            src="logo.png"
-            alt="Doria Feminist Fund"
-            class="h-20 mx-auto mb-6"
-          />
-
-          <h1
-            class="text-5xl font-extrabold mb-4 bg-gradient-to-r from-pink-600 to-teal-600 bg-clip-text text-transparent leading-normal pb-2"
-          >
-            Reference Guide
-          </h1>
-        </div>
-        <h2 class="text-2xl font-bold text-stone-800 mb-6 flex items-center">
-          <span class="text-3xl mr-3">📋</span> Quick Navigation
-        </h2>
-        <div class="grid md:grid-cols-2 gap-4">
-          <a
-            href="#section-1"
-            class="flex items-center p-3 rounded-lg hover:bg-pink-50 transition-colors no-print-link"
-          >
-            <span class="text-2xl mr-3">💬</span>
-            <span class="font-semibold text-stone-700"
-              >Encrypted Messaging Apps</span
-            >
-          </a>
-          <a
-            href="#section-2"
-            class="flex items-center p-3 rounded-lg hover:bg-pink-50 transition-colors no-print-link"
-          >
-            <span class="text-2xl mr-3">🕵️</span>
-            <span class="font-semibold text-stone-700">Incognito Mode</span>
-          </a>
-          <a
-            href="#section-3"
-            class="flex items-center p-3 rounded-lg hover:bg-pink-50 transition-colors no-print-link"
-          >
-            <span class="text-2xl mr-3">☁️</span>
-            <span class="font-semibold text-stone-700">Cloud Backups</span>
-          </a>
-          <a
-            href="#section-4"
-            class="flex items-center p-3 rounded-lg hover:bg-pink-50 transition-colors no-print-link"
-          >
-            <span class="text-2xl mr-3">🔐</span>
-            <span class="font-semibold text-stone-700">Device Encryption</span>
-          </a>
-          <a
-            href="#section-5"
-            class="flex items-center p-3 rounded-lg hover:bg-pink-50 transition-colors no-print-link"
-          >
-            <span class="text-2xl mr-3">🗑️</span>
-            <span class="font-semibold text-stone-700"
-              >Secure File Deletion</span
-            >
-          </a>
-          <a
-            href="#section-6"
-            class="flex items-center p-3 rounded-lg hover:bg-pink-50 transition-colors no-print-link"
-          >
-            <span class="text-2xl mr-3">🔒</span>
-            <span class="font-semibold text-stone-700">VPNs</span>
-          </a>
-          <a
-            href="#section-7"
-            class="flex items-center p-3 rounded-lg hover:bg-pink-50 transition-colors no-print-link"
-          >
-            <span class="text-2xl mr-3">🛡️</span>
-            <span class="font-semibold text-stone-700">Antivirus Software</span>
-          </a>
-          <a
-            href="#section-8"
-            class="flex items-center p-3 rounded-lg hover:bg-pink-50 transition-colors no-print-link"
-          >
-            <span class="text-2xl mr-3">📱</span>
-            <span class="font-semibold text-stone-700"
-              >QR Codes & URL Shorteners</span
-            >
-          </a>
-        </div>
-      </div>
-
       <!-- Content Sections -->
       <div class="space-y-6">
         <!-- Section 1: Encrypted Messaging -->
@@ -710,7 +739,8 @@
     <footer class="bg-stone-800 text-stone-200 py-6">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <p class="text-sm">
-          © <span id="footer-year"></span> Doria Feminist Fund | Digital Security Workshop
+          © <span id="footer-year"></span> Doria Feminist Fund | Digital
+          Security Workshop
         </p>
       </div>
     </footer>

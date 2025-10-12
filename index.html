@@ -10,6 +10,25 @@
     <!-- Visualization & Content Choices: The source report is entirely qualitative, containing no datasets suitable for charting with Chart.js. Therefore, all information is presented using structured, interactive HTML. Report Info: Lists of security risks/practices -> Goal: Inform/Organize -> Presentation: Interactive accordions and checklists. Interaction: Click to reveal details or check off completed actions. Justification: Breaks down dense information, making it scannable and actionable. Report Info: Tool comparisons (e.g., Signal vs. WhatsApp) -> Goal: Compare -> Presentation: HTML tables with clear visual indicators (✅, ⚠️, ❌). Interaction: Static comparison for clarity. Justification: The most direct way to compare features. Report Info: Detailed tool misuse appendix -> Goal: Reference/Deep-dive -> Presentation: A grid of clickable cards opening detailed modals. Interaction: Click to open. Justification: Hides complex details until requested, keeping the main interface clean while making deep-dive information accessible. All visuals are Unicode icons, adhering to constraints. -->
     <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
     <style>
+      @font-face {
+        font-family: "Graebenbach";
+        src: url("Graebenbach-Regular.otf") format("opentype");
+        font-weight: 400;
+        font-style: normal;
+      }
+
+      @font-face {
+        font-family: "Graebenbach";
+        src: url("Graebenbach-Medium.otf") format("opentype");
+        font-weight: 500;
+        font-style: normal;
+      }
+
+      body {
+        font-family: "Graebenbach", "Segoe UI", Tahoma, Geneva, Verdana,
+          sans-serif;
+      }
+
       .active-nav {
         color: #ec4899;
         border-bottom: 2px solid #ec4899;
@@ -52,9 +71,240 @@
       .link:hover {
         color: #0d9488;
       }
+
+      /* Split View Styles */
+      .split-view-container {
+        display: grid;
+        grid-template-columns: 360px 1fr;
+        gap: 3rem;
+        min-height: 600px;
+      }
+      .split-view-nav {
+        position: sticky;
+        top: 100px;
+        height: fit-content;
+        border: 2px solid #ec4899;
+      }
+      .split-view-nav-item {
+        padding: 1.25rem 1.5rem;
+        cursor: pointer;
+        border-left: 4px solid transparent;
+        transition: all 0.3s ease;
+        font-size: 1rem;
+      }
+      .split-view-nav-item:hover {
+        background: linear-gradient(90deg, #fdf2f8, #ffffff);
+        border-left-color: #ec4899;
+        transform: translateX(4px);
+      }
+      .split-view-nav-item.active {
+        background: linear-gradient(90deg, #fce7f3, #fbcfe8);
+        border-left-color: #ec4899;
+        font-weight: 700;
+        transform: translateX(4px);
+      }
+      .split-view-content {
+        animation: slideInRight 0.4s ease;
+        font-size: 1.05rem;
+        line-height: 1.8;
+        min-height: 600px;
+        display: flex;
+        flex-direction: column;
+      }
+      .split-view-content-panel {
+        border: 2px solid #fce7f3;
+        border-radius: 0.75rem;
+        overflow: hidden;
+        min-height: 600px;
+      }
+      @keyframes slideInRight {
+        from {
+          opacity: 0;
+          transform: translateX(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+      @media (max-width: 768px) {
+        .split-view-container {
+          grid-template-columns: 1fr;
+          gap: 2rem;
+        }
+        .split-view-nav {
+          position: static;
+          display: flex;
+          flex-direction: column;
+          gap: 0.5rem;
+        }
+        .split-view-nav-item {
+          transform: none !important;
+        }
+      }
+
+      /* Timeline Styles */
+      .timeline-container {
+        position: relative;
+        padding-left: 3rem;
+      }
+      .timeline-line {
+        position: absolute;
+        left: 1.5rem;
+        top: 2rem;
+        bottom: 2rem;
+        width: 3px;
+        background: linear-gradient(180deg, #ec4899, #f472b6);
+      }
+      .timeline-item {
+        position: relative;
+        margin-bottom: 3rem;
+      }
+      .timeline-dot {
+        position: absolute;
+        left: -2.65rem;
+        top: 0.5rem;
+        width: 2.5rem;
+        height: 2.5rem;
+        background: linear-gradient(135deg, #ec4899, #f472b6);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: bold;
+        box-shadow: 0 4px 6px rgba(236, 72, 153, 0.3);
+        z-index: 10;
+        border: 3px solid white;
+      }
+      .timeline-dot::after {
+        content: "";
+        width: 10px;
+        height: 10px;
+        background: white;
+        border-radius: 50%;
+      }
+      .timeline-card {
+        background: white;
+        border-radius: 0.75rem;
+        padding: 2rem;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        cursor: pointer;
+        transition: all 0.3s ease;
+        border-left: 3px solid transparent;
+      }
+      .timeline-card:hover {
+        box-shadow: 0 8px 16px rgba(236, 72, 153, 0.2);
+        transform: translateY(-2px);
+        border-left-color: #fce7f3;
+      }
+      .timeline-card-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .timeline-card-content {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.4s ease;
+      }
+      .timeline-card-content.expanded {
+        max-height: 2000px;
+        margin-top: 1rem;
+        padding-top: 1rem;
+        border-top: 2px solid #fce7f3;
+      }
+      @media (max-width: 768px) {
+        .timeline-container {
+          padding-left: 2rem;
+        }
+        .timeline-dot {
+          left: -2rem;
+          width: 2rem;
+          height: 2rem;
+          font-size: 0.875rem;
+        }
+      }
+
+      /* Flip Card Styles */
+      .flip-cards-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+      }
+      .flip-card {
+        perspective: 1000px;
+        height: 500px;
+        cursor: pointer;
+      }
+      .flip-card-inner {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        transition: transform 0.6s;
+        transform-style: preserve-3d;
+      }
+      .flip-card.flipped .flip-card-inner {
+        transform: rotateY(180deg);
+      }
+      .flip-card-front,
+      .flip-card-back {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        backface-visibility: hidden;
+        border-radius: 1rem;
+        padding: 2rem;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      }
+      .flip-card-front {
+        background: radial-gradient(
+            circle,
+            rgba(255, 255, 255, 0.06) 10%,
+            transparent 10%
+          ),
+          radial-gradient(
+            circle,
+            rgba(255, 255, 255, 0.04) 15%,
+            transparent 15%
+          ),
+          radial-gradient(circle, rgba(255, 255, 255, 0.08) 8%, transparent 8%),
+          linear-gradient(135deg, #ec4899 0%, #f472b6 20%, #14b8a6 100%);
+        background-position: 0 0, 50px 50px, 25px 75px, 0 0;
+        background-size: 100px 100px, 150px 150px, 120px 120px, 100% 100%;
+        color: white;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+      }
+      .flip-card-back {
+        background: white;
+        transform: rotateY(180deg);
+        overflow-y: auto;
+      }
+      .flip-hint {
+        position: absolute;
+        bottom: 1rem;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 0.75rem;
+        opacity: 0.8;
+      }
+      @media (hover: hover) {
+        .flip-card:hover .flip-card-inner {
+          transform: rotateY(180deg);
+        }
+        .flip-card.flipped:hover .flip-card-inner {
+          transform: rotateY(0deg);
+        }
+      }
     </style>
   </head>
-  <body class="bg-rose-50 text-stone-800 font-sans leading-relaxed overflow-x-hidden">
+  <body
+    class="bg-rose-50 text-stone-800 font-sans leading-relaxed overflow-x-hidden"
+  >
     <header
       id="header"
       class="fixed top-0 z-40 w-full transition-all duration-300"
@@ -222,7 +472,7 @@
         />
       </section>
 
-      <div id="main-content" class="py-12">
+      <div id="main-content">
         <section
           id="part1"
           class="slide-content mb-20 relative min-h-screen flex flex-col justify-center py-20 overflow-hidden"
@@ -385,7 +635,13 @@
             <img
               src="right-side.png"
               alt=""
-              class="absolute -right-20 top-20 w-64 opacity-60 hidden lg:block pointer-events-none"
+              class="absolute -right-20 w-64 opacity-60 hidden lg:block pointer-events-none"
+            />
+            <!-- Bottom left decorative image -->
+            <img
+              src="rotated-flowers.png"
+              alt=""
+              class="absolute -left-10 bottom-10 w-32 opacity-50 hidden lg:block pointer-events-none"
             />
 
             <div class="text-center mb-12">
@@ -407,20 +663,32 @@
                 online.
               </p>
             </div>
-            <div class="space-y-8" id="part2-accordions"></div>
+            <div id="part2-split-view"></div>
           </div>
         </section>
 
         <section
           id="part3"
-          class="slide-content mb-20 relative min-h-screen flex flex-col justify-center py-20"
+          class="slide-content mb-20 relative min-h-screen flex flex-col justify-center py-20 overflow-hidden"
         >
           <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
             <!-- Rotated feminist symbol -->
             <img
               src="rotated.png"
               alt=""
-              class="absolute left-1/2 -translate-x-1/2 -top-16 w-32 opacity-70 hidden md:block"
+              class="absolute left-0 w-32 opacity-70 hidden md:block"
+            />
+            <!-- Top right decorative -->
+            <img
+              src="top-right.png"
+              alt=""
+              class="absolute -right-16 top-20 w-40 opacity-50 hidden lg:block pointer-events-none"
+            />
+            <!-- Bottom left decorative -->
+            <img
+              src="left-side.png"
+              alt=""
+              class="absolute -left-20 bottom-20 w-48 opacity-40 hidden lg:block pointer-events-none"
             />
 
             <div class="text-center mb-12">
@@ -442,7 +710,7 @@
                 team members.
               </p>
             </div>
-            <div class="space-y-8" id="part3-accordions"></div>
+            <div id="part3-timeline"></div>
           </div>
         </section>
 
@@ -455,10 +723,16 @@
             <img
               src="right-column.png"
               alt=""
-              class="absolute -right-32 top-20 w-72 opacity-50 hidden xl:block pointer-events-none"
+              class="absolute z-0 -right-60 -top-60 opacity-25 hidden xl:block pointer-events-none"
+            />
+            <!-- Left top decorative -->
+            <img
+              src="rotated-flowers.png"
+              alt=""
+              class="absolute -left-10 top-32 w-36 opacity-50 hidden lg:block pointer-events-none"
             />
 
-            <div class="text-center mb-12">
+            <div class="text-center mb-12 relative z-10">
               <h2
                 class="text-base text-pink-600 font-semibold tracking-wide uppercase"
               >
@@ -477,7 +751,7 @@
                 device risks.
               </p>
             </div>
-            <div class="space-y-8" id="part4-accordions"></div>
+            <div class="relative z-40" id="part4-flip-cards"></div>
           </div>
         </section>
 
@@ -486,11 +760,17 @@
           class="slide-content mb-20 relative min-h-screen flex flex-col justify-center py-20 overflow-hidden"
         >
           <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-            <!-- Bottom right decorative image -->
+            <!-- Top left decorative -->
             <img
-              src="bottom-right.png"
+              src="top-right.png"
               alt=""
-              class="absolute -right-20 bottom-0 w-80 opacity-60 hidden lg:block pointer-events-none"
+              class="absolute -left-10 top-10 w-48 opacity-50 hidden lg:block pointer-events-none"
+            />
+            <!-- Right side decorative -->
+            <img
+              src="right-side.png"
+              alt=""
+              class="absolute -right-24 bottom-32 w-56 opacity-40 hidden lg:block pointer-events-none"
             />
 
             <div class="text-center mb-12">
@@ -531,32 +811,43 @@
 
         <section
           id="appendix"
-          class="slide-content py-20"
+          class="slide-content py-20 relative min-h-screen flex flex-col justify-center"
         >
-          <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+          <div
+            class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10"
+          >
             <div class="text-center">
               <h2
                 class="text-base text-pink-600 font-semibold tracking-wide uppercase"
               >
-                Quick Reference
+                Resource Guide
               </h2>
               <p
-                class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-stone-900 sm:text-4xl"
+                class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-stone-900 sm:text-4xl mb-6"
               >
                 Security Tools Cheat Sheet
               </p>
-              <p class="mt-4 max-w-3xl mx-auto text-xl text-stone-500 mb-8">
-                A comprehensive, printable reference guide for all security tools covered in this workshop.
+              <p
+                class="max-w-3xl mx-auto text-xl text-stone-500 font-medium mb-12"
+              >
+                A comprehensive, printable reference guide for all security
+                tools covered in this workshop.
               </p>
               <a
                 href="cheat-sheet.html"
                 target="_blank"
-                class="inline-flex items-center bg-gradient-to-r from-pink-500 to-teal-500 hover:from-pink-600 hover:to-teal-600 text-white font-bold py-4 px-8 rounded-full shadow-lg transition-all hover:scale-105 text-lg"
+                class="inline-block bg-pink-500 hover:bg-pink-600 text-white font-bold py-4 px-8 rounded-full text-lg transition-colors shadow-lg"
               >
-                <span class="mr-2">📄</span> View Cheat Sheet
+                View Cheat Sheet →
               </a>
             </div>
           </div>
+          <!-- Bottom decorative image - larger and covering bottom -->
+          <img
+            src="bottom-right.png"
+            alt=""
+            class="absolute right-0 bottom-0 w-full opacity-15 hidden lg:block pointer-events-none"
+          />
         </section>
       </div>
 
@@ -578,21 +869,9 @@
             Thank You for Participating!
           </h2>
           <p class="text-xl md:text-2xl text-stone-700 mb-8">
-            Remember: Digital security is a journey, not a destination. Stay
-            vigilant, stay connected, and stay safe.
+            Remember: Digital security is a journey, not a destination. <br />
+            Stay vigilant, stay connected, and stay safe.
           </p>
-          <div
-            class="bg-white/80 backdrop-blur-sm p-8 rounded-2xl shadow-xl max-w-2xl mx-auto"
-          >
-            <p class="text-lg text-stone-600 mb-4">
-              <strong class="text-pink-600">Questions or need support?</strong>
-            </p>
-            <p class="text-stone-600">
-              Reach out to your network, consult the resources in this guide,
-              and remember that seeking help is a sign of strength, not
-              weakness.
-            </p>
-          </div>
         </div>
         <!-- Decorative elements -->
         <img
@@ -612,7 +891,8 @@
     <footer class="bg-stone-800 text-stone-200 py-6">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <p class="text-sm">
-          © <span id="footer-year"></span> Doria Feminist Fund | Digital Security Workshop
+          © <span id="footer-year"></span> Doria Feminist Fund | Digital
+          Security Workshop
         </p>
       </div>
     </footer>
@@ -681,12 +961,12 @@
             donts: [
               "Believing a chat is 100% private just because the app is encrypted",
               "Taking screenshots of sensitive information",
-              "Adding unverified people to sensitive groups"
+              "Adding unverified people to sensitive groups",
             ],
             dos: [
               "Use disappearing messages for sensitive topics",
               "Regularly clear your chat history",
-              "Verify contacts before adding to groups"
+              "Verify contacts before adding to groups",
             ],
             why: "The app is secure. You might not be. That's the weak link.",
             fullContent: `
@@ -718,12 +998,12 @@
             donts: [
               "Thinking it makes you anonymous online",
               "Believing it hides activity from ISP or government",
-              "Using it for sensitive research without VPN"
+              "Using it for sensitive research without VPN",
             ],
             dos: [
               "Use it to hide browsing from device users only",
               "Combine with a trusted VPN for real privacy",
-              "Understand its limitations clearly"
+              "Understand its limitations clearly",
             ],
             why: "Incognito hides history from your roommate, not from the government.",
             fullContent: `
@@ -748,12 +1028,12 @@
             donts: [
               "Auto-syncing everything without reviewing",
               "Storing unencrypted sensitive documents",
-              "Using weak passwords or no 2FA"
+              "Using weak passwords or no 2FA",
             ],
             dos: [
               "Be selective about what you sync",
               "Use Cryptomator to encrypt sensitive folders",
-              "Always enable 2FA on cloud accounts"
+              "Always enable 2FA on cloud accounts",
             ],
             why: "Cloud providers can access your data and comply with government requests.",
             fullContent: `
@@ -782,12 +1062,12 @@
             donts: [
               "Believing it protects devices that are on and unlocked",
               "Using simple PINs like 1234",
-              "Using fingerprint unlock in high-risk situations"
+              "Using fingerprint unlock in high-risk situations",
             ],
             dos: [
               "Power OFF device completely if at risk",
               "Use long alphanumeric passphrases",
-              "Disable biometrics for high-risk situations"
+              "Disable biometrics for high-risk situations",
             ],
             why: "Encryption is most powerful when your device is powered OFF.",
             fullContent: `
@@ -815,12 +1095,12 @@
             donts: [
               "Thinking Trash/Recycle Bin permanently erases files",
               "Selling devices without secure erase",
-              "Assuming deleted means gone"
+              "Assuming deleted means gone",
             ],
             dos: [
               "Use file shredder applications for sensitive files",
               "Use built-in Secure Erase when disposing devices",
-              "Understand deleted files can be recovered"
+              "Understand deleted files can be recovered",
             ],
             why: "Deleted files can be recovered. Journalists and activists have been compromised this way.",
             fullContent: `
@@ -844,12 +1124,12 @@
             donts: [
               "Using free VPNs from app stores",
               "Trusting VPNs with logging history",
-              "Thinking VPNs make you completely anonymous"
+              "Thinking VPNs make you completely anonymous",
             ],
             dos: [
               "Use reputable, paid VPN with no-logs policy",
               "Choose providers outside surveillance jurisdictions",
-              "Research VPN audits and reputation"
+              "Research VPN audits and reputation",
             ],
             why: "Bad VPNs are worse than no VPN. Free VPNs sell your data.",
             fullContent: `
@@ -875,12 +1155,12 @@
             donts: [
               "Installing once and forgetting about it",
               "Ignoring update notifications",
-              "Thinking it replaces safe browsing habits"
+              "Thinking it replaces safe browsing habits",
             ],
             dos: [
               "Enable automatic updates for software and definitions",
               "Run scans regularly (weekly minimum)",
-              "Keep operating system updated"
+              "Keep operating system updated",
             ],
             why: "Out-of-date antivirus can't protect against new threats.",
             fullContent: `
@@ -908,12 +1188,12 @@
             donts: [
               "Using random online QR generators for sensitive links",
               "Trusting QR codes in public without checking",
-              "Using free URL shorteners for confidential info"
+              "Using free URL shorteners for confidential info",
             ],
             dos: [
               "Use offline or trusted QR generators",
               "Preview shortened URLs before clicking",
-              "Use full URLs for sensitive links"
+              "Use full URLs for sensitive links",
             ],
             why: "QR codes can be swapped. URL shorteners track clicks and can be hijacked.",
             fullContent: `
@@ -977,7 +1257,8 @@
 
         data.forEach((item) => {
           const card = document.createElement("div");
-          card.className = "bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 p-6 border-2 border-stone-200";
+          card.className =
+            "bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 p-6 border-2 border-stone-200";
 
           card.innerHTML = `
             <div class="text-center mb-4">
@@ -992,7 +1273,12 @@
                   <span class="mr-2">❌</span> DON'T
                 </h4>
                 <ul class="space-y-1">
-                  ${item.donts.map(dont => `<li class="text-xs text-stone-700 flex items-start"><span class="mr-2 mt-1">•</span><span>${dont}</span></li>`).join('')}
+                  ${item.donts
+                    .map(
+                      (dont) =>
+                        `<li class="text-xs text-stone-700 flex items-start"><span class="mr-2 mt-1">•</span><span>${dont}</span></li>`
+                    )
+                    .join("")}
                 </ul>
               </div>
 
@@ -1001,13 +1287,20 @@
                   <span class="mr-2">✅</span> DO
                 </h4>
                 <ul class="space-y-1">
-                  ${item.dos.map(doItem => `<li class="text-xs text-stone-700 flex items-start"><span class="mr-2 mt-1">•</span><span>${doItem}</span></li>`).join('')}
+                  ${item.dos
+                    .map(
+                      (doItem) =>
+                        `<li class="text-xs text-stone-700 flex items-start"><span class="mr-2 mt-1">•</span><span>${doItem}</span></li>`
+                    )
+                    .join("")}
                 </ul>
               </div>
             </div>
 
             <div class="bg-teal-50 rounded-lg p-3 border-l-4 border-teal-500 mb-4">
-              <p class="text-xs text-teal-900 font-medium"><strong>Why it matters:</strong> ${item.why}</p>
+              <p class="text-xs text-teal-900 font-medium"><strong>Why it matters:</strong> ${
+                item.why
+              }</p>
             </div>
 
             <button class="learn-more-btn w-full text-center text-sm text-pink-600 hover:text-pink-700 font-semibold py-2 border border-pink-300 rounded-lg hover:bg-pink-50 transition-colors">
@@ -1023,15 +1316,15 @@
         });
 
         // Add click handlers for "Learn More" buttons
-        container.querySelectorAll('.learn-more-btn').forEach(btn => {
-          btn.addEventListener('click', (e) => {
+        container.querySelectorAll(".learn-more-btn").forEach((btn) => {
+          btn.addEventListener("click", (e) => {
             const content = e.target.nextElementSibling;
-            if (content.classList.contains('hidden')) {
-              content.classList.remove('hidden');
-              e.target.textContent = 'Show Less ↑';
+            if (content.classList.contains("hidden")) {
+              content.classList.remove("hidden");
+              e.target.textContent = "Show Less ↑";
             } else {
-              content.classList.add('hidden');
-              e.target.textContent = 'Learn More →';
+              content.classList.add("hidden");
+              e.target.textContent = "Learn More →";
             }
           });
         });
@@ -1056,10 +1349,160 @@
           container.appendChild(wrapper);
         });
       }
+
+      function createSplitView(containerId, data) {
+        const container = document.getElementById(containerId);
+        if (!container) return;
+
+        const wrapper = document.createElement("div");
+        wrapper.className = "split-view-container";
+
+        // Create navigation panel
+        const nav = document.createElement("div");
+        nav.className = "split-view-nav bg-white rounded-lg shadow-md p-2";
+
+        data.forEach((item, index) => {
+          const navItem = document.createElement("div");
+          navItem.className = `split-view-nav-item rounded ${
+            index === 0 ? "active" : ""
+          }`;
+          navItem.innerHTML = `<span class="text-sm">${item.title}</span>`;
+          navItem.dataset.index = index;
+          nav.appendChild(navItem);
+        });
+
+        // Create content panel
+        const contentPanel = document.createElement("div");
+        contentPanel.className = "split-view-content-panel";
+        contentPanel.innerHTML = `
+          <div class="split-view-content bg-white rounded-lg shadow-md p-8">
+            ${data[0].content}
+          </div>
+        `;
+
+        wrapper.appendChild(nav);
+        wrapper.appendChild(contentPanel);
+        container.appendChild(wrapper);
+
+        // Add click handlers
+        nav.querySelectorAll(".split-view-nav-item").forEach((item) => {
+          item.addEventListener("click", () => {
+            const index = parseInt(item.dataset.index);
+
+            // Update active state
+            nav
+              .querySelectorAll(".split-view-nav-item")
+              .forEach((i) => i.classList.remove("active"));
+            item.classList.add("active");
+
+            // Update content with animation
+            const content = contentPanel.querySelector(".split-view-content");
+            content.style.animation = "none";
+            setTimeout(() => {
+              content.innerHTML = data[index].content;
+              content.style.animation = "";
+            }, 50);
+          });
+        });
+      }
+
+      function createTimeline(containerId, data) {
+        const container = document.getElementById(containerId);
+        if (!container) return;
+
+        const timeline = document.createElement("div");
+        timeline.className = "timeline-container";
+
+        const line = document.createElement("div");
+        line.className = "timeline-line";
+        timeline.appendChild(line);
+
+        data.forEach((item, index) => {
+          const timelineItem = document.createElement("div");
+          timelineItem.className = "timeline-item";
+
+          timelineItem.innerHTML = `
+            <div class="timeline-dot"></div>
+            <div class="timeline-card">
+              <div class="timeline-card-header">
+                <h4 class="font-bold text-lg text-stone-800">${item.title}</h4>
+                <svg class="w-5 h-5 text-pink-500 transition-transform ${
+                  index === 0 ? "rotate-180" : ""
+                }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+              </div>
+              <div class="timeline-card-content ${
+                index === 0 ? "expanded" : ""
+              }">
+                <div class="text-stone-600">${item.content}</div>
+              </div>
+            </div>
+          `;
+
+          timeline.appendChild(timelineItem);
+        });
+
+        container.appendChild(timeline);
+
+        // Add click handlers
+        container.querySelectorAll(".timeline-card").forEach((card) => {
+          card.addEventListener("click", () => {
+            const content = card.querySelector(".timeline-card-content");
+            const icon = card.querySelector("svg");
+            const isExpanded = content.classList.contains("expanded");
+
+            if (isExpanded) {
+              content.classList.remove("expanded");
+              icon.classList.remove("rotate-180");
+            } else {
+              content.classList.add("expanded");
+              icon.classList.add("rotate-180");
+            }
+          });
+        });
+      }
+
+      function createFlipCards(containerId, data) {
+        const container = document.getElementById(containerId);
+        if (!container) return;
+
+        const grid = document.createElement("div");
+        grid.className = "flip-cards-grid";
+
+        data.forEach((item) => {
+          const card = document.createElement("div");
+          card.className = "flip-card";
+
+          card.innerHTML = `
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <h3 class="text-2xl font-bold mb-4">${item.title}</h3>
+                <p class="flip-hint">Click or hover to reveal details →</p>
+              </div>
+              <div class="flip-card-back">
+                <h4 class="font-bold text-xl text-stone-800 mb-4">${item.title}</h4>
+                <div class="text-sm text-stone-600">${item.content}</div>
+              </div>
+            </div>
+          `;
+
+          grid.appendChild(card);
+        });
+
+        container.appendChild(grid);
+
+        // Add click handlers for mobile
+        grid.querySelectorAll(".flip-card").forEach((card) => {
+          card.addEventListener("click", () => {
+            card.classList.toggle("flipped");
+          });
+        });
+      }
       document.addEventListener("DOMContentLoaded", () => {
-        createAccordion("part2-accordions", accordionData.part2);
-        createAccordion("part3-accordions", accordionData.part3);
-        createAccordion("part4-accordions", accordionData.part4);
+        createSplitView("part2-split-view", accordionData.part2);
+        createTimeline("part3-timeline", accordionData.part3);
+        createFlipCards("part4-flip-cards", accordionData.part4);
         createAccordion("incident-response-accordion", incidentResponseData);
         // Cheat sheet cards removed - now showing CTA to dedicated cheat-sheet.html page
         // createCheatSheetCards("appendix-cards", accordionData.appendix);
@@ -1103,7 +1546,10 @@
 
         document.querySelectorAll(".tab-button").forEach((button) => {
           button.addEventListener("click", (e) => {
-            const parent = e.target.closest(".accordion-content");
+            e.stopPropagation(); // Prevent card from collapsing when clicking tabs
+            const parent = e.target.closest(
+              ".accordion-content, .timeline-card-content"
+            );
             const tabs = parent.querySelectorAll(".tab-button");
             const contents = parent.querySelectorAll(".tab-content");
             tabs.forEach((t) => t.classList.remove("active"));
@@ -1196,7 +1642,8 @@
         });
 
         // Set footer year
-        document.getElementById('footer-year').textContent = new Date().getFullYear();
+        document.getElementById("footer-year").textContent =
+          new Date().getFullYear();
       });
     </script>
   </body>
