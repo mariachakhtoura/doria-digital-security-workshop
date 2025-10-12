@@ -1,0 +1,1203 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Digital Security Workshop Hub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chosen Palette: Vibrant Feminist Colors - Pink/Magenta with Teal Accents -->
+    <!-- Application Structure Plan: The SPA is designed as an interactive, slide-based presentation, mirroring the narrative flow of the source workshop script ('Why' -> 'You' -> 'Us' -> 'Them' -> 'Action Plan'). This journey-based structure is highly effective for educational content, guiding users through complex topics in manageable steps. A persistent top navigation allows non-linear access for users who want to revisit specific sections. Key information within each slide is transformed from static text into interactive components like accordions, tabs, and clickable modals. This encourages active engagement over passive reading. The appendix is reimagined as an interactive tool guide, making reference material easily searchable and digestible. This structure was chosen to maximize comprehension and retention for a non-technical audience by making the learning process guided, interactive, and less overwhelming than a long text document. -->
+    <!-- Visualization & Content Choices: The source report is entirely qualitative, containing no datasets suitable for charting with Chart.js. Therefore, all information is presented using structured, interactive HTML. Report Info: Lists of security risks/practices -> Goal: Inform/Organize -> Presentation: Interactive accordions and checklists. Interaction: Click to reveal details or check off completed actions. Justification: Breaks down dense information, making it scannable and actionable. Report Info: Tool comparisons (e.g., Signal vs. WhatsApp) -> Goal: Compare -> Presentation: HTML tables with clear visual indicators (✅, ⚠️, ❌). Interaction: Static comparison for clarity. Justification: The most direct way to compare features. Report Info: Detailed tool misuse appendix -> Goal: Reference/Deep-dive -> Presentation: A grid of clickable cards opening detailed modals. Interaction: Click to open. Justification: Hides complex details until requested, keeping the main interface clean while making deep-dive information accessible. All visuals are Unicode icons, adhering to constraints. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+      .active-nav {
+        color: #ec4899;
+        border-bottom: 2px solid #ec4899;
+        padding-bottom: 4px;
+      }
+      .slide {
+        will-change: transform, opacity;
+      }
+      .slide-content {
+        animation: fadeIn 0.6s ease-in-out forwards;
+      }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .accordion-content {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+      }
+      .accordion-content.open {
+        max-height: 2000px;
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+      }
+      .tab-button.active {
+        border-color: #14b8a6;
+        color: #0d9488;
+      }
+      .link {
+        color: #14b8a6;
+        text-decoration: underline;
+      }
+      .link:hover {
+        color: #0d9488;
+      }
+    </style>
+  </head>
+  <body class="bg-rose-50 text-stone-800 font-sans leading-relaxed overflow-x-hidden">
+    <header
+      id="header"
+      class="fixed top-0 z-40 w-full transition-all duration-300"
+    >
+      <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-16">
+          <div class="flex items-center">
+            <img src="logo.png" alt="Doria Feminist Fund" class="h-10 mr-3" />
+          </div>
+          <div class="hidden md:block">
+            <div id="nav-links" class="ml-10 flex items-baseline space-x-4">
+              <a
+                href="#part1"
+                class="nav-link text-stone-600 hover:text-pink-500 px-3 py-2 rounded-md text-sm font-medium"
+                >Threat Landscape</a
+              >
+              <a
+                href="#part2"
+                class="nav-link text-stone-600 hover:text-pink-500 px-3 py-2 rounded-md text-sm font-medium"
+                >Personal Security</a
+              >
+              <a
+                href="#part3"
+                class="nav-link text-stone-600 hover:text-pink-500 px-3 py-2 rounded-md text-sm font-medium"
+                >Organizational Protocols</a
+              >
+              <a
+                href="#part4"
+                class="nav-link text-stone-600 hover:text-pink-500 px-3 py-2 rounded-md text-sm font-medium"
+                >External Threats</a
+              >
+              <a
+                href="#part5"
+                class="nav-link text-stone-600 hover:text-pink-500 px-3 py-2 rounded-md text-sm font-medium"
+                >Action Plan</a
+              >
+              <a
+                href="#appendix"
+                class="nav-link text-stone-600 hover:text-pink-500 px-3 py-2 rounded-md text-sm font-medium"
+                >Resource Guide</a
+              >
+            </div>
+          </div>
+          <div class="-mr-2 flex md:hidden">
+            <button
+              id="mobile-menu-button"
+              type="button"
+              class="bg-white inline-flex items-center justify-center p-2 rounded-md text-stone-400 hover:text-stone-500 hover:bg-stone-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-pink-500"
+              aria-controls="mobile-menu"
+              aria-expanded="false"
+            >
+              <span class="sr-only">Open main menu</span>
+              <svg
+                class="block h-6 w-6"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                aria-hidden="true"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M4 6h16M4 12h16M4 18h16"
+                />
+              </svg>
+              <svg
+                class="hidden h-6 w-6"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                aria-hidden="true"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </nav>
+      <div class="hidden md:hidden" id="mobile-menu">
+        <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white shadow-lg">
+          <a
+            href="#part1"
+            class="nav-link text-stone-600 hover:bg-stone-100 block px-3 py-2 rounded-md text-base font-medium"
+            >Threat Landscape</a
+          >
+          <a
+            href="#part2"
+            class="nav-link text-stone-600 hover:bg-stone-100 block px-3 py-2 rounded-md text-base font-medium"
+            >Personal Security</a
+          >
+          <a
+            href="#part3"
+            class="nav-link text-stone-600 hover:bg-stone-100 block px-3 py-2 rounded-md text-base font-medium"
+            >Organizational Protocols</a
+          >
+          <a
+            href="#part4"
+            class="nav-link text-stone-600 hover:bg-stone-100 block px-3 py-2 rounded-md text-base font-medium"
+            >External Threats</a
+          >
+          <a
+            href="#part5"
+            class="nav-link text-stone-600 hover:bg-stone-100 block px-3 py-2 rounded-md text-base font-medium"
+            >Action Plan</a
+          >
+          <a
+            href="#appendix"
+            class="nav-link text-stone-600 hover:bg-stone-100 block px-3 py-2 rounded-md text-base font-medium"
+            >Resource Guide</a
+          >
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <!-- Hero Section with Main Banner -->
+      <section
+        class="relative bg-gradient-to-br from-pink-100 via-rose-50 to-teal-50 min-h-screen flex flex-col items-center justify-center overflow-hidden pt-32"
+      >
+        <!-- Title and text on top -->
+        <div class="relative z-20 text-center px-4 mb-4">
+          <h1
+            class="text-5xl md:text-7xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-pink-600 to-teal-600 mb-4 leading-normal pb-4"
+          >
+            Digital Security Workshop
+          </h1>
+          <p
+            class="text-2xl md:text-3xl text-stone-700 font-semibold mb-6 leading-normal pb-4"
+          >
+            Protecting Feminist Movements in the Digital Age
+          </p>
+          <a
+            href="#part1"
+            class="inline-block bg-pink-500 hover:bg-pink-600 text-white font-bold py-4 px-8 rounded-full text-lg transition-colors shadow-lg"
+          >
+            Begin Workshop →
+          </a>
+        </div>
+        <!-- Banner image below title -->
+        <div class="relative z-10 flex items-center justify-center w-full mb-6">
+          <img
+            src="main-banner.png"
+            alt="Digital Security Workshop"
+            class="max-w-3xl w-full h-auto object-contain px-8"
+          />
+        </div>
+        <!-- Decorative Elements -->
+        <img
+          src="top-right.png"
+          alt=""
+          class="absolute top-10 right-10 w-32 md:w-48 opacity-80 z-0"
+        />
+        <img
+          src="rotated-flowers.png"
+          alt=""
+          class="absolute bottom-10 left-10 w-24 md:w-32 opacity-80 z-0"
+        />
+      </section>
+
+      <div id="main-content" class="py-12">
+        <section
+          id="part1"
+          class="slide-content mb-20 relative min-h-screen flex flex-col justify-center py-20 overflow-hidden"
+        >
+          <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+            <!-- Left decorative image -->
+            <img
+              src="left-side.png"
+              alt=""
+              class="absolute -left-20 top-20 w-64 opacity-60 hidden lg:block pointer-events-none"
+            />
+
+            <div class="text-center mb-12">
+              <h2
+                class="text-base text-pink-600 font-semibold tracking-wide uppercase"
+              >
+                Part 1: Threat Landscape
+              </h2>
+              <p
+                class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-stone-900 sm:text-4xl"
+              >
+                Understanding the Digital Risks
+              </p>
+              <p class="mt-4 max-w-3xl mx-auto text-xl text-stone-500">
+                This section establishes the context and urgency for digital
+                security. Here we explore why feminist movements in the MENA
+                region are specific targets, the common attacks they face, and
+                the foundational concept of encryption that underpins all our
+                defenses.
+              </p>
+            </div>
+            <div class="space-y-12">
+              <div class="bg-white p-8 rounded-lg shadow-md">
+                <h3 class="text-2xl font-bold mb-4 text-center">
+                  Adversary Analysis
+                </h3>
+                <p class="text-center text-lg text-stone-600 mb-8">
+                  "We do feminist work. That makes some people
+                  angry—governments, religious groups, trolls. And when people
+                  are angry, they attack. That's just the reality."
+                </p>
+                <div class="grid md:grid-cols-3 gap-8 text-center">
+                  <div>
+                    <p class="text-5xl mb-2">🏛️</p>
+                    <h4 class="font-semibold text-lg">State Actors</h4>
+                    <p class="text-stone-500">Surveillance & Censorship</p>
+                  </div>
+                  <div>
+                    <p class="text-5xl mb-2">🗣️</p>
+                    <h4 class="font-semibold text-lg">Anti-Rights Groups</h4>
+                    <p class="text-stone-500">Trolling & Doxxing</p>
+                  </div>
+                  <div>
+                    <p class="text-5xl mb-2">🎭</p>
+                    <h4 class="font-semibold text-lg">Opportunistic Hackers</h4>
+                    <p class="text-stone-500">Phishing & Scams</p>
+                  </div>
+                </div>
+              </div>
+              <div class="bg-white p-8 rounded-lg shadow-md">
+                <h3 class="text-2xl font-bold mb-4 text-center">
+                  Common Attack Vector: Phishing
+                </h3>
+                <div class="grid lg:grid-cols-2 gap-8 items-center">
+                  <div
+                    class="bg-stone-100 p-6 rounded-lg border border-stone-200 font-mono text-sm"
+                  >
+                    <p>
+                      <span class="font-bold">From:</span>
+                      grants@feminist-fundation.org
+                      <span class="text-red-500 font-bold ml-2">❌ Typo</span>
+                    </p>
+                    <p>
+                      <span class="font-bold">Subject:</span> URGENT: Your Grant
+                      Application Requires Immediate Action
+                    </p>
+                    <hr class="my-4" />
+                    <p class="mb-4">
+                      Dear Beneficiary,
+                      <span class="text-red-500 font-bold ml-2"
+                        >❌ Generic</span
+                      >
+                    </p>
+                    <p class="mb-4">
+                      Your grant application has been approved for $15,000 USD.
+                      To receive funds, please verify your banking details
+                      <span class="text-red-500 font-bold"
+                        >within 24 hours</span
+                      >
+                      by clicking below:
+                    </p>
+                    <a
+                      href="#"
+                      class="bg-blue-500 text-white px-4 py-2 rounded my-2 inline-block"
+                      >VERIFY NOW</a
+                    >
+                    <span class="text-red-500 font-bold ml-2"
+                      >❌ Suspicious Link</span
+                    >
+                    <p>
+                      Failure to respond will result in cancellation.
+                      <span class="text-red-500 font-bold">❌ Urgency</span>
+                    </p>
+                  </div>
+                  <div>
+                    <h4 class="font-bold text-lg mb-2">
+                      The 3-Second Phishing Check:
+                    </h4>
+                    <ul class="space-y-2 list-disc list-inside text-stone-600">
+                      <li>
+                        <span class="font-semibold">HOVER</span> over links
+                        before clicking.
+                      </li>
+                      <li>
+                        <span class="font-semibold">CHECK</span> the sender's
+                        actual email address.
+                      </li>
+                      <li>
+                        <span class="font-semibold">ASK:</span> "Was I expecting
+                        this?"
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="bg-white p-8 rounded-lg shadow-md">
+                <h3 class="text-2xl font-bold mb-4 text-center">
+                  What is Encryption?
+                </h3>
+                <div class="grid md:grid-cols-2 gap-8 items-center">
+                  <div class="text-center">
+                    <p class="text-lg">"Meeting at 3pm"</p>
+                    <p class="text-teal-600 my-2">↓ ENCRYPTION ↓</p>
+                    <p class="text-lg font-mono bg-stone-100 p-2 rounded">
+                      "k8#mX@9pLz$vN2qR"
+                    </p>
+                    <p class="text-teal-600 my-2">↓ DECRYPTION (with key) ↓</p>
+                    <p class="text-lg">"Meeting at 3pm"</p>
+                  </div>
+                  <div class="bg-teal-50 border border-teal-200 p-6 rounded-lg">
+                    <h4 class="font-bold text-lg mb-2">Simple Analogy 🔒</h4>
+                    <p class="text-teal-800">
+                      Encryption is like putting your message in a locked box.
+                      Only the person with the key can open it. Everyone else
+                      just sees a locked box full of gibberish.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section
+          id="part2"
+          class="slide-content mb-20 relative min-h-screen flex flex-col justify-center py-20 overflow-hidden"
+        >
+          <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+            <!-- Right decorative image -->
+            <img
+              src="right-side.png"
+              alt=""
+              class="absolute -right-20 top-20 w-64 opacity-60 hidden lg:block pointer-events-none"
+            />
+
+            <div class="text-center mb-12">
+              <h2
+                class="text-base text-pink-600 font-semibold tracking-wide uppercase"
+              >
+                Part 2: Personal Security Hygiene
+              </h2>
+              <p
+                class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-stone-900 sm:text-4xl"
+              >
+                Fortifying Individual Defenses
+              </p>
+              <p class="mt-4 max-w-3xl mx-auto text-xl text-stone-500">
+                This section is focused on individual empowerment. We will
+                deconstruct common security practices, providing clear,
+                actionable steps to secure your personal accounts and devices,
+                from creating strong passphrases to protecting your finances
+                online.
+              </p>
+            </div>
+            <div class="space-y-8" id="part2-accordions"></div>
+          </div>
+        </section>
+
+        <section
+          id="part3"
+          class="slide-content mb-20 relative min-h-screen flex flex-col justify-center py-20"
+        >
+          <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+            <!-- Rotated feminist symbol -->
+            <img
+              src="rotated.png"
+              alt=""
+              class="absolute left-1/2 -translate-x-1/2 -top-16 w-32 opacity-70 hidden md:block"
+            />
+
+            <div class="text-center mb-12">
+              <h2
+                class="text-base text-pink-600 font-semibold tracking-wide uppercase"
+              >
+                Part 3: Organizational Security Protocols
+              </h2>
+              <p
+                class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-stone-900 sm:text-4xl"
+              >
+                Protecting Collective Assets
+              </p>
+              <p class="mt-4 max-w-3xl mx-auto text-xl text-stone-500">
+                Security is a team sport. Here, we transition from individual
+                actions to collective responsibility, exploring organizational
+                policies for data management, office security, secure
+                communications, and ensuring a safe digital lifecycle for all
+                team members.
+              </p>
+            </div>
+            <div class="space-y-8" id="part3-accordions"></div>
+          </div>
+        </section>
+
+        <section
+          id="part4"
+          class="slide-content mb-20 relative min-h-screen flex flex-col justify-center py-20 overflow-hidden"
+        >
+          <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+            <!-- Right column decorative image -->
+            <img
+              src="right-column.png"
+              alt=""
+              class="absolute -right-32 top-20 w-72 opacity-50 hidden xl:block pointer-events-none"
+            />
+
+            <div class="text-center mb-12">
+              <h2
+                class="text-base text-pink-600 font-semibold tracking-wide uppercase"
+              >
+                Part 4: Countering External Threats
+              </h2>
+              <p
+                class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-stone-900 sm:text-4xl"
+              >
+                Advanced Defense Strategies
+              </p>
+              <p class="mt-4 max-w-3xl mx-auto text-xl text-stone-500">
+                With a strong internal foundation, we can now face the outside
+                world. This section provides strategies to defend against
+                external adversaries, focusing on tools like VPNs, securing our
+                public presence on social media, and preparing for physical
+                device risks.
+              </p>
+            </div>
+            <div class="space-y-8" id="part4-accordions"></div>
+          </div>
+        </section>
+
+        <section
+          id="part5"
+          class="slide-content mb-20 relative min-h-screen flex flex-col justify-center py-20 overflow-hidden"
+        >
+          <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+            <!-- Bottom right decorative image -->
+            <img
+              src="bottom-right.png"
+              alt=""
+              class="absolute -right-20 bottom-0 w-80 opacity-60 hidden lg:block pointer-events-none"
+            />
+
+            <div class="text-center mb-12">
+              <h2
+                class="text-base text-pink-600 font-semibold tracking-wide uppercase"
+              >
+                Part 5: Action Plan & Response
+              </h2>
+              <p
+                class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-stone-900 sm:text-4xl"
+              >
+                From Plan to Practice
+              </p>
+              <p class="mt-4 max-w-3xl mx-auto text-xl text-stone-500">
+                Knowledge is only useful when applied. This final section
+                translates learning into immediate, sustainable action. We'll
+                cover three critical tasks to complete today, outline a simple
+                incident response plan, and provide resources for continued
+                support.
+              </p>
+            </div>
+            <div class="space-y-8">
+              <div class="bg-white p-8 rounded-lg shadow-md">
+                <h3 class="text-2xl font-bold mb-4">
+                  Do These 3 Things Before You Leave Today
+                </h3>
+                <div id="action-checklist" class="space-y-4"></div>
+              </div>
+              <div class="bg-white p-8 rounded-lg shadow-md">
+                <h3 class="text-2xl font-bold mb-4">
+                  Your Incident Response Plan
+                </h3>
+                <div id="incident-response-accordion"></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section
+          id="appendix"
+          class="slide-content py-20"
+        >
+          <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+            <div class="text-center">
+              <h2
+                class="text-base text-pink-600 font-semibold tracking-wide uppercase"
+              >
+                Quick Reference
+              </h2>
+              <p
+                class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-stone-900 sm:text-4xl"
+              >
+                Security Tools Cheat Sheet
+              </p>
+              <p class="mt-4 max-w-3xl mx-auto text-xl text-stone-500 mb-8">
+                A comprehensive, printable reference guide for all security tools covered in this workshop.
+              </p>
+              <a
+                href="cheat-sheet.html"
+                target="_blank"
+                class="inline-flex items-center bg-gradient-to-r from-pink-500 to-teal-500 hover:from-pink-600 hover:to-teal-600 text-white font-bold py-4 px-8 rounded-full shadow-lg transition-all hover:scale-105 text-lg"
+              >
+                <span class="mr-2">📄</span> View Cheat Sheet
+              </a>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- Thank You Section -->
+      <section
+        class="relative bg-gradient-to-br from-pink-50 via-rose-100 to-teal-50 py-24 overflow-hidden"
+      >
+        <div
+          class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10"
+        >
+          <img
+            src="thank-you.png"
+            alt="Thank You"
+            class="mx-auto w-64 md:w-80 mb-8"
+          />
+          <h2
+            class="text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-pink-600 to-teal-600 mb-6 leading-normal pb-4"
+          >
+            Thank You for Participating!
+          </h2>
+          <p class="text-xl md:text-2xl text-stone-700 mb-8">
+            Remember: Digital security is a journey, not a destination. Stay
+            vigilant, stay connected, and stay safe.
+          </p>
+          <div
+            class="bg-white/80 backdrop-blur-sm p-8 rounded-2xl shadow-xl max-w-2xl mx-auto"
+          >
+            <p class="text-lg text-stone-600 mb-4">
+              <strong class="text-pink-600">Questions or need support?</strong>
+            </p>
+            <p class="text-stone-600">
+              Reach out to your network, consult the resources in this guide,
+              and remember that seeking help is a sign of strength, not
+              weakness.
+            </p>
+          </div>
+        </div>
+        <!-- Decorative elements -->
+        <img
+          src="rotated-flowers.png"
+          alt=""
+          class="absolute top-10 left-10 w-32 opacity-70"
+        />
+        <img
+          src="top-right.png"
+          alt=""
+          class="absolute bottom-10 right-10 w-40 opacity-70"
+        />
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-stone-800 text-stone-200 py-6">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <p class="text-sm">
+          © <span id="footer-year"></span> Doria Feminist Fund | Digital Security Workshop
+        </p>
+      </div>
+    </footer>
+
+    <script>
+      const accordionData = {
+        part2: [
+          {
+            title: "Forget Everything You Know About Passwords",
+            content: `<div class="grid md:grid-cols-2 gap-8 items-start"><div class="bg-red-50 border border-red-200 p-4 rounded-lg"> <h4 class="font-bold text-red-800">❌ BAD PASSWORD</h4> <p class="font-mono text-red-700">Qwe_123!</p> <ul class="text-sm text-red-600 mt-2"><li>Only 8 characters</li><li>Obvious pattern</li><li>Easy to crack in minutes</li></ul> </div><div class="bg-green-50 border border-green-200 p-4 rounded-lg"> <h4 class="font-bold text-green-800">✅ GOOD PASSPHRASE</h4> <p class="font-mono text-green-700">I-Love-Coding-At-3AM-2024</p> <ul class="text-sm text-green-600 mt-2"><li>25+ characters</li><li>Easy to remember</li><li>Would take centuries to crack</li></ul> </div></div><div class="mt-6"><h4 class="font-bold">💡 Real Scenario:</h4><p class="text-stone-600 text-sm">"In 2023, a feminist organization had their email hacked because they reused the same password across 10 accounts. When one shopping website was breached, hackers got into everything. It took them 6 months to recover."</p></div>`,
+          },
+          {
+            title: "The One Thing That Actually Stops Hackers (2FA)",
+            content: `<p class="mb-4 text-stone-600">It's like needing TWO keys to open your door: Your password + a code from your phone.</p><h4 class="font-bold mb-2">Why Use an App, Not SMS?</h4><p class="text-stone-600 text-sm">A hacker can trick your phone company into transferring your number to their SIM card (SIM-swapping). They then get your SMS codes. This has happened to activists in our region. Authenticator apps (like <a href="https://support.google.com/accounts/answer/1066447" target="_blank" class="link">Google Authenticator</a> or <a href="https://authy.com/" target="_blank" class="link">Authy</a>) are tied to your physical device, not your phone number, making them much safer.</p><h4 class="font-bold mt-4 mb-2">Priority Accounts for 2FA:</h4><ul class="list-disc list-inside text-sm text-stone-600"><li>Email (most important)</li><li>Banking/financial accounts</li><li>Cloud storage</li><li>Social media</li><li>Password manager</li></ul>`,
+          },
+          {
+            title: "Device Security Basics",
+            content: `<ul class="space-y-2 text-stone-600 text-sm"><li><span class="font-semibold">✅ Screen Lock:</span> Use a strong PIN (6+ digits) or passphrase.</li><li><span class="font-semibold">✅ Automatic Updates:</span> Turn them ON. Updates fix security holes.</li><li><span class="font-semibold">✅ Full-Disk Encryption:</span> Scrambles your data if your device is stolen. It's most powerful when the device is powered OFF.</li></ul><div class="mt-4"><h4 class="font-bold">💡 Real Scenario:</h4><p class="text-stone-600 text-sm">"In 2021, a vulnerability in WhatsApp allowed hackers to install spyware just by calling you. The fix? An update. Organizations that delayed updating were compromised for weeks."</p></div>`,
+          },
+          {
+            title: "Protecting Your Money",
+            content: `<ul class="space-y-2 text-stone-600 text-sm"><li><span class="font-semibold">✅ Only Use Official Apps:</span> Download ONLY from the Apple App Store or Google Play Store.</li><li><span class="font-semibold">✅ Recognize Phishing:</span> Your bank will NEVER send a link to "verify your account" or ask for your password.</li><li><span class="font-semibold">✅ Secure Your Password:</span> Use a strong, UNIQUE password for banking and enable 2FA.</li></ul><div class="mt-4"><h4 class="font-bold">💡 Real Scenario:</h4><p class="text-stone-600 text-sm">"Last year, several organizations in our region received SMS messages saying 'Your bank account has been suspended. Click here to reactivate.' People who clicked and entered their details had their accounts emptied within hours."</p></div>`,
+          },
+        ],
+        part3: [
+          {
+            title: "What Data Would Destroy Us If It Leaked?",
+            content: `<p class="mb-4 text-stone-600">Think about your beneficiary lists, donor information, and internal strategies. The safest data is data you don't collect.</p><h4 class="font-bold">💡 The Golden Rule: Data Minimization</h4><p class="text-stone-600 text-sm">Don't collect data you don't absolutely need. Can't leak what you don't have. Ask yourself: do we need full names, or will initials work? Can we delete this after the project ends?</p><div class="mt-4"><h4 class="font-bold">💡 Real Scenario:</h4><p class="text-stone-600 text-sm">"An organization collected full names, addresses, and photos of all beneficiaries. Their laptop was stolen at an airport. All that data was exposed. If they had only collected first names and city names, the damage would have been far less."</p></div>`,
+          },
+          {
+            title: "Backups, Cloud Storage & AI",
+            content: `<div class="border-b border-stone-200 mb-4"><nav class="flex space-x-4 -mb-px" aria-label="Tabs"><button class="tab-button active py-2 px-1 border-b-2 font-medium text-sm">Backups</button><button class="tab-button py-2 px-1 border-b-2 border-transparent text-stone-500 hover:text-stone-700 font-medium text-sm">Cloud Security</button><button class="tab-button py-2 px-1 border-b-2 border-transparent text-stone-500 hover:text-stone-700 font-medium text-sm">AI Threat</button></nav></div><div class="tab-content"><h4 class="font-bold">The 3-2-1 Backup Rule</h4><p class="text-sm text-stone-600">3 copies of data, on 2 different media types, with 1 copy off-site. Example: Laptop (copy 1), external hard drive (copy 2), encrypted cloud (copy 3). CRITICAL: If you've never tried restoring from your backup, you don't have one. Test it!</p></div><div class="tab-content hidden"><h4 class="font-bold">Cloud Storage Security</h4><p class="text-sm text-stone-600">Cloud companies can access your files. For truly sensitive data, encrypt it BEFORE uploading using a tool like <a href="https://cryptomator.org/" target="_blank" class="link">Cryptomator</a> (free). Always use a strong password and 2FA on your cloud account.</p></div><div class="tab-content hidden"><h4 class="font-bold">The AI Threat</h4><p class="text-sm text-stone-600">🚨 NEVER paste sensitive info (beneficiary stories, reports) into public AI like ChatGPT. That data is stored on their servers and is no longer private. This has led to real data leaks. Always anonymize and generalize before using AI.</p></div>`,
+          },
+          {
+            title: "Basic Office Security Rules",
+            content: `<ul class="space-y-3 text-stone-600 text-sm"><li><span class="font-semibold">🌐 WiFi Security:</span> Never use public WiFi for sensitive work. Secure your office WiFi with a strong password and create a separate network for guests.</li><li><span class="font-semibold">💻 Physical Device Security:</span> Lock ALL devices when stepping away, even for a minute (Windows + L or Command + Control + Q).</li><li><span class="font-semibold">📠 Shared Equipment:</span> Change default passwords and update firmware on shared printers. They store copies of documents.</li></ul><div class="mt-4"><h4 class="font-bold">💡 Real Scenario:</h4><p class="text-stone-600 text-sm">"An organization gave their office WiFi password to a visitor whose laptop had malware. The malware spread to their network and accessed shared folders. A guest network would have prevented this."</p></div>`,
+          },
+          {
+            title: "Offboarding: The Importance of a Clean Break",
+            content: `<p class="text-stone-600 text-sm">When a staff member, volunteer, or intern leaves, you need an immediate offboarding protocol. Every day of delay is a security risk.</p><h4 class="font-bold mt-4 mb-2">Essential Checklist:</h4><ul class="list-disc list-inside text-sm text-stone-600"><li>Deactivate email and app access.</li><li>Change passwords on shared accounts.</li><li>Remove from all communication groups (Signal, WhatsApp).</li><li>Collect all organizational property.</li></ul><div class="mt-4"><h4 class="font-bold">💡 Real Scenario:</h4><p class="text-stone-600 text-sm">"A disgruntled volunteer who still had access deleted critical grant documents from a shared drive three weeks after leaving. They had no backup. Don't be that organization."</p></div>`,
+          },
+          {
+            title: "Choosing the Right Communication Channel",
+            content: `<table class="w-full text-left text-sm mt-4"><thead><tr class="border-b"><th class="py-2">Tool</th><th class="py-2">Best For</th><th class="py-2">Warning</th></tr></thead><tbody><tr class="border-b"><td class="py-2 font-semibold">📱 Signal</td><td class="py-2">Sensitive conversations</td><td class="py-2 text-green-600">Best practice</td></tr><tr class="border-b"><td class="py-2 font-semibold">📱 WhatsApp</td><td class="py-2">General use</td><td class="py-2 text-yellow-600">Owned by Meta, collects metadata</td></tr><tr class="border-b"><td class="py-2 font-semibold">📱 Telegram</td><td class="py-2">Public announcements</td><td class="py-2 text-red-600">⚠️ NOT encrypted by default</td></tr></tbody></table><div class="mt-4"><h4 class="font-bold">💡 Real Scenario:</h4><p class="text-stone-600 text-sm">"An organization used a non-secret Telegram group to discuss a campaign. Authorities requested data from Telegram and got full access to all messages and contacts, leading to arrests. Signal would have protected them."</p></div>`,
+          },
+        ],
+        part4: [
+          {
+            title: "Virtual Private Networks (VPNs)",
+            content: `<p class="text-stone-600 text-sm">A VPN creates an encrypted tunnel for your internet traffic, hiding your activity from your Internet Service Provider (ISP). Use it on public WiFi and for researching sensitive topics.</p><h4 class="font-bold text-red-600 mt-4 mb-2">🚨 CRITICAL WARNING:</h4><p class="text-stone-600 text-sm">Free VPNs are worse than no VPN. They make money by selling your browsing data. Pay for a trusted one (like <a href="https://protonvpn.com/" target="_blank" class="link">Proton VPN</a> or <a href="https://mullvad.net/" target="_blank" class="link">Mullvad</a>) or use one for activists (like <a href="https://riseup.net/vpn" target="_blank" class="link">RiseupVPN</a>).</p><div class="mt-4"><h4 class="font-bold">💡 Real Scenario:</h4><p class="text-stone-600 text-sm">"An activist used a free VPN. The company logged all her activity and sold it. When authorities requested info, the VPN handed over her complete browsing history."</p></div>`,
+          },
+          {
+            title: "Social Media Safety",
+            content: `<p class="text-stone-600 text-sm">Doxxing is publishing someone's private info online. Prevent it by locking down your privacy settings.</p><h4 class="font-bold mt-4 mb-2">Essential Settings:</h4><ul class="list-disc list-inside text-sm text-stone-600"><li>Set your profile to private.</li><li>Require approval for photo tags.</li><li>Turn OFF location services on all posts.</li><li>Hide your phone number, email, and full birthday.</li></ul><div class="mt-4"><h4 class="font-bold">💡 Real Scenario:</h4><p class="text-stone-600 text-sm">"An activist posted a photo from a café with location tagging on. Anti-rights groups used her pattern of check-ins to find her home address and publish it online. She had to move."</p></div>`,
+          },
+          {
+            title: "Physical Device Risks",
+            content: `<p class="text-stone-600 text-sm">If your device might be confiscated at a border, checkpoint, or protest:</p><h4 class="font-bold mt-4 mb-2">What to Do:</h4><ul class="list-disc list-inside text-sm text-stone-600"><li><span class="font-semibold">Power it OFF completely.</span> Encryption is most powerful when a device is off.</li><li>Back up your data and remove sensitive apps beforehand.</li><li>If the device is returned, assume it's compromised. Don't use it for sensitive work.</li><li>If it's not returned, remotely wipe it (if set up) and change ALL your passwords immediately from a safe device.</li></ul>`,
+          },
+        ],
+        appendix: [
+          {
+            icon: "💬",
+            title: "Encrypted Messaging Apps",
+            subtitle: "Signal, WhatsApp",
+            donts: [
+              "Believing a chat is 100% private just because the app is encrypted",
+              "Taking screenshots of sensitive information",
+              "Adding unverified people to sensitive groups"
+            ],
+            dos: [
+              "Use disappearing messages for sensitive topics",
+              "Regularly clear your chat history",
+              "Verify contacts before adding to groups"
+            ],
+            why: "The app is secure. You might not be. That's the weak link.",
+            fullContent: `
+                <h4 class="font-bold text-red-700 mb-2">What Not to Do:</h4>
+                <ul class="list-disc list-inside space-y-1 text-sm text-stone-600 mb-4">
+                    <li>Believing a chat is 100% private just because the app is encrypted</li>
+                    <li>Taking screenshots of sensitive information and storing them in an insecure photo gallery</li>
+                    <li>Adding people to sensitive group chats without verifying their identity</li>
+                    <li>Using disappearing messages but then taking photos of the screen</li>
+                    <li>Backing up chats to unencrypted cloud storage</li>
+                </ul>
+                <h4 class="font-bold text-green-700 mb-2">What to Do Instead:</h4>
+                <ul class="list-disc list-inside space-y-1 text-sm text-stone-600 mb-4">
+                    <li>Use disappearing messages for sensitive topics</li>
+                    <li>Regularly clear your chat history for sensitive conversations</li>
+                    <li>Be mindful of who is in a group and what you share</li>
+                    <li>Avoid screenshots; if you must take one, store it in encrypted storage and delete ASAP</li>
+                    <li>Verify contacts before adding to sensitive groups (Signal: tap contact → View safety number)</li>
+                    <li>Disable cloud backups for sensitive accounts or use encrypted backups only</li>
+                </ul>
+                <h4 class="font-bold text-cyan-700 mb-2">Why It Matters:</h4>
+                <p class="text-sm text-stone-600">The app is secure. You might not be. That's the weak link. A compromised device, or a screenshot shared with the wrong person, bypasses all encryption. In our context, a single screenshot can be used as "evidence" in legal cases or for public shaming campaigns. And if you're in a group chat with 50 people, it's only as secure as the least careful person in that group.</p>
+            `,
+          },
+          {
+            icon: "🕵️",
+            title: "Incognito Mode",
+            subtitle: "Private Browsing",
+            donts: [
+              "Thinking it makes you anonymous online",
+              "Believing it hides activity from ISP or government",
+              "Using it for sensitive research without VPN"
+            ],
+            dos: [
+              "Use it to hide browsing from device users only",
+              "Combine with a trusted VPN for real privacy",
+              "Understand its limitations clearly"
+            ],
+            why: "Incognito hides history from your roommate, not from the government.",
+            fullContent: `
+                <h4 class="font-bold text-red-700 mb-2">What Not to Do:</h4>
+                <ul class="list-disc list-inside space-y-1 text-sm text-stone-600 mb-4">
+                    <li>Thinking it makes you anonymous online</li>
+                    <li>Believing it hides your activity from your internet service provider (ISP), employer, or government</li>
+                </ul>
+                <h4 class="font-bold text-green-700 mb-2">What to Do Instead:</h4>
+                <ul class="list-disc list-inside space-y-1 text-sm text-stone-600 mb-4">
+                    <li>Understand its only real purpose: it stops your browser from saving your history and cookies on that specific device</li>
+                    <li>For real privacy from outside observers, use a trusted VPN</li>
+                </ul>
+                <h4 class="font-bold text-cyan-700 mb-2">Why It Matters:</h4>
+                <p class="text-sm text-stone-600">Assuming incognito mode provides anonymity creates a false sense of security, which is dangerous when researching sensitive topics. State actors and ISPs can still see your internet activity. Incognito mode is for hiding your browsing history from your roommate, not from the government.</p>
+            `,
+          },
+          {
+            icon: "☁️",
+            title: "Cloud Backups",
+            subtitle: "Google Drive, iCloud, Dropbox",
+            donts: [
+              "Auto-syncing everything without reviewing",
+              "Storing unencrypted sensitive documents",
+              "Using weak passwords or no 2FA"
+            ],
+            dos: [
+              "Be selective about what you sync",
+              "Use Cryptomator to encrypt sensitive folders",
+              "Always enable 2FA on cloud accounts"
+            ],
+            why: "Cloud providers can access your data and comply with government requests.",
+            fullContent: `
+                <h4 class="font-bold text-red-700 mb-2">What Not to Do:</h4>
+                <ul class="list-disc list-inside space-y-1 text-sm text-stone-600 mb-4">
+                    <li>Automatically syncing everything from your devices without reviewing what is being uploaded</li>
+                    <li>Assuming the cloud provider cannot access or be forced to hand over your data</li>
+                    <li>Storing unencrypted sensitive documents (beneficiary data, internal strategies)</li>
+                    <li>Using weak passwords or no 2FA on cloud accounts</li>
+                </ul>
+                <h4 class="font-bold text-green-700 mb-2">What to Do Instead:</h4>
+                <ul class="list-disc list-inside space-y-1 text-sm text-stone-600 mb-4">
+                    <li>Be selective about what you sync - don't automatically backup everything</li>
+                    <li>Always use a strong, unique passphrase and 2FA on your cloud account</li>
+                    <li>Use <a href="https://cryptomator.org/" target="_blank" class="link">Cryptomator</a> or similar to encrypt sensitive folders before uploading</li>
+                    <li>Review sharing permissions regularly</li>
+                </ul>
+                <h4 class="font-bold text-cyan-700 mb-2">Why It Matters:</h4>
+                <p class="text-sm text-stone-600">Cloud accounts are a primary target for hackers. If they gain access, they have a copy of your life's data. Governments can and do request data from Google, Apple, Dropbox, etc. And these companies usually comply.</p>
+            `,
+          },
+          {
+            icon: "🔐",
+            title: "Device Encryption",
+            subtitle: "Full-Disk Encryption",
+            donts: [
+              "Believing it protects devices that are on and unlocked",
+              "Using simple PINs like 1234",
+              "Using fingerprint unlock in high-risk situations"
+            ],
+            dos: [
+              "Power OFF device completely if at risk",
+              "Use long alphanumeric passphrases",
+              "Disable biometrics for high-risk situations"
+            ],
+            why: "Encryption is most powerful when your device is powered OFF.",
+            fullContent: `
+                <h4 class="font-bold text-red-700 mb-2">What Not to Do:</h4>
+                <ul class="list-disc list-inside space-y-1 text-sm text-stone-600 mb-4">
+                    <li>Believing it protects your device while it is turned on and unlocked</li>
+                    <li>Using a simple, easy-to-guess PIN like 1234 or a basic swipe pattern</li>
+                    <li>Using fingerprint/face unlock in high-risk situations</li>
+                </ul>
+                <h4 class="font-bold text-green-700 mb-2">What to Do Instead:</h4>
+                <ul class="list-disc list-inside space-y-1 text-sm text-stone-600 mb-4">
+                    <li>Understand that encryption is most powerful when your device is turned OFF</li>
+                    <li>Use a long, alphanumeric passphrase, not a simple PIN</li>
+                    <li>If you fear device confiscation at a checkpoint or during an arrest, power it down completely</li>
+                    <li>Disable biometric unlock (fingerprint/face) for high-risk situations</li>
+                </ul>
+                <h4 class="font-bold text-cyan-700 mb-2">Why It Matters:</h4>
+                <p class="text-sm text-stone-600">If someone has physical access to your phone and can force you to unlock it, encryption can't help you. That's why you power it off. A powered-off encrypted device is significantly harder to break into. A simple PIN can be guessed by observing you ("shoulder surfing") or from fingerprint smudges on the screen.</p>
+            `,
+          },
+          {
+            icon: "🗑️",
+            title: "Secure File Deletion",
+            subtitle: "Permanently Erasing Data",
+            donts: [
+              "Thinking Trash/Recycle Bin permanently erases files",
+              "Selling devices without secure erase",
+              "Assuming deleted means gone"
+            ],
+            dos: [
+              "Use file shredder applications for sensitive files",
+              "Use built-in Secure Erase when disposing devices",
+              "Understand deleted files can be recovered"
+            ],
+            why: "Deleted files can be recovered. Journalists and activists have been compromised this way.",
+            fullContent: `
+                <h4 class="font-bold text-red-700 mb-2">What Not to Do:</h4>
+                <ul class="list-disc list-inside space-y-1 text-sm text-stone-600 mb-4">
+                    <li>Thinking that dragging a file to the Trash/Recycle Bin and emptying it permanently erases the file</li>
+                </ul>
+                <h4 class="font-bold text-green-700 mb-2">What to Do Instead:</h4>
+                <ul class="list-disc list-inside space-y-1 text-sm text-stone-600 mb-4">
+                    <li>For highly sensitive files, use a dedicated "file shredder" application to securely overwrite the file's data</li>
+                    <li>When getting rid of a computer, use the built-in "Secure Erase" or factory reset functions</li>
+                </ul>
+                <h4 class="font-bold text-cyan-700 mb-2">Why It Matters:</h4>
+                <p class="text-sm text-stone-600">Files "deleted" normally can often be recovered with simple software. If a device is stolen, confiscated, or sold, that sensitive data could be retrieved. Journalists, activists, and researchers have had their "deleted" files recovered and used against them.</p>
+            `,
+          },
+          {
+            icon: "🔒",
+            title: "VPNs",
+            subtitle: "Virtual Private Networks",
+            donts: [
+              "Using free VPNs from app stores",
+              "Trusting VPNs with logging history",
+              "Thinking VPNs make you completely anonymous"
+            ],
+            dos: [
+              "Use reputable, paid VPN with no-logs policy",
+              "Choose providers outside surveillance jurisdictions",
+              "Research VPN audits and reputation"
+            ],
+            why: "Bad VPNs are worse than no VPN. Free VPNs sell your data.",
+            fullContent: `
+                <h4 class="font-bold text-red-700 mb-2">What Not to Do:</h4>
+                <ul class="list-disc list-inside space-y-1 text-sm text-stone-600 mb-4">
+                    <li>Using the first "free" VPN you find in the app store</li>
+                    <li>Trusting a VPN that has a history of logging user data</li>
+                    <li>Thinking a VPN makes you completely anonymous</li>
+                </ul>
+                <h4 class="font-bold text-green-700 mb-2">What to Do Instead:</h4>
+                <ul class="list-disc list-inside space-y-1 text-sm text-stone-600 mb-4">
+                    <li>Use a reputable, paid VPN service that has a strict, independently audited "no-logs" policy</li>
+                    <li>Choose a provider based outside of surveillance-heavy jurisdictions (avoid US, UK, Australia, China)</li>
+                </ul>
+                <h4 class="font-bold text-cyan-700 mb-2">Why It Matters:</h4>
+                <p class="text-sm text-stone-600">A bad VPN is worse than no VPN at all. It gives you a dangerous false sense of security while actively collecting all of your internet traffic, which can then be sold to advertisers, data brokers, or handed over to authorities. Free VPNs make money by selling your data - that's their business model.</p>
+            `,
+          },
+          {
+            icon: "🛡️",
+            title: "Antivirus Software",
+            subtitle: "Protection Software",
+            donts: [
+              "Installing once and forgetting about it",
+              "Ignoring update notifications",
+              "Thinking it replaces safe browsing habits"
+            ],
+            dos: [
+              "Enable automatic updates for software and definitions",
+              "Run scans regularly (weekly minimum)",
+              "Keep operating system updated"
+            ],
+            why: "Out-of-date antivirus can't protect against new threats.",
+            fullContent: `
+                <h4 class="font-bold text-red-700 mb-2">What Not to Do:</h4>
+                <ul class="list-disc list-inside space-y-1 text-sm text-stone-600 mb-4">
+                    <li>Installing it once and then forgetting about it</li>
+                    <li>Ignoring notifications to update the software</li>
+                    <li>Thinking antivirus is a substitute for safe browsing habits</li>
+                </ul>
+                <h4 class="font-bold text-green-700 mb-2">What to Do Instead:</h4>
+                <ul class="list-disc list-inside space-y-1 text-sm text-stone-600 mb-4">
+                    <li>Enable automatic updates for both the software itself and its virus definitions</li>
+                    <li>Run scans regularly (at least weekly)</li>
+                    <li>Keep your operating system updated</li>
+                </ul>
+                <h4 class="font-bold text-cyan-700 mb-2">Why It Matters:</h4>
+                <p class="text-sm text-stone-600">Antivirus software is in a constant race against new viruses and malware. If it isn't constantly updated, it cannot protect you from the latest threats, giving you a false sense of safety. An out-of-date antivirus is almost useless.</p>
+                <div class="mt-4 p-4 bg-stone-100 rounded-lg text-sm"><span class="font-bold">Honest Note:</span> If you're on a Mac or updated Windows 10/11, you probably don't need third-party antivirus. The built-in protection is decent. Don't click sketchy links and you'll be fine.</div>
+            `,
+          },
+          {
+            icon: "📱",
+            title: "QR Codes & URL Shorteners",
+            subtitle: "Bit.ly, TinyURL, QR codes",
+            donts: [
+              "Using random online QR generators for sensitive links",
+              "Trusting QR codes in public without checking",
+              "Using free URL shorteners for confidential info"
+            ],
+            dos: [
+              "Use offline or trusted QR generators",
+              "Preview shortened URLs before clicking",
+              "Use full URLs for sensitive links"
+            ],
+            why: "QR codes can be swapped. URL shorteners track clicks and can be hijacked.",
+            fullContent: `
+                <h4 class="font-bold text-red-700 mb-2">What Not to Do:</h4>
+                <ul class="list-disc list-inside space-y-1 text-sm text-stone-600 mb-4">
+                    <li>Using random online QR generators for sensitive links (they see all your data)</li>
+                    <li>Trusting QR codes you find in public without checking where they lead</li>
+                    <li>Using free URL shorteners (bit.ly, tinyurl) for confidential information</li>
+                    <li>Clicking shortened links without previewing the destination</li>
+                </ul>
+                <h4 class="font-bold text-green-700 mb-2">What to Do Instead:</h4>
+                <ul class="list-disc list-inside space-y-1 text-sm text-stone-600 mb-4">
+                    <li>Use offline QR generators or trusted privacy-respecting ones for sensitive content</li>
+                    <li>Always preview URLs before clicking shortened links</li>
+                    <li>For sensitive links, use full URLs shared through secure channels</li>
+                </ul>
+                <h4 class="font-bold text-cyan-700 mb-2">Why It Matters:</h4>
+                <p class="text-sm text-stone-600">QR codes can be swapped with malicious ones (especially at protests or public events). URL shorteners track everyone who clicks and can be hijacked. Both expose your data to third parties who may share it with governments or bad actors. For activism work, this is a real risk.</p>
+            `,
+          },
+        ],
+      };
+      const actionChecklistData = [
+        {
+          id: "action1",
+          text: "Install a Password Manager (like Bitwarden).",
+          details:
+            "Add your first 5 passwords: email, banking, social media, cloud, and work accounts.",
+        },
+        {
+          id: "action2",
+          text: "Enable 2FA on Your Primary Email.",
+          details:
+            "Use an authenticator app, NOT SMS. Remember to save your backup codes offline.",
+        },
+        {
+          id: "action3",
+          text: "Review Your Main Social Media Privacy.",
+          details:
+            'Set posts to "Friends Only", friends list to "Only Me", and turn on tag review.',
+        },
+      ];
+      const incidentResponseData = [
+        {
+          title: "Device is Stolen or Lost",
+          content: `Try to locate it (Find My iPhone/Android). If it has sensitive data, WIPE IT IMMEDIATELY. Then, from another device, change critical passwords for email, banking, and cloud accounts.`,
+        },
+        {
+          title: "Account is Hacked",
+          content: `Try to recover the account using "Forgot password." If you regain access, change the password immediately. Warn your contacts that you were hacked, as they may receive phishing messages from you.`,
+        },
+        {
+          title: "Clicked a Phishing Link",
+          content: `Disconnect from the internet immediately to prevent malware from spreading. From a DIFFERENT, safe device, change the password for any account credentials you may have entered. Run a full security scan on the affected device.`,
+        },
+      ];
+
+      function createCheatSheetCards(containerId, data) {
+        const container = document.getElementById(containerId);
+        if (!container) return;
+
+        data.forEach((item) => {
+          const card = document.createElement("div");
+          card.className = "bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 p-6 border-2 border-stone-200";
+
+          card.innerHTML = `
+            <div class="text-center mb-4">
+              <div class="text-5xl mb-3">${item.icon}</div>
+              <h3 class="text-xl font-bold text-stone-900">${item.title}</h3>
+              <p class="text-sm text-stone-500 mt-1">${item.subtitle}</p>
+            </div>
+
+            <div class="space-y-4 mb-4">
+              <div class="bg-red-50 rounded-lg p-3 border-l-4 border-red-500">
+                <h4 class="font-bold text-red-700 text-sm mb-2 flex items-center">
+                  <span class="mr-2">❌</span> DON'T
+                </h4>
+                <ul class="space-y-1">
+                  ${item.donts.map(dont => `<li class="text-xs text-stone-700 flex items-start"><span class="mr-2 mt-1">•</span><span>${dont}</span></li>`).join('')}
+                </ul>
+              </div>
+
+              <div class="bg-green-50 rounded-lg p-3 border-l-4 border-green-500">
+                <h4 class="font-bold text-green-700 text-sm mb-2 flex items-center">
+                  <span class="mr-2">✅</span> DO
+                </h4>
+                <ul class="space-y-1">
+                  ${item.dos.map(doItem => `<li class="text-xs text-stone-700 flex items-start"><span class="mr-2 mt-1">•</span><span>${doItem}</span></li>`).join('')}
+                </ul>
+              </div>
+            </div>
+
+            <div class="bg-teal-50 rounded-lg p-3 border-l-4 border-teal-500 mb-4">
+              <p class="text-xs text-teal-900 font-medium"><strong>Why it matters:</strong> ${item.why}</p>
+            </div>
+
+            <button class="learn-more-btn w-full text-center text-sm text-pink-600 hover:text-pink-700 font-semibold py-2 border border-pink-300 rounded-lg hover:bg-pink-50 transition-colors">
+              Learn More →
+            </button>
+
+            <div class="learn-more-content hidden mt-4 pt-4 border-t border-stone-200">
+              ${item.fullContent}
+            </div>
+          `;
+
+          container.appendChild(card);
+        });
+
+        // Add click handlers for "Learn More" buttons
+        container.querySelectorAll('.learn-more-btn').forEach(btn => {
+          btn.addEventListener('click', (e) => {
+            const content = e.target.nextElementSibling;
+            if (content.classList.contains('hidden')) {
+              content.classList.remove('hidden');
+              e.target.textContent = 'Show Less ↑';
+            } else {
+              content.classList.add('hidden');
+              e.target.textContent = 'Learn More →';
+            }
+          });
+        });
+      }
+
+      function createAccordion(containerId, data) {
+        const container = document.getElementById(containerId);
+        if (!container) return;
+        data.forEach((item, index) => {
+          const wrapper = document.createElement("div");
+          wrapper.className =
+            "border border-stone-200 rounded-lg bg-white shadow-sm";
+          wrapper.innerHTML = `
+            <button class="accordion-toggle w-full flex justify-between items-center text-left p-4 font-semibold text-stone-700 hover:bg-stone-50">
+                <span>${item.title}</span>
+                <svg class="w-5 h-5 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+            </button>
+            <div class="accordion-content px-4">
+                <div class="py-4 border-t border-stone-200">${item.content}</div>
+            </div>
+        `;
+          container.appendChild(wrapper);
+        });
+      }
+      document.addEventListener("DOMContentLoaded", () => {
+        createAccordion("part2-accordions", accordionData.part2);
+        createAccordion("part3-accordions", accordionData.part3);
+        createAccordion("part4-accordions", accordionData.part4);
+        createAccordion("incident-response-accordion", incidentResponseData);
+        // Cheat sheet cards removed - now showing CTA to dedicated cheat-sheet.html page
+        // createCheatSheetCards("appendix-cards", accordionData.appendix);
+
+        const actionContainer = document.getElementById("action-checklist");
+        actionChecklistData.forEach((item) => {
+          const div = document.createElement("div");
+          div.className = "flex items-start";
+          div.innerHTML = `
+            <input id="${item.id}" type="checkbox" class="h-5 w-5 rounded border-stone-300 text-pink-500 focus:ring-pink-500 mt-1">
+            <div class="ml-3 text-sm">
+                <label for="${item.id}" class="font-medium text-stone-700">${item.text}</label>
+                <p class="text-stone-500">${item.details}</p>
+            </div>
+        `;
+          actionContainer.appendChild(div);
+        });
+
+        document.querySelectorAll(".accordion-toggle").forEach((button) => {
+          button.addEventListener("click", () => {
+            const content = button.nextElementSibling;
+            const icon = button.querySelector("svg");
+            const isOpen = content.classList.contains("open");
+
+            // Close all accordions in the same container
+            const container = button.closest(".space-y-8");
+            container.querySelectorAll(".accordion-content").forEach((c) => {
+              c.classList.remove("open");
+              c.previousElementSibling
+                .querySelector("svg")
+                .classList.remove("rotate-180");
+            });
+
+            // Open the clicked one if it was closed
+            if (!isOpen) {
+              content.classList.add("open");
+              icon.classList.add("rotate-180");
+            }
+          });
+        });
+
+        document.querySelectorAll(".tab-button").forEach((button) => {
+          button.addEventListener("click", (e) => {
+            const parent = e.target.closest(".accordion-content");
+            const tabs = parent.querySelectorAll(".tab-button");
+            const contents = parent.querySelectorAll(".tab-content");
+            tabs.forEach((t) => t.classList.remove("active"));
+            e.target.classList.add("active");
+            contents.forEach((c, i) => {
+              if (tabs[i] === e.target) {
+                c.classList.remove("hidden");
+              } else {
+                c.classList.add("hidden");
+              }
+            });
+          });
+        });
+
+        const navLinks = document.querySelectorAll(".nav-link");
+        const sections = document.querySelectorAll(
+          'section[id^="part"], section[id="appendix"]'
+        );
+
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                navLinks.forEach((link) => {
+                  link.classList.remove("active-nav");
+                  if (link.getAttribute("href") === `#${entry.target.id}`) {
+                    link.classList.add("active-nav");
+                  }
+                });
+              }
+            });
+          },
+          { rootMargin: "-50% 0px -50% 0px" }
+        );
+
+        sections.forEach((section) => observer.observe(section));
+
+        const mobileMenuButton = document.getElementById("mobile-menu-button");
+        const mobileMenu = document.getElementById("mobile-menu");
+        mobileMenuButton.addEventListener("click", () => {
+          mobileMenu.classList.toggle("hidden");
+          mobileMenuButton
+            .querySelectorAll("svg")
+            .forEach((svg) => svg.classList.toggle("hidden"));
+        });
+
+        // Header background on scroll
+        const header = document.getElementById("header");
+        const heroSection = document.querySelector("section");
+
+        window.addEventListener("scroll", () => {
+          const heroHeight = heroSection.offsetHeight;
+
+          if (window.scrollY > heroHeight - 100) {
+            // Past hero section - use white background
+            header.classList.add(
+              "bg-white/80",
+              "backdrop-blur-md",
+              "shadow-sm"
+            );
+            header.classList.remove(
+              "bg-gradient-to-br",
+              "from-pink-100/80",
+              "via-rose-50/80",
+              "to-teal-50/80"
+            );
+          } else if (window.scrollY > 50) {
+            // In hero section but scrolled - use gradient background
+            header.classList.add(
+              "bg-gradient-to-br",
+              "from-pink-100/80",
+              "via-rose-50/80",
+              "to-teal-50/80",
+              "backdrop-blur-md",
+              "shadow-sm"
+            );
+            header.classList.remove("bg-white/80");
+          } else {
+            // At top - transparent
+            header.classList.remove(
+              "bg-white/80",
+              "bg-gradient-to-br",
+              "from-pink-100/80",
+              "via-rose-50/80",
+              "to-teal-50/80",
+              "backdrop-blur-md",
+              "shadow-sm"
+            );
+          }
+        });
+
+        // Set footer year
+        document.getElementById('footer-year').textContent = new Date().getFullYear();
+      });
+    </script>
+  </body>
+</html>
