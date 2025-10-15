@@ -1580,45 +1580,41 @@ Save backup codes
 
 ⚠️ CRITICAL: Save those backup codes\! If you lose your phone, this is how you get back into your account.
 
-✅ ACTION 3: Review Your Main Social Media Privacy Settings
+✅ ACTION 3: Turn on Find My Phone and double-check backups
 
-Why: Most people's social media is wide open. This takes 3 minutes and dramatically reduces your risk.
+Why: If your device is stolen or lost, Find My Device lets you track, lock, or remotely wipe it. Regular backups ensure you don't lose important data if something happens to your device.
 
-Quick checklist (3 minutes):
+Quick checklist (5 minutes):
 
-Facebook:
+**Enable Find My Device:**
 
-Settings → Privacy → "Who can see your future posts?" → Change to Friends
+iPhone:
+Settings → [Your Name] → Find My → Find My iPhone → Enable
+Also enable "Send Last Location"
 
-Settings → Privacy → "Who can see your friends list?" → Change to Only Me
+Android:
+Settings → Security → Find My Device → Enable
+Ensure location services are ON
 
-Settings → Timeline and Tagging → "Review tags people add" → Turn ON
+**Verify Your Backups:**
 
-Settings → Location → Turn OFF
+iPhone:
+Settings → [Your Name] → iCloud → iCloud Backup → Check "Last Successful Backup" date
+If it's old, tap "Back Up Now"
 
-Instagram:
-
-Settings → Privacy → Private Account → Turn ON
-
-Settings → Tags → "Manually approve tags" → Turn ON
-
-Remove location from old posts if possible
-
-Twitter/X:
-
-Settings → Privacy → Protect your posts → Turn ON (makes account private)
-
-Settings → Location → Tweet location → Turn OFF
+Android:
+Settings → Google → Backup → Check "Backup details"
+Ensure photos, contacts, and app data are included
 
 ⚠️ What this does:
 
-Limits who can see your posts (not the whole world)
+Lets you locate your device on a map if it's lost or stolen
 
-Prevents people from tagging you without permission
+Allows you to remotely lock or wipe your device to protect sensitive data
 
-Stops location tracking
+Ensures you can recover your contacts, photos, and important files if your device is lost
 
-Makes it harder to build a profile of your movements and connections
+Protects beneficiary and organizational data from falling into the wrong hands
 
 Track Your Progress:
 
@@ -1630,7 +1626,7 @@ TODAY (before leaving):
 
 ☐ 2FA enabled on email (backup codes saved)
 
-☐ Social media privacy settings reviewed and locked down
+☐ Find My Phone enabled and backups verified
 
 THIS WEEK:
 
@@ -1654,7 +1650,7 @@ THIS MONTH:
 
 Speaker Notes:
 
-"Knowledge is good, but action is better. I want everyone to leave here with three concrete things done today. Not 'I'll do it later' \- we're doing it now. First, install a password manager. It takes 5 minutes. Second, enable 2FA on your email. This is the single most important thing you can do. Third, lock down your social media privacy settings. These three actions alone will dramatically improve your security. I'm serious. Don't leave this room without at least starting on one of these. Pull out your phones right now. Let's do this together. I'll walk around and help anyone who needs it."
+"Knowledge is good, but action is better. I want everyone to leave here with three concrete things done today. Not 'I'll do it later' \- we're doing it now. First, install a password manager. It takes 5 minutes. Second, enable 2FA on your email. This is the single most important thing you can do. Third, turn on Find My Phone and verify your backups are working. These three actions alone will dramatically improve your security. I'm serious. Don't leave this room without at least starting on one of these. Pull out your phones right now. Let's do this together. I'll walk around and help anyone who needs it."
 
 Slide 15: Your Incident Response Plan
 

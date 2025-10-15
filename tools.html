@@ -3,8 +3,25 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="https://cdn.prod.website-files.com/611c650408a750d2eacdf307/611c650408a750c7d4cdf350_favicon-doria.png" />
     <title>Free Security Tools | Digital Security Workshop</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script type="text/javascript">
+      function googleTranslateElementInit() {
+        new google.translate.TranslateElement(
+          {
+            pageLanguage: "en",
+            includedLanguages: "en,ar,fr",
+            layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+          },
+          "google_translate_element"
+        );
+      }
+    </script>
+    <script
+      type="text/javascript"
+      src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
+    ></script>
     <style>
       @font-face {
         font-family: "Graebenbach";
@@ -32,6 +49,48 @@
       .tool-card:hover {
         transform: translateY(-2px);
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      /* Language Selector Styles */
+      .goog-te-banner-frame.skiptranslate {
+        display: none !important;
+      }
+      body {
+        top: 0 !important;
+      }
+      #google_translate_element {
+        position: absolute;
+        top: 5rem;
+        right: 1rem;
+        z-index: 1000;
+        background: white;
+        padding: 0.5rem;
+        border-radius: 0.5rem;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      }
+      #google_translate_element .goog-te-combo {
+        background: white;
+        border: 2px solid #ec4899;
+        border-radius: 0.5rem;
+        padding: 0.5rem 1rem;
+        cursor: pointer;
+        color: #ec4899;
+        font-weight: 600;
+        font-size: 0.875rem;
+        outline: none;
+      }
+      #google_translate_element .goog-te-combo:hover {
+        background: #fce7f3;
+      }
+      #google_translate_element .goog-te-combo:focus {
+        border-color: #db2777;
+      }
+      @media (max-width: 768px) {
+        #google_translate_element {
+          top: 4.5rem;
+          right: 0.5rem;
+          padding: 0.25rem;
+        }
       }
 
       @media print {
@@ -99,16 +158,21 @@
     <!-- Header -->
     <header class="bg-white shadow-sm sticky top-0 z-40">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-        <div class="flex items-center justify-center">
-          <img src="logo.png" alt="Doria Feminist Fund" class="h-12 mr-4" />
-          <h1
-            class="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-600 to-teal-600"
-          >
-            Free Security Tools
-          </h1>
+        <div class="flex items-center justify-between">
+          <div class="flex items-center">
+            <img src="logo.png" alt="Doria Feminist Fund" class="h-12 mr-4" />
+            <h1
+              class="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-600 to-teal-600"
+            >
+              Free Security Tools
+            </h1>
+          </div>
         </div>
       </div>
     </header>
+
+    <!-- Google Translate Widget -->
+    <div id="google_translate_element" class="no-print"></div>
 
     <!-- Back Button -->
     <div class="no-print fixed top-4 left-4 z-50">
@@ -134,14 +198,6 @@
 
       <!-- Essential Security Tools Grid -->
       <section class="mb-8">
-        <h2 class="text-3xl font-bold text-stone-900 mb-8 text-center">
-          Essential Security Tools
-        </h2>
-        <p class="text-lg text-stone-600 mb-8 text-center max-w-3xl mx-auto">
-          One carefully selected tool for each security category - all free and
-          beginner-friendly
-        </p>
-
         <div
           class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
         >

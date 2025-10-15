@@ -3,8 +3,25 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="https://cdn.prod.website-files.com/611c650408a750d2eacdf307/611c650408a750c7d4cdf350_favicon-doria.png" />
     <title>Digital Security Workshop Hub</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script type="text/javascript">
+      function googleTranslateElementInit() {
+        new google.translate.TranslateElement(
+          {
+            pageLanguage: "en",
+            includedLanguages: "en,ar,fr",
+            layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+          },
+          "google_translate_element"
+        );
+      }
+    </script>
+    <script
+      type="text/javascript"
+      src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
+    ></script>
     <!-- Chosen Palette: Vibrant Feminist Colors - Pink/Magenta with Teal Accents -->
     <!-- Application Structure Plan: The SPA is designed as an interactive, slide-based presentation, mirroring the narrative flow of the source workshop script ('Why' -> 'You' -> 'Us' -> 'Them' -> 'Action Plan'). This journey-based structure is highly effective for educational content, guiding users through complex topics in manageable steps. A persistent top navigation allows non-linear access for users who want to revisit specific sections. Key information within each slide is transformed from static text into interactive components like accordions, tabs, and clickable modals. This encourages active engagement over passive reading. The appendix is reimagined as an interactive tool guide, making reference material easily searchable and digestible. This structure was chosen to maximize comprehension and retention for a non-technical audience by making the learning process guided, interactive, and less overwhelming than a long text document. -->
     <!-- Visualization & Content Choices: The source report is entirely qualitative, containing no datasets suitable for charting with Chart.js. Therefore, all information is presented using structured, interactive HTML. Report Info: Lists of security risks/practices -> Goal: Inform/Organize -> Presentation: Interactive accordions and checklists. Interaction: Click to reveal details or check off completed actions. Justification: Breaks down dense information, making it scannable and actionable. Report Info: Tool comparisons (e.g., Signal vs. WhatsApp) -> Goal: Compare -> Presentation: HTML tables with clear visual indicators (✅, ⚠️, ❌). Interaction: Static comparison for clarity. Justification: The most direct way to compare features. Report Info: Detailed tool misuse appendix -> Goal: Reference/Deep-dive -> Presentation: A grid of clickable cards opening detailed modals. Interaction: Click to open. Justification: Hides complex details until requested, keeping the main interface clean while making deep-dive information accessible. All visuals are Unicode icons, adhering to constraints. -->
@@ -239,6 +256,9 @@
         height: 500px;
         cursor: pointer;
       }
+      .flip-card.span-2 {
+        grid-column: span 2;
+      }
       .flip-card-inner {
         position: relative;
         width: 100%;
@@ -300,6 +320,48 @@
         }
         .flip-card.flipped:hover .flip-card-inner {
           transform: rotateY(0deg);
+        }
+      }
+
+      /* Language Selector Styles */
+      .goog-te-banner-frame.skiptranslate {
+        display: none !important;
+      }
+      body {
+        top: 0 !important;
+      }
+      #google_translate_element {
+        position: absolute;
+        top: 5rem;
+        right: 1rem;
+        z-index: 1000;
+        background: white;
+        padding: 0.5rem;
+        border-radius: 0.5rem;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      }
+      #google_translate_element .goog-te-combo {
+        background: white;
+        border: 2px solid #ec4899;
+        border-radius: 0.5rem;
+        padding: 0.5rem 1rem;
+        cursor: pointer;
+        color: #ec4899;
+        font-weight: 600;
+        font-size: 0.875rem;
+        outline: none;
+      }
+      #google_translate_element .goog-te-combo:hover {
+        background: #fce7f3;
+      }
+      #google_translate_element .goog-te-combo:focus {
+        border-color: #db2777;
+      }
+      @media (max-width: 768px) {
+        #google_translate_element {
+          top: 4.5rem;
+          right: 0.5rem;
+          padding: 0.25rem;
         }
       }
 
@@ -365,7 +427,7 @@
           <div class="flex items-center">
             <img src="logo.png" alt="Doria Feminist Fund" class="h-14 mr-3" />
           </div>
-          <div class="hidden md:block">
+          <div class="hidden md:flex items-center space-x-4">
             <div id="nav-links" class="ml-10 flex items-baseline space-x-4">
               <a
                 href="#part1-adversary"
@@ -381,6 +443,11 @@
                 href="#part3"
                 class="nav-link text-stone-600 hover:text-pink-500 px-3 py-2 text-sm font-medium"
                 >Organizational Protocols</a
+              >
+              <a
+                href="#part3-data"
+                class="nav-link text-stone-600 hover:text-pink-500 px-3 py-2 text-sm font-medium"
+                >Data Management</a
               >
               <a
                 href="#part4"
@@ -460,6 +527,11 @@
             >Organizational Protocols</a
           >
           <a
+            href="#part3-data"
+            class="nav-link text-stone-600 hover:bg-stone-100 block px-3 py-2 rounded-md text-base font-medium"
+            >Data Management</a
+          >
+          <a
             href="#part4"
             class="nav-link text-stone-600 hover:bg-stone-100 block px-3 py-2 rounded-md text-base font-medium"
             >External Threats</a
@@ -477,6 +549,9 @@
         </div>
       </div>
     </header>
+
+    <!-- Google Translate Widget -->
+    <div id="google_translate_element"></div>
 
     <!-- Prev/Next Slide Buttons -->
     <button
@@ -562,6 +637,187 @@
           src="rotated-flowers.png"
           alt=""
           class="absolute bottom-10 left-10 w-24 md:w-32 opacity-80 z-0"
+        />
+      </section>
+
+      <!-- Table of Contents Section -->
+      <section
+        id="table-of-contents"
+        class="slide-content mb-20 relative min-h-screen flex flex-col justify-center py-20 overflow-hidden bg-gradient-to-br from-rose-50 via-pink-50 to-teal-50"
+      >
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+          <div class="text-center mb-16">
+            <h2
+              class="text-5xl md:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-pink-600 to-teal-600 mb-6 pb-2"
+            >
+              Workshop Agenda
+            </h2>
+            <p class="text-xl text-stone-600 max-w-2xl mx-auto">
+              A comprehensive journey through digital security for feminist
+              organizations
+            </p>
+          </div>
+
+          <div class="grid md:grid-cols-2 gap-6">
+            <!-- Item 1 -->
+            <a
+              href="#part1-adversary"
+              class="bg-white hover:bg-gradient-to-br hover:from-pink-50 hover:to-pink-100 p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 border-2 border-transparent hover:border-pink-300 group"
+            >
+              <div class="flex items-start">
+                <span
+                  class="text-5xl mr-4 group-hover:scale-110 transition-transform duration-300"
+                  >🏛️</span
+                >
+                <div>
+                  <h3 class="text-2xl font-bold text-stone-800 mb-2">
+                    1. Threat Landscape
+                  </h3>
+                  <p class="text-stone-600">
+                    Understanding who targets feminist movements and why
+                  </p>
+                </div>
+              </div>
+            </a>
+
+            <!-- Item 2 -->
+            <a
+              href="#part2"
+              class="bg-white hover:bg-gradient-to-br hover:from-pink-50 hover:to-pink-100 p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 border-2 border-transparent hover:border-pink-300 group"
+            >
+              <div class="flex items-start">
+                <span
+                  class="text-5xl mr-4 group-hover:scale-110 transition-transform duration-300"
+                  >🔐</span
+                >
+                <div>
+                  <h3 class="text-2xl font-bold text-stone-800 mb-2">
+                    2. Personal Security
+                  </h3>
+                  <p class="text-stone-600">
+                    Protecting your accounts, devices, and communications
+                  </p>
+                </div>
+              </div>
+            </a>
+
+            <!-- Item 3 -->
+            <a
+              href="#part3"
+              class="bg-white hover:bg-gradient-to-br hover:from-teal-50 hover:to-teal-100 p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 border-2 border-transparent hover:border-teal-300 group"
+            >
+              <div class="flex items-start">
+                <span
+                  class="text-5xl mr-4 group-hover:scale-110 transition-transform duration-300"
+                  >🏢</span
+                >
+                <div>
+                  <h3 class="text-2xl font-bold text-stone-800 mb-2">
+                    3. Organizational Protocols
+                  </h3>
+                  <p class="text-stone-600">
+                    Building security culture within your organization
+                  </p>
+                </div>
+              </div>
+            </a>
+
+            <!-- Item 4 -->
+            <a
+              href="#part3-data"
+              class="bg-white hover:bg-gradient-to-br hover:from-teal-50 hover:to-teal-100 p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 border-2 border-transparent hover:border-teal-300 group"
+            >
+              <div class="flex items-start">
+                <span
+                  class="text-5xl mr-4 group-hover:scale-110 transition-transform duration-300"
+                  >💾</span
+                >
+                <div>
+                  <h3 class="text-2xl font-bold text-stone-800 mb-2">
+                    4. Data Management
+                  </h3>
+                  <p class="text-stone-600">
+                    Safeguarding sensitive information and secure backups
+                  </p>
+                </div>
+              </div>
+            </a>
+
+            <!-- Item 5 -->
+            <a
+              href="#part4"
+              class="bg-white hover:bg-gradient-to-br hover:from-pink-50 hover:to-pink-100 p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 border-2 border-transparent hover:border-pink-300 group"
+            >
+              <div class="flex items-start">
+                <span
+                  class="text-5xl mr-4 group-hover:scale-110 transition-transform duration-300"
+                  >⚠️</span
+                >
+                <div>
+                  <h3 class="text-2xl font-bold text-stone-800 mb-2">
+                    5. External Threats
+                  </h3>
+                  <p class="text-stone-600">
+                    Recognizing and defending against digital attacks
+                  </p>
+                </div>
+              </div>
+            </a>
+
+            <!-- Item 6 -->
+            <a
+              href="#part5"
+              class="bg-white hover:bg-gradient-to-br hover:from-teal-50 hover:to-teal-100 p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 border-2 border-transparent hover:border-teal-300 group"
+            >
+              <div class="flex items-start">
+                <span
+                  class="text-5xl mr-4 group-hover:scale-110 transition-transform duration-300"
+                  >✅</span
+                >
+                <div>
+                  <h3 class="text-2xl font-bold text-stone-800 mb-2">
+                    6. Action Plan
+                  </h3>
+                  <p class="text-stone-600">
+                    Immediate steps you can take today to improve security
+                  </p>
+                </div>
+              </div>
+            </a>
+
+            <!-- Item 7 -->
+            <a
+              href="#appendix"
+              class="bg-white hover:bg-gradient-to-br hover:from-pink-50 hover:to-teal-100 p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 border-2 border-transparent hover:border-teal-300 group"
+            >
+              <div class="flex items-start">
+                <span
+                  class="text-5xl mr-4 group-hover:scale-110 transition-transform duration-300"
+                  >📚</span
+                >
+                <div>
+                  <h3 class="text-2xl font-bold text-stone-800 mb-2">
+                    7. Resource Guide
+                  </h3>
+                  <p class="text-stone-600">
+                    Tools, checklists, and references for ongoing learning
+                  </p>
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <!-- Decorative Elements -->
+        <img
+          src="top-right.png"
+          alt=""
+          class="absolute top-10 right-10 w-32 md:w-48 opacity-60 z-0 pointer-events-none"
+        />
+        <img
+          src="rotated-flowers.png"
+          alt=""
+          class="absolute bottom-10 left-10 w-24 md:w-32 opacity-60 z-0 pointer-events-none"
         />
       </section>
 
@@ -780,8 +1036,9 @@
                         "fundation.org" instead of "foundation.org"
                       </li>
                       <li>
-                        <strong>Verify before you trust</strong> - When in
-                        doubt, verify through a different channel
+                        <strong>Use a sandbox environment</strong> - A safe
+                        space to test whether a link or file is dangerous, ex
+                        Windows Sandbox
                       </li>
                     </ul>
                   </div>
@@ -791,17 +1048,6 @@
                     class="attack-content hidden"
                     data-content="surveillance"
                   >
-                    <div
-                      class="bg-teal-50 border-2 border-teal-200 p-4 rounded-lg mb-6"
-                    >
-                      <h4 class="font-bold text-lg mb-2 text-teal-900">
-                        📖 Plain English:
-                      </h4>
-                      <p class="text-stone-700">
-                        <strong>Surveillance</strong> = Someone
-                        watching/recording your online activity
-                      </p>
-                    </div>
                     <div class="grid md:grid-cols-2 gap-6 mb-6">
                       <div>
                         <h4 class="font-bold text-lg mb-3 text-purple-800">
@@ -815,10 +1061,6 @@
                           <li>
                             <strong>Governments</strong> - Can request data from
                             ISPs and tech companies
-                          </li>
-                          <li>
-                            <strong>Workplace/School</strong> - Can monitor
-                            network traffic
                           </li>
                           <li>
                             <strong>Apps & Websites</strong> - Track your
@@ -862,37 +1104,19 @@
                         sensitive conversations
                       </li>
                       <li>
-                        <strong>Use HTTPS websites</strong> - Look for padlock
-                        icon in browser
+                        <strong>Review app permissions regularly</strong> -
+                        Limiting what they can access reduces how much of your
+                        information can be exposed
                       </li>
                       <li>
                         <strong>Avoid posting sensitive info publicly</strong> -
                         Once online, assume it's permanent
-                      </li>
-                      <li>
-                        <strong>Turn off location services</strong> - Unless
-                        absolutely necessary
                       </li>
                     </ul>
                   </div>
 
                   <!-- Harassment Content (Hidden by default) -->
                   <div class="attack-content hidden" data-content="harassment">
-                    <div
-                      class="bg-teal-50 border-2 border-teal-200 p-4 rounded-lg mb-6"
-                    >
-                      <h4 class="font-bold text-lg mb-2 text-teal-900">
-                        📖 Plain English:
-                      </h4>
-                      <p class="text-stone-700 mb-2">
-                        <strong>Harassment</strong> = Coordinated attacks to
-                        intimidate or silence you online
-                      </p>
-                      <p class="text-stone-700">
-                        <strong>Doxxing</strong> = Publishing someone's private
-                        information online (address, phone, family info)
-                      </p>
-                    </div>
                     <div class="grid md:grid-cols-2 gap-6 mb-6">
                       <div>
                         <h4 class="font-bold text-lg mb-3 text-orange-800">
@@ -908,16 +1132,8 @@
                             campaigns flooding your accounts
                           </li>
                           <li>
-                            <strong>Impersonation</strong> - Fake accounts
-                            pretending to be you
-                          </li>
-                          <li>
                             <strong>Threatening Messages</strong> - To you and
                             your family/friends
-                          </li>
-                          <li>
-                            <strong>Reputation Attacks</strong> - Spreading
-                            false information about you
                           </li>
                         </ul>
                       </div>
@@ -928,10 +1144,6 @@
                         <ul class="space-y-2 text-sm text-red-600">
                           <li>❌ Home address or precise location</li>
                           <li>❌ Phone number</li>
-                          <li>❌ Names or photos of family members</li>
-                          <li>❌ Your workplace location</li>
-                          <li>❌ Your daily routine or patterns</li>
-                          <li>❌ Travel plans in advance</li>
                         </ul>
                       </div>
                     </div>
@@ -942,23 +1154,28 @@
                       class="list-disc list-inside space-y-2 text-stone-600 mb-4"
                     >
                       <li>
-                        <strong>Set profile to PRIVATE</strong> - Not public
+                        <strong>Keep a backup communication channel</strong> -
+                        In case your main account gets compromised
                       </li>
                       <li>
-                        <strong>Turn OFF location services</strong> - On all
-                        posts and photos
+                        <strong
+                          >Report doxxing or impersonation to the platform
+                          immediately</strong
+                        >
+                        - Most major platforms now treat it as a serious
+                        violation
                       </li>
                       <li>
-                        <strong>Require approval for photo tags</strong> -
-                        Control what appears on your profile
-                      </li>
-                      <li>
-                        <strong>Hide friends/followers list</strong> - Don't
-                        reveal your network
+                        <strong>Keep a “response plan” ready</strong> - Who to
+                        contact, what to remove, and what to document
                       </li>
                       <li>
                         <strong>Use separate accounts</strong> - Personal vs.
                         work/activism
+                      </li>
+                      <li>
+                        <strong>Hide friends/followers list</strong> - Don't
+                        reveal your network
                       </li>
                     </ul>
                   </div>
@@ -1063,6 +1280,57 @@
         </section>
 
         <section
+          id="part3-data"
+          class="slide-content mb-20 relative min-h-screen flex flex-col justify-center py-20 overflow-hidden"
+        >
+          <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+            <!-- Rotated feminist symbol -->
+            <img
+              src="rotated.png"
+              alt=""
+              class="absolute left-0 w-32 opacity-70 hidden md:block"
+            />
+            <!-- Top right decorative -->
+            <img
+              src="top-right.png"
+              alt=""
+              class="absolute -right-16 top-20 w-40 opacity-50 hidden lg:block pointer-events-none"
+            />
+            <!-- Bottom left decorative -->
+            <img
+              src="left-side.png"
+              alt=""
+              class="absolute -left-20 bottom-20 w-48 opacity-40 hidden lg:block pointer-events-none"
+            />
+            <!-- Bottom right decorative -->
+            <img
+              src="rotated-flowers.png"
+              alt=""
+              class="absolute -right-10 bottom-20 w-40 opacity-50 hidden lg:block pointer-events-none"
+            />
+
+            <div class="text-center mb-12">
+              <h2
+                class="text-base text-pink-600 font-semibold tracking-wide uppercase"
+              >
+                Part 3: Data Management
+              </h2>
+              <p
+                class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-stone-900 sm:text-4xl"
+              >
+                Safeguarding Sensitive Information
+              </p>
+              <p class="mt-4 max-w-3xl mx-auto text-xl text-stone-500">
+                Understanding what data needs protection, implementing secure
+                backups, and managing cloud storage safely to prevent leaks and
+                ensure business continuity.
+              </p>
+            </div>
+            <div id="part3-data-timeline"></div>
+          </div>
+        </section>
+
+        <section
           id="part4"
           class="slide-content mb-20 relative min-h-screen flex flex-col justify-center py-20 overflow-hidden"
         >
@@ -1094,63 +1362,11 @@
               <p class="mt-4 max-w-3xl mx-auto text-xl text-stone-500">
                 With a strong internal foundation, we can now face the outside
                 world. This section provides strategies to defend against
-                external adversaries, focusing on tools like VPNs, securing our
-                public presence on social media, and preparing for physical
-                device risks.
+                external adversaries, focusing on tools like VPNs and preparing
+                for physical device risks.
               </p>
             </div>
             <div class="relative z-40" id="part4-flip-cards"></div>
-          </div>
-        </section>
-
-        <section
-          id="part5"
-          class="slide-content mb-20 relative min-h-screen flex flex-col justify-center py-20 overflow-hidden"
-        >
-          <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-            <!-- Top left decorative -->
-            <img
-              src="top-right.png"
-              alt=""
-              class="absolute -left-10 top-10 w-48 opacity-50 hidden lg:block pointer-events-none"
-            />
-            <!-- Bottom left decorative -->
-            <img
-              src="rotated-flowers.png"
-              alt=""
-              class="absolute -left-10 bottom-20 w-40 opacity-50 hidden lg:block pointer-events-none"
-            />
-            <!-- Bottom right decorative -->
-            <img
-              src="left-side.png"
-              alt=""
-              class="absolute -right-20 bottom-20 w-48 opacity-50 hidden lg:block pointer-events-none"
-            />
-            <div class="text-center mb-12">
-              <h2
-                class="text-base text-pink-600 font-semibold tracking-wide uppercase"
-              >
-                Part 5: Action Plan & Response
-              </h2>
-              <p
-                class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-stone-900 sm:text-4xl"
-              >
-                From Plan to Practice
-              </p>
-              <p class="mt-4 max-w-3xl mx-auto text-xl text-stone-500">
-                Knowledge is only useful when applied. This final section
-                translates learning into immediate, sustainable action. We'll
-                cover three critical tasks to complete today, outline a simple
-                incident response plan, and provide resources for continued
-                support.
-              </p>
-            </div>
-            <div class="space-y-8">
-              <div class="bg-white p-8 rounded-lg shadow-md">
-                <h3 class="text-2xl font-bold mb-4">Do These 3 Things Today</h3>
-                <div id="action-checklist" class="space-y-4"></div>
-              </div>
-            </div>
           </div>
         </section>
 
@@ -1227,6 +1443,57 @@
                 >
                   View Incident Response Template →
                 </a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section
+          id="part5"
+          class="slide-content mb-20 relative min-h-screen flex flex-col justify-center py-20 overflow-hidden"
+        >
+          <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+            <!-- Top left decorative -->
+            <img
+              src="top-right.png"
+              alt=""
+              class="absolute -left-10 top-10 w-48 opacity-50 hidden lg:block pointer-events-none"
+            />
+            <!-- Bottom left decorative -->
+            <img
+              src="rotated-flowers.png"
+              alt=""
+              class="absolute -left-10 bottom-20 w-40 opacity-50 hidden lg:block pointer-events-none"
+            />
+            <!-- Bottom right decorative -->
+            <img
+              src="left-side.png"
+              alt=""
+              class="absolute -right-20 bottom-20 w-48 opacity-50 hidden lg:block pointer-events-none"
+            />
+            <div class="text-center mb-12">
+              <h2
+                class="text-base text-pink-600 font-semibold tracking-wide uppercase"
+              >
+                Part 5: Action Plan & Response
+              </h2>
+              <p
+                class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-stone-900 sm:text-4xl"
+              >
+                From Plan to Practice
+              </p>
+              <p class="mt-4 max-w-3xl mx-auto text-xl text-stone-500">
+                Knowledge is only useful when applied. This final section
+                translates learning into immediate, sustainable action. We'll
+                cover three critical tasks to complete today, outline a simple
+                incident response plan, and provide resources for continued
+                support.
+              </p>
+            </div>
+            <div class="space-y-8">
+              <div class="bg-white p-8 rounded-lg shadow-md">
+                <h3 class="text-2xl font-bold mb-4">Do These 3 Things Today</h3>
+                <div id="action-checklist" class="space-y-4"></div>
               </div>
             </div>
           </div>
@@ -1432,40 +1699,8 @@
               </div>
             `,
           },
-          {
-            title: "Online Security 101",
-            content: `
-              <div class="grid md:grid-cols-3 gap-6 mb-6">
-                <div class="bg-teal-50 border-2 border-teal-200 p-5 rounded-lg text-center">
-                  <p class="text-4xl mb-3">📱</p>
-                  <h4 class="font-bold text-teal-900 mb-2">Official Apps Only</h4>
-                  <p class="text-sm text-stone-700">Download from App Store or Play Store</p>
-                </div>
-                <div class="bg-teal-50 border-2 border-teal-200 p-5 rounded-lg text-center">
-                  <p class="text-4xl mb-3">🎣</p>
-                  <h4 class="font-bold text-teal-900 mb-2">Recognize Phishing</h4>
-                  <p class="text-sm text-stone-700">Banks never send verification links</p>
-                </div>
-                <div class="bg-teal-50 border-2 border-teal-200 p-5 rounded-lg text-center">
-                  <p class="text-4xl mb-3">🔐</p>
-                  <h4 class="font-bold text-teal-900 mb-2">Secure Password</h4>
-                  <p class="text-sm text-stone-700">Strong password + Enable 2FA</p>
-                </div>
-              </div>
-
-              <div class="bg-blue-50 border-2 border-blue-200 p-5 rounded-lg mb-6">
-                <h4 class="font-bold text-lg mb-3 text-blue-900">💰 Banking Security Essentials</h4>
-                <p class="text-stone-700">Your bank will NEVER ask for passwords via SMS, email, or send verification links. If concerned, call your bank using the number on your card.</p>
-              </div>
-
-              <div class="bg-yellow-50 border-2 border-yellow-300 p-4 rounded">
-                <h4 class="font-bold mb-2">💡 Real Scenario</h4>
-                <p class="text-stone-700 text-sm italic">"Last year, several organizations in our region received SMS messages saying 'Your bank account has been suspended. Click here to reactivate.' The link looked exactly like their bank's website. People who clicked and entered their details had their accounts emptied within hours."</p>
-              </div>
-            `,
-          },
         ],
-        part3: [
+        part3Data: [
           {
             title: "What Data Would Destroy Us If It Leaked?",
             content: `
@@ -1494,13 +1729,45 @@
             content: `
             <div class="border-b border-purple-200 mb-6">
               <nav class="flex space-x-4 -mb-px" aria-label="Tabs">
-                <button class="tab-button active py-2 px-4 border-b-2 border-purple-600 text-purple-900 font-bold text-sm">Backups</button>
-                <button class="tab-button py-2 px-4 border-b-2 border-transparent text-stone-500 hover:text-purple-700 font-medium text-sm">Cloud Security</button>
+                <button class="tab-button active py-2 px-4 border-b-2 border-purple-600 text-purple-900 font-bold text-sm">Cloud Security</button>
+                <button class="tab-button py-2 px-4 border-b-2 border-transparent text-stone-500 hover:text-purple-700 font-medium text-sm">Backups</button>
                 <button class="tab-button py-2 px-4 border-b-2 border-transparent text-stone-500 hover:text-purple-700 font-medium text-sm">AI Threat</button>
               </nav>
             </div>
 
             <div class="tab-content">
+              <p class="text-stone-600 text-sm mb-6">When you store files in Google Drive, Dropbox, or iCloud, the company CAN access them. Governments can request access. Hackers can breach your account.</p>
+
+              <div class="grid md:grid-cols-2 gap-6 mb-6">
+                <div class="bg-teal-50 border-2 border-teal-200 p-5 rounded-lg text-center">
+                  <p class="text-4xl mb-3">🔒</p>
+                  <h4 class="font-bold text-teal-900 mb-3">Strong Account Security</h4>
+                  <div class="text-sm text-stone-700 text-left space-y-1">
+                    <p>• Unique, strong password</p>
+                    <p>• 2FA enabled (authenticator app)</p>
+                    <p>• Regular security checkup</p>
+                  </div>
+                </div>
+
+                <div class="bg-teal-50 border-2 border-teal-200 p-5 rounded-lg text-center">
+                  <p class="text-4xl mb-3">🔐</p>
+                  <h4 class="font-bold text-teal-900 mb-3">Encrypt Before Upload</h4>
+                  <div class="text-sm text-stone-700 text-left">
+                    <p>For truly sensitive files, encrypt them BEFORE uploading. Cloud provider sees gibberish, you have encrypted backup.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="bg-purple-50 border-2 border-purple-200 p-5 rounded-lg">
+                <h4 class="font-bold text-lg mb-3 text-purple-900">⚠️ Common Mistakes</h4>
+                <div class="text-sm text-stone-700 space-y-2">
+                  <p>• Sharing links set to "anyone with link" instead of specific people</p>
+                  <p>• Not reviewing who has access to shared folders</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="tab-content hidden">
               <div class="bg-teal-50 border-2 border-teal-200 p-4 rounded-lg mb-6">
                 <h4 class="font-bold text-lg mb-2 text-teal-900">📖 Plain English:</h4>
                 <p class="text-stone-700 mb-2"><strong>Backup</strong> = A copy of your data in case the original is lost</p>
@@ -1532,46 +1799,6 @@
             </div>
 
             <div class="tab-content hidden">
-              <p class="text-stone-600 text-sm mb-6">When you store files in Google Drive, Dropbox, or iCloud, the company CAN access them. Governments can request access. Hackers can breach your account.</p>
-
-              <div class="grid md:grid-cols-3 gap-6 mb-6">
-                <div class="bg-teal-50 border-2 border-teal-200 p-5 rounded-lg text-center">
-                  <p class="text-4xl mb-3">🔒</p>
-                  <h4 class="font-bold text-teal-900 mb-3">Strong Account Security</h4>
-                  <div class="text-sm text-stone-700 text-left space-y-1">
-                    <p>• Unique, strong password</p>
-                    <p>• 2FA enabled (authenticator app)</p>
-                    <p>• Regular security checkup</p>
-                  </div>
-                </div>
-
-                <div class="bg-teal-50 border-2 border-teal-200 p-5 rounded-lg text-center">
-                  <p class="text-4xl mb-3">🔐</p>
-                  <h4 class="font-bold text-teal-900 mb-3">Encrypt Before Upload</h4>
-                  <div class="text-sm text-stone-700 text-left">
-                    <p>For truly sensitive files, encrypt them BEFORE uploading. Cloud provider sees gibberish, you have encrypted backup.</p>
-                  </div>
-                </div>
-
-                <div class="bg-teal-50 border-2 border-teal-200 p-5 rounded-lg text-center">
-                  <p class="text-4xl mb-3">✋</p>
-                  <h4 class="font-bold text-teal-900 mb-3">Selective Syncing</h4>
-                  <div class="text-sm text-stone-700 text-left">
-                    <p>Don't auto-sync everything. Be intentional about what goes to the cloud.</p>
-                  </div>
-                </div>
-              </div>
-
-              <div class="bg-purple-50 border-2 border-purple-200 p-5 rounded-lg">
-                <h4 class="font-bold text-lg mb-3 text-purple-900">⚠️ Common Mistakes</h4>
-                <div class="text-sm text-stone-700 space-y-2">
-                  <p>• Sharing links set to "anyone with link" instead of specific people</p>
-                  <p>• Not reviewing who has access to shared folders</p>
-                </div>
-              </div>
-            </div>
-
-            <div class="tab-content hidden">
               <p class="text-sm text-red-900 mb-3">ChatGPT, Claude, Gemini—they may train on your data, include it in responses to others, and governments can request access.</p>
               <p class="text-sm text-red-900 font-bold">❌ Never paste: Beneficiary names • Personal stories • Financial data • Donor info • Strategy docs • Passwords • Location data</p>
               <div class="grid md:grid-cols-2 gap-6 mb-6 mt-4">
@@ -1591,6 +1818,8 @@
               </div>
             </div>`,
           },
+        ],
+        part3: [
           {
             title: "Basic Office Security Rules",
             content: `
@@ -1727,55 +1956,64 @@
             <p class="text-stone-600 text-sm mb-4">Free VPNs are worse than no VPN. They make money by selling your browsing data. Pay for a trusted one (like <a href="https://protonvpn.com/" target="_blank" class="link">Proton VPN</a>) or use one for activists (like <a href="https://riseup.net/vpn" target="_blank" class="link">RiseupVPN</a>).</p>`,
           },
           {
-            title: "Physical Device Risks",
+            title: "Secure File Deletion",
             content: `
-            <div class="bg-teal-50 border-2 border-teal-200 p-5 rounded-lg mb-6">
-              <h4 class="text-xl mb-3 font-bold text-teal-900">🔍 Find My Device</h4>
-              <p class="text-sm text-stone-700 mb-3">Allows you to track your device's location from another device or computer. You can see where it is on a map, make it ring (even if it's on silent), or put it in "Lost Mode" to lock it remotely.</p>
-              <p class="text-sm text-stone-700 font-bold mb-4">Why this matters: You can locate your device before someone has time to access your data.</p>
-
-              <div class="grid md:grid-cols-2 gap-4">
-                <div class="bg-white border border-teal-300 p-3 rounded">
-                  <p class="font-bold text-teal-900 mb-2">📱 iPhone:</p>
-                  <p class="text-xs text-stone-700">Settings → [Your Name] → Find My → Find My iPhone → Enable</p>
+            <h4 class="font-bold text-lg mb-4">What Happens When You Delete a File?</h4>
+            <div class="bg-stone-50 border-2 border-stone-200 p-5 rounded-lg mb-6">
+              <div class="space-y-3 text-sm">
+                <div>
+                  <p class="font-bold text-red-700 mb-1">Normal Delete:</p>
+                  <p class="text-stone-600 italic">"File removed from view, but actual data still exists on disk—recoverable with basic tools"</p>
                 </div>
-                <div class="bg-white border border-teal-300 p-3 rounded">
-                  <p class="font-bold text-teal-900 mb-2">🤖 Android:</p>
-                  <p class="text-xs text-stone-700">Settings → Security → Lost Device Protection</p>
+                <div>
+                  <p class="font-bold text-green-700 mb-1">File Shredder:</p>
+                  <p class="text-stone-600 italic">"File overwritten multiple times with random data—permanently destroyed and unrecoverable"</p>
                 </div>
               </div>
             </div>
 
-            <div class="bg-teal-50 border-2 border-teal-200 p-5 rounded-lg mb-6">
-              <h4 class="text-xl mb-3 font-bold text-teal-900">🗑️ Remote Erase</h4>
-              <p class="text-sm text-stone-700 mb-3">If you can't recover your device, you can remotely wipe ALL data on it from another device or computer. This deletes everything—messages, photos, apps, documents, accounts.</p>
-              <p class="text-sm text-stone-700 font-bold mb-4">Why this matters: Prevents anyone from accessing your sensitive data if the device is stolen or confiscated.</p>
+            <h4 class="font-bold text-lg mb-4">🗑️ File Shredder Tools</h4>
+            <div class="bg-purple-50 border-2 border-purple-200 p-4 rounded-lg">
+              <p class="text-sm text-stone-700 mb-2">💻 <strong>Windows:</strong> Eraser - Right-click any file → Eraser → Erase</p>
+              <p class="text-sm text-stone-700">🍎 <strong>Mac:</strong> Permanent Eraser - Drag files to securely delete (35-pass overwrite)</p>
+            </div>`,
+          },
+          {
+            title: "Physical Device Risks",
+            span: 2,
+            content: `
+            <div class="grid md:grid-cols-2 gap-4 mb-6">
+              <div class="bg-teal-50 border-2 border-teal-200 p-5 rounded-lg">
+                <h4 class="text-xl mb-3 font-bold text-teal-900">🔍 Find My Device</h4>
+                <p class="text-sm text-stone-700 mb-3">Allows you to track your device's location from another device or computer. You can see where it is on a map, make it ring (even if it's on silent), or put it in "Lost Mode" to lock it remotely.</p>
+                <p class="text-sm text-stone-700 font-bold mb-4">Why this matters: You can locate your device before someone has time to access your data.</p>
 
-              <div class="grid md:grid-cols-2 gap-4">
-                <div class="bg-white border border-teal-300 p-3 rounded">
-                  <p class="font-bold text-teal-900 mb-2">📱 iPhone:</p>
-                  <p class="text-xs text-stone-700">iCloud.com → Find My iPhone → Select device → Erase This Device</p>
-                </div>
-                <div class="bg-white border border-teal-300 p-3 rounded">
-                  <p class="font-bold text-teal-900 mb-2">🤖 Android:</p>
-                  <p class="text-xs text-stone-700">android.com/find → Select device → Erase device</p>
+                <div class="space-y-3">
+                  <div class="bg-white border border-teal-300 p-3 rounded">
+                    <p class="font-bold text-teal-900 mb-2">📱 iPhone:</p>
+                    <p class="text-xs text-stone-700">Settings → [Your Name] → Find My → Find My iPhone → Enable</p>
+                  </div>
+                  <div class="bg-white border border-teal-300 p-3 rounded">
+                    <p class="font-bold text-teal-900 mb-2">🤖 Android:</p>
+                    <p class="text-xs text-stone-700">Settings → Security → Lost Device Protection</p>
+                  </div>
                 </div>
               </div>
-            </div>
 
-            <div class="bg-purple-50 border-2 border-purple-200 p-5 rounded-lg mb-6">
-              <h4 class="text-xl mb-3 font-bold text-purple-900">☁️ Cloud Backup</h4>
-              <p class="text-sm text-stone-700 mb-2"><strong>Why cloud backup matters:</strong> If you use remote erase, your device is wiped clean—including all your photos, contacts, messages, and documents. Without a backup, you lose everything.</p>
-              <p class="text-sm text-stone-700 mb-4">Cloud backup ensures you can recover your data on a new device after remote erase.</p>
+              <div class="bg-teal-50 border-2 border-teal-200 p-5 rounded-lg">
+                <h4 class="text-xl mb-3 font-bold text-teal-900">🗑️ Remote Erase</h4>
+                <p class="text-sm text-stone-700 mb-3">If you can't recover your device, you can remotely wipe ALL data on it from another device or computer. This deletes everything—messages, photos, apps, documents, accounts.</p>
+                <p class="text-sm text-stone-700 font-bold mb-4">Why this matters: Prevents anyone from accessing your sensitive data if the device is stolen or confiscated.</p>
 
-              <div class="grid md:grid-cols-2 gap-4">
-                <div class="bg-white border border-purple-300 p-3 rounded">
-                  <p class="font-bold text-purple-900 mb-2">📱 iPhone:</p>
-                  <p class="text-xs text-stone-700">Settings → [Your Name] → iCloud → iCloud Backup → Enable</p>
-                </div>
-                <div class="bg-white border border-purple-300 p-3 rounded">
-                  <p class="font-bold text-purple-900 mb-2">🤖 Android:</p>
-                  <p class="text-xs text-stone-700">Settings → Google → Backup → Turn on</p>
+                <div class="space-y-3">
+                  <div class="bg-white border border-teal-300 p-3 rounded">
+                    <p class="font-bold text-teal-900 mb-2">📱 iPhone:</p>
+                    <p class="text-xs text-stone-700">iCloud.com → Find My iPhone → Select device → Erase This Device</p>
+                  </div>
+                  <div class="bg-white border border-teal-300 p-3 rounded">
+                    <p class="font-bold text-teal-900 mb-2">🤖 Android:</p>
+                    <p class="text-xs text-stone-700">android.com/find → Select device → Erase device</p>
+                  </div>
                 </div>
               </div>
             </div>`,
@@ -2300,7 +2538,7 @@
 
         data.forEach((item) => {
           const card = document.createElement("div");
-          card.className = "flip-card";
+          card.className = item.span ? "flip-card span-2" : "flip-card";
 
           card.innerHTML = `
             <div class="flip-card-inner">
@@ -2328,15 +2566,18 @@
         });
       }
       document.addEventListener("DOMContentLoaded", () => {
+        // Google Translate widget is now initialized natively via googleTranslateElementInit()
+
         // Master Slide Navigation System
         const slides = [
           { id: "part1-adversary", title: "Understanding the Digital Risks" },
           { id: "part1-attacks", title: "How They Target Us" },
           { id: "part2", title: "Fortifying Individual Defenses" },
           { id: "part3", title: "Protecting Collective Assets" },
+          { id: "part3-data", title: "Safeguarding Sensitive Information" },
           { id: "part4", title: "Advanced Defense Strategies" },
-          { id: "part5", title: "From Plan to Practice" },
           { id: "incident-response", title: "Incident Response Plan" },
+          { id: "part5", title: "From Plan to Practice" },
           { id: "appendix", title: "Security Tools Cheat Sheet" },
           { id: "thank-you-slide", title: "Thank You for Participating!" },
         ];
@@ -2445,6 +2686,7 @@
 
         createSplitView("part2-split-view", accordionData.part2);
         createTimeline("part3-timeline", accordionData.part3);
+        createTimeline("part3-data-timeline", accordionData.part3Data);
         createFlipCards("part4-flip-cards", accordionData.part4);
         // Cheat sheet cards removed - now showing CTA to dedicated cheat-sheet.html page
         // createCheatSheetCards("appendix-cards", accordionData.appendix);
