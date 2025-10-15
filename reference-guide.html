@@ -3,19 +3,29 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/png" href="https://cdn.prod.website-files.com/611c650408a750d2eacdf307/611c650408a750c7d4cdf350_favicon-doria.png" />
+    <link
+      rel="icon"
+      type="image/png"
+      href="https://cdn.prod.website-files.com/611c650408a750d2eacdf307/611c650408a750c7d4cdf350_favicon-doria.png"
+    />
     <title>Digital Security Cheat Sheet - Doria Feminist Fund</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script type="text/javascript">
       function googleTranslateElementInit() {
-        new google.translate.TranslateElement({
-          pageLanguage: 'en',
-          includedLanguages: 'en,ar,fr',
-          layout: google.translate.TranslateElement.InlineLayout.SIMPLE
-        }, 'google_translate_element');
+        new google.translate.TranslateElement(
+          {
+            pageLanguage: "en",
+            includedLanguages: "en,ar,fr",
+            layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+          },
+          "google_translate_element"
+        );
       }
     </script>
-    <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    <script
+      type="text/javascript"
+      src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
+    ></script>
     <style>
       @font-face {
         font-family: "Graebenbach";
@@ -56,21 +66,39 @@
           column-rule: 1px solid #e5e7eb;
         }
 
-        /* Remove card styling for print */
+        /* Remove card styling for print but keep content visible */
         .card {
-          background: none !important;
-          border: none !important;
+          background: white !important;
+          border: 1px solid #e5e7eb !important;
           box-shadow: none !important;
           border-radius: 0 !important;
-          padding: 0 !important;
+          padding: 0.5rem !important;
           margin-bottom: 1rem !important;
           break-inside: avoid;
           page-break-inside: avoid;
         }
 
-        /* Hide badges */
+        /* Keep badges visible but simplified for print */
         .badge {
-          display: none !important;
+          display: inline-block !important;
+          padding: 0.125rem 0.25rem !important;
+          border-radius: 0.125rem !important;
+          font-size: 0.6rem !important;
+          font-weight: 700 !important;
+          margin-right: 0.25rem !important;
+          border: 1px solid !important;
+        }
+
+        .dont-badge {
+          background-color: #fee2e2 !important;
+          color: #991b1b !important;
+          border-color: #fca5a5 !important;
+        }
+
+        .do-badge {
+          background-color: #d1fae5 !important;
+          color: #065f46 !important;
+          border-color: #6ee7b7 !important;
         }
 
         /* Compact section headers */
